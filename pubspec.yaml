@@ -28,6 +28,7 @@ dependencies:
   # UI
   cupertino_icons: ^1.0.2
   flutter_launcher_icons: ^0.11.0
+  flutter_screenutil: ^5.6.1
  
   
 dev_dependencies:
@@ -49,8 +50,18 @@ flutter_icons:
   
 flutter:
    uses-material-design: true
+   fonts:
+    - family: ClashGrotesk
+      fonts:
+      - asset: fonts/ClashGrotesk-Medium.otf
+        weight: 500
+    - family: Amulya
+      fonts:
+      - asset:  fonts/Amulya-Regular.otf
+        weight: 400
    assets:
     - assets/icons/
     - assets/images/onboarding/
+  
 
   
