@@ -87,3 +87,10 @@ TextStyle kClashGrotesk12Medium = TextStyle(
   fontSize: 12.sp,
   height: 12.sp.toFigmaHeight(18)
 );
+
+TextStyle kAmulya14Regular = TextStyle(
+    fontFamily: "Amulya",
+    fontWeight: FontWeight.w400,
+    fontSize: 14.sp,
+    height: 2
+);
