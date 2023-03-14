@@ -25,6 +25,8 @@ class SignIN extends StatelessWidget with $SignIN {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => SignInViewModel(),
+      onDispose: (model) => disposeForm(),
+      onModelReady: (model) => syncFormWithViewModel(model),
       builder: (context, model, child) => Scaffold(
         backgroundColor: kWhiteColor,
         appBar: const CustomAppBar(
@@ -37,6 +39,8 @@ class SignIN extends StatelessWidget with $SignIN {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               InputField(
+                onchanged: model.nameValidationColor,
+                textColor: model.nameTextColor,
                 labelText: "Your shop name",
                 hintText: "e.g storeload",
                 inputController: nameController,
@@ -45,6 +49,8 @@ class SignIN extends StatelessWidget with $SignIN {
               ),
               kTextFieldHieghtSpacing,
               InputField(
+                onchanged: model.passwordValidationColor,
+                textColor: model.passwordTextColor,
                 inputController: passwordController,
                 hasValidationMessage: model.hasPasswordValidationMessage,
                 validationMessage: model.passwordValidationMessage ??

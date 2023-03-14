@@ -6,6 +6,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/views/authentication/forgot_password/forgot_password.dart';
+import 'package:storeload/ui/views/authentication/signin/sign_in.dart';
 import 'package:storeload/ui/views/authentication/signup/sign_up.dart';
 import 'package:storeload/ui/views/widgets/set_up_dialog_ui.dart';
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         //onGenerateRoute: StackedRouter().onGenerateRoute,
         //navigatorKey: StackedService.navigatorKey,
 
-        home:    SignUP(),
+        home:    SignIN(),
       ),
     );
   }
