@@ -5,6 +5,10 @@ import 'package:storeload/ui/utils/edge_insects.dart';
 import 'package:storeload/ui/utils/test_styles.dart';
 import 'package:storeload/ui/views/widgets/app_button.dart';
 
+import '../../widgets/custom_text_button.dart';
+
+
+
 class OnBoarding extends StatelessWidget {
   const OnBoarding({Key? key}) : super(key: key);
 
@@ -51,11 +55,9 @@ class OnBoarding extends StatelessWidget {
                         "Have an account?",
                         style: kAmulya14Regular.copyWith(color: kTextColor),
                       ),
-                      Text(
-                        "Sign in",
-                        style: kAmulya14Regular.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: kBackgroundColor),
+                      CustomTextButton(
+                        title: "Sign in",
+                        onTap: () {},
                       ),
                     ],
                   )
@@ -68,3 +70,5 @@ class OnBoarding extends StatelessWidget {
     );
   }
 }
+
+

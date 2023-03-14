@@ -8,4 +8,5 @@ const kTextColor50 = Color(0XFF808080);
 const kTextColor20 = Color(0XFF333333);
 const kSecondOrangeColor = Color(0XFFFF9447);
 const kErrorTextColor = Color(0XFFD41F1F);
+const kSuccessTextColor = Colors.green;
 const kTextFieldFocusedColor = Color.fromRGBO(0, 27, 46, 0.08);

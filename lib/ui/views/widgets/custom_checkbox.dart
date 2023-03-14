@@ -1,5 +1,6 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/test_styles.dart';
 
@@ -18,7 +19,6 @@ class _MyCheckBoxState extends State<MyCheckBox> {
       //Use Align so that our Container does not get all width as it happens in ListView
       alignment: Alignment.centerLeft,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
         ),
@@ -27,7 +27,7 @@ class _MyCheckBoxState extends State<MyCheckBox> {
           children: [
             Checkbox(
               checkColor: Colors.white,
-              activeColor: kTextFieldFocusedColor,
+              activeColor: kBackgroundColor,
               value: widget.listTileCheckBox,
               onChanged: (val) {
                 setState(() => widget.listTileCheckBox = val);

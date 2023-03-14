@@ -1,6 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:storeload/ui/utils/validation_manager.dart';
-import 'package:storeload/ui/views/signin/sign_in.form.dart';
+import 'package:storeload/ui/views/authentication/signin/sign_in.form.dart';
 
 
 class SignInViewModel extends FormViewModel{
