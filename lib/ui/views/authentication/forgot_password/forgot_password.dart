@@ -44,17 +44,16 @@ class ForgotPassword extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: OtpTimerButton(
-                  controller: controller,
+                    controller: controller,
                     backgroundColor: kTextColor40,
                     buttonType: ButtonType.text_button,
-                    onPressed: () async{
-                    await model.showBasicDialog();
+                    onPressed: () async {
+                      await model.showBasicDialog();
 
                       controller.loading();
                       Future.delayed(const Duration(seconds: 2), () {
                         controller.startTimer();
                       });
-
                     },
                     text: Text(
                       "Resend Code?",
@@ -64,11 +63,10 @@ class ForgotPassword extends StatelessWidget {
                       ),
                     ),
                     duration: 30,
-                loadingIndicator: CircularProgressIndicator(
-                  color: kBackgroundColor,
-                )),
+                    loadingIndicator: CircularProgressIndicator(
+                      color: kBackgroundColor,
+                    )),
               ),
-
             ],
           ),
         ),
