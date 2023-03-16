@@ -61,7 +61,9 @@ class FirstStepView extends StatelessWidget with $FirstStepView {
                   onTap: () {
                     if (model.currentStep == 1) {
                       model.changeStep(2);
-                    } else {}
+                    } else {
+                      model.goToHome();
+                    }
                   },
                 )
               ],
@@ -224,6 +226,7 @@ class StepOneWidget extends ViewModelWidget<FirstStepViewModel> {
                 borderRadius: normalBorderRadius),
           ),
         ),
+        SizedBox(height: 12.h)
       ],
     );
   }

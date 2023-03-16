@@ -15,7 +15,7 @@ dependencies:
     sdk: flutter
   
   # State management
-  stacked: ^2.2.2
+  stacked: ^2.3.6
   stacked_services: ^0.9.9
   # Network
   dio: ^5.0.1

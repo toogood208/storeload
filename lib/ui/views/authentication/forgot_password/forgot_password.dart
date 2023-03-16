@@ -13,7 +13,7 @@ import '../../widgets/custom_app_bar.dart';
 
 class ForgotPassword extends StatelessWidget {
   ForgotPassword({Key? key}) : super(key: key);
-  final OtpTimerButtonController controller = OtpTimerButtonController();
+   OtpTimerButtonController controller = OtpTimerButtonController();
 
   @override
   Widget build(BuildContext context) {
