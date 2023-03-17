@@ -35,11 +35,10 @@ class MyApp extends StatelessWidget {
             colorScheme: Theme.of(context).colorScheme.copyWith(
                   primary: kBackgroundColor,
                 )),
-        initialRoute: Routes.firstStepView,
+        initialRoute: Routes.forgotPassword,
         onGenerateRoute: StackedRouter().onGenerateRoute,
         navigatorKey: StackedService.navigatorKey,
 
-        // home: FirstStepView(),
       ),
     );
   }

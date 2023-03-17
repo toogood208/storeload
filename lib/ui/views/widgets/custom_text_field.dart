@@ -68,61 +68,69 @@ class _InputFieldState extends State<InputField> {
             child: Builder(builder: (context) {
               final FocusNode focusNode = Focus.of(context);
               final bool hasFocus = focusNode.hasFocus;
-              return TextFormField(
-                textAlign: TextAlign.start,
-                textAlignVertical: TextAlignVertical.center,
-                controller: widget.inputController,
-                
-                onChanged: widget.onchanged,
-                autofocus: widget.autoFocus,
-                
-                readOnly: widget.isDisabled,
-                obscureText: passwordVisibility,
-                keyboardType: TextInputType.text,
-                style: kAmulya14Regular.copyWith(color: kTextColor40),
-                decoration: InputDecoration(
-                  fillColor: hasFocus ? kTextFieldFocusedColor : kWhiteColor,
-                  prefixIcon: null == widget.prefixIcon
-                      ? null
-                      : Icon(
-                          widget.prefixIcon,
-                          color: kBackgroundColor,
-                        ),
-                  suffix: widget.suffixIcon == true
-                      ? InkWell(
-                          onTap: () => setState(
-                            () => passwordVisibility = !passwordVisibility,
+              return Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: kTextColor50),
+                  borderRadius: BorderRadius.circular(8)
+                ),
+                child: TextFormField(
+                  
+                  textAlign: TextAlign.start,
+                  textAlignVertical: TextAlignVertical.center,
+                  controller: widget.inputController,
+                  
+                  onChanged: widget.onchanged,
+                  autofocus: widget.autoFocus,
+                  
+                  readOnly: widget.isDisabled,
+                  obscureText: passwordVisibility,
+                  keyboardType: TextInputType.text,
+                  style: kAmulya14Regular.copyWith(color: kTextColor40),
+                  decoration: InputDecoration(
+                    
+                    fillColor: hasFocus ? kTextFieldFocusedColor : kWhiteColor,
+                    prefixIcon: null == widget.prefixIcon
+                        ? null
+                        : Icon(
+                            widget.prefixIcon,
+                            color: kBackgroundColor,
                           ),
-                          child: Container(
-                            transform: Matrix4.translationValues(0.0, 2.0, 0.0),
-                            child: Text(
-                              passwordVisibility ? "SHOW" : "HIDE",
-                              style: kAmulya14Regular.copyWith(
-                                  color: kBackgroundColor),
+                    suffix: widget.suffixIcon == true
+                        ? InkWell(
+                            onTap: () => setState(
+                              () => passwordVisibility = !passwordVisibility,
                             ),
-                          ),
-                        )
-                      : null,
-                  filled: true,
-                  hintText: widget.hintText,
-                  hintStyle: kAmulya14Regular.copyWith(color: kTextColor40),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 0.0, horizontal: 14.0),
-                  border: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: kTextColor50, width: 1.0),
-                      borderRadius: smallBorderRadius),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: widget.isDisabled == true
-                              ? kWhiteColor
-                              : kTextColor50,
-                          width: 1.0),
-                      borderRadius: normalBorderRadius),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: kTextColor50, width: 1.0),
-                      borderRadius: normalBorderRadius),
+                            child: Container(
+                              transform: Matrix4.translationValues(0.0, 2.0, 0.0),
+                              child: Text(
+                                passwordVisibility ? "SHOW" : "HIDE",
+                                style: kAmulya14Regular.copyWith(
+                                    color: kBackgroundColor),
+                              ),
+                            ),
+                          )
+                        : null,
+                    filled: true,
+                    hintText: widget.hintText,
+                    hintStyle: kAmulya14Regular.copyWith(color: kTextColor40),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 0.0, horizontal: 14.0),
+                    border: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: kTextColor50, width: 1.0),
+                        borderRadius: smallBorderRadius),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: widget.isDisabled == true
+                                ? kWhiteColor
+                                : kTextColor50,
+                            width: 1.0),
+                        borderRadius: normalBorderRadius),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: kTextColor50, width: 1.0),
+                        borderRadius: normalBorderRadius),
+                  ),
                 ),
               );
             }),
@@ -132,3 +140,5 @@ class _InputFieldState extends State<InputField> {
     );
   }
 }
+
+

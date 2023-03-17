@@ -6,19 +6,21 @@ import 'package:otp_timer_button/otp_timer_button.dart';
 import 'package:stacked/stacked.dart';
 import 'package:storeload/ui/utils/test_styles.dart';
 import 'package:storeload/ui/views/authentication/forgot_password/forgot_password_view_model.dart';
+import 'package:storeload/ui/views/widgets/app_spinner.dart';
+import 'package:storeload/ui/views/widgets/custom_text_button.dart';
 
 import '../../../utils/colors.dart';
 import '../../../utils/edge_insects.dart';
 import '../../widgets/custom_app_bar.dart';
 
 class ForgotPassword extends StatelessWidget {
-  ForgotPassword({Key? key}) : super(key: key);
-   OtpTimerButtonController controller = OtpTimerButtonController();
+  const ForgotPassword({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => ForgotPasswordViewModel(),
+      onModelReady: (model) => model.startTimer(),
       builder: (context, model, child) => Scaffold(
         backgroundColor: kWhiteColor,
         appBar: const CustomAppBar(
@@ -27,8 +29,8 @@ class ForgotPassword extends StatelessWidget {
         body: SingleChildScrollView(
           padding: kAppPadding,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 "Enter the four digit code sent to your mail",
@@ -42,31 +44,16 @@ class ForgotPassword extends StatelessWidget {
               ),
               SizedBox(height: 8.h),
               Align(
-                alignment: Alignment.centerRight,
-                child: OtpTimerButton(
-                    controller: controller,
-                    backgroundColor: kTextColor40,
-                    buttonType: ButtonType.text_button,
-                    onPressed: () async {
-                      await model.showBasicDialog();
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "${model.minutes}:${model.second}",
+                    style: kAmulya14Regular.copyWith(color: kTextColor),
+                  ),),
+                  SizedBox(height: 80.h),
 
-                      controller.loading();
-                      Future.delayed(const Duration(seconds: 2), () {
-                        controller.startTimer();
-                      });
-                    },
-                    text: Text(
-                      "Resend Code?",
-                      style: kAmulya14Regular.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: kBackgroundColor,
-                      ),
-                    ),
-                    duration: 30,
-                    loadingIndicator: CircularProgressIndicator(
-                      color: kBackgroundColor,
-                    )),
-              ),
+                 model.isBusy? const AppSpinner() :CustomTextButton(title: "Resend Code?", onTap: model.getOTP)
+            
+              
             ],
           ),
         ),
