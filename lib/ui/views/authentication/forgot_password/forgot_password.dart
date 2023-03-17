@@ -33,7 +33,8 @@ class ForgotPassword extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Enter the four digit code sent to your mail",
+                "Enter the four digit code sent to your ***********load@gmail",
+                textAlign: TextAlign.left,
                 style: kAmulya14Regular.copyWith(color: kTextColor40),
               ),
               SizedBox(height: 80.h),
@@ -41,6 +42,10 @@ class ForgotPassword extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 otpFieldStyle: OtpFieldStyle(focusBorderColor: kTextColor50),
                 style: kAmulya18Regular.copyWith(color: kTextColor20),
+                onChanged: (value) {
+                  
+                },
+                margin: kOTPFieldPadding,
               ),
               SizedBox(height: 8.h),
               Align(
