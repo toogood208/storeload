@@ -1,13 +1,12 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.router.dart';
 import 'package:storeload/ui/utils/colors.dart';
-import 'package:storeload/ui/views/authentication/reset_password/reset_password.dart';
 import 'package:storeload/ui/views/widgets/set_up_dialog_ui.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
   setUpDialogUI();
@@ -26,14 +25,13 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'StoreReload',
         theme: Theme.of(context).copyWith(
-            colorScheme: Theme.of(context).colorScheme.copyWith(
-                  primary: kBackgroundColor,
-                )),
-                home:  ResetPaswword(),
-       // initialRoute: Routes.forgotPassword,
-       // onGenerateRoute: StackedRouter().onGenerateRoute,
-      //  navigatorKey: StackedService.navigatorKey,
-
+          colorScheme: Theme.of(context).colorScheme.copyWith(
+                primary: kBackgroundColor,
+              ),
+        ),
+        initialRoute: Routes.signUP,
+        onGenerateRoute: StackedRouter().onGenerateRoute,
+        navigatorKey: StackedService.navigatorKey,
       ),
     );
   }
