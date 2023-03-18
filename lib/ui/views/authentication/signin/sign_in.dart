@@ -4,6 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:storeload/ui/views/authentication/signin/sign_in.form.dart';
 import 'package:storeload/ui/views/authentication/signin/sign_in_view_model.dart';
+import 'package:storeload/ui/views/widgets/app_spinner.dart';
 import 'package:storeload/ui/views/widgets/custom_text_button.dart';
 
 import '../../../utils/colors.dart';
@@ -32,7 +33,10 @@ class SignIN extends StatelessWidget with $SignIN {
         appBar: const CustomAppBar(
           title: "Sign in",
         ),
-        body: SingleChildScrollView(
+        body: model.isBusy?
+         const Center(
+          child: AppSpinner(),
+         ): SingleChildScrollView(
           padding: kAppPadding,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -61,10 +65,14 @@ class SignIN extends StatelessWidget with $SignIN {
               ),
               CustomTextButton(
                 title: "Forgot Password?",
-                onTap: () {},
+                onTap: model.navigateToForgetPassword,
               ),
               SizedBox(height: 64.h),
-              const AppButton(width: double.infinity, title: "Sign in"),
+              AppButton(
+                width: double.infinity,
+                title: "Sign in",
+                onTap: model.submit,
+              ),
               kTextFieldHieghtSpacing,
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -80,7 +88,7 @@ class SignIN extends StatelessWidget with $SignIN {
                       ),
                       CustomTextButton(
                         title: "Sign up",
-                        onTap: () {},
+                        onTap: model.navigateToSignUp,
                       )
                     ],
                   ),
@@ -94,5 +102,3 @@ class SignIN extends StatelessWidget with $SignIN {
     );
   }
 }
-
-

@@ -113,7 +113,7 @@ class SignUP extends StatelessWidget with $SignUP {
                                 style: kAmulya14Regular.copyWith(
                                     color: kTextColor),
                               ),
-                              CustomTextButton(title: "Sign in", onTap: () {}),
+                              CustomTextButton(title: "Sign in", onTap: model.navigateToSignIN),
                             ],
                           ),
                           kTextFieldHieghtSpacing,
