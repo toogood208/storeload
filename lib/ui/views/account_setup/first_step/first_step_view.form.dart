@@ -12,8 +12,8 @@ import 'package:stacked/stacked.dart';
 const String FirstNameValueKey = 'firstName';
 const String LastNameValueKey = 'lastName';
 const String EmailValueKey = 'email';
+const String NinValueKey = 'nin';
 const String MobileNumberValueKey = 'mobileNumber';
-const String NinNumberValueKey = 'ninNumber';
 
 final Map<String, TextEditingController> _FirstStepViewTextEditingControllers =
     {};
@@ -24,8 +24,8 @@ final Map<String, String? Function(String?)?> _FirstStepViewTextValidations = {
   FirstNameValueKey: null,
   LastNameValueKey: null,
   EmailValueKey: null,
+  NinValueKey: null,
   MobileNumberValueKey: null,
-  NinNumberValueKey: null,
 };
 
 mixin $FirstStepView on StatelessWidget {
@@ -35,16 +35,16 @@ mixin $FirstStepView on StatelessWidget {
       _getFormTextEditingController(LastNameValueKey);
   TextEditingController get emailController =>
       _getFormTextEditingController(EmailValueKey);
+  TextEditingController get ninController =>
+      _getFormTextEditingController(NinValueKey);
   TextEditingController get mobileNumberController =>
       _getFormTextEditingController(MobileNumberValueKey);
-  TextEditingController get ninNumberController =>
-      _getFormTextEditingController(NinNumberValueKey);
   FocusNode get firstNameFocusNode => _getFormFocusNode(FirstNameValueKey);
   FocusNode get lastNameFocusNode => _getFormFocusNode(LastNameValueKey);
   FocusNode get emailFocusNode => _getFormFocusNode(EmailValueKey);
+  FocusNode get ninFocusNode => _getFormFocusNode(NinValueKey);
   FocusNode get mobileNumberFocusNode =>
       _getFormFocusNode(MobileNumberValueKey);
-  FocusNode get ninNumberFocusNode => _getFormFocusNode(NinNumberValueKey);
 
   TextEditingController _getFormTextEditingController(String key,
       {String? initialValue}) {
@@ -70,8 +70,8 @@ mixin $FirstStepView on StatelessWidget {
     firstNameController.addListener(() => _updateFormData(model));
     lastNameController.addListener(() => _updateFormData(model));
     emailController.addListener(() => _updateFormData(model));
+    ninController.addListener(() => _updateFormData(model));
     mobileNumberController.addListener(() => _updateFormData(model));
-    ninNumberController.addListener(() => _updateFormData(model));
   }
 
   /// Registers a listener on every generated controller that calls [model.setData()]
@@ -82,8 +82,8 @@ mixin $FirstStepView on StatelessWidget {
     firstNameController.addListener(() => _updateFormData(model));
     lastNameController.addListener(() => _updateFormData(model));
     emailController.addListener(() => _updateFormData(model));
+    ninController.addListener(() => _updateFormData(model));
     mobileNumberController.addListener(() => _updateFormData(model));
-    ninNumberController.addListener(() => _updateFormData(model));
   }
 
   final bool _autoTextFieldValidation = true;
@@ -100,8 +100,8 @@ mixin $FirstStepView on StatelessWidget {
           FirstNameValueKey: firstNameController.text,
           LastNameValueKey: lastNameController.text,
           EmailValueKey: emailController.text,
+          NinValueKey: ninController.text,
           MobileNumberValueKey: mobileNumberController.text,
-          NinNumberValueKey: ninNumberController.text,
         }),
     );
     if (_autoTextFieldValidation || forceValidate) {
@@ -115,8 +115,8 @@ mixin $FirstStepView on StatelessWidget {
         FirstNameValueKey: _getValidationMessage(FirstNameValueKey),
         LastNameValueKey: _getValidationMessage(LastNameValueKey),
         EmailValueKey: _getValidationMessage(EmailValueKey),
+        NinValueKey: _getValidationMessage(NinValueKey),
         MobileNumberValueKey: _getValidationMessage(MobileNumberValueKey),
-        NinNumberValueKey: _getValidationMessage(NinNumberValueKey),
       });
 
   /// Returns the validation message for the given key
@@ -150,9 +150,9 @@ extension ValueProperties on FormViewModel {
   String? get firstNameValue => this.formValueMap[FirstNameValueKey] as String?;
   String? get lastNameValue => this.formValueMap[LastNameValueKey] as String?;
   String? get emailValue => this.formValueMap[EmailValueKey] as String?;
+  String? get ninValue => this.formValueMap[NinValueKey] as String?;
   String? get mobileNumberValue =>
       this.formValueMap[MobileNumberValueKey] as String?;
-  String? get ninNumberValue => this.formValueMap[NinNumberValueKey] as String?;
 
   set firstNameValue(String? value) {
     this.setData(
@@ -195,6 +195,19 @@ extension ValueProperties on FormViewModel {
     }
   }
 
+  set ninValue(String? value) {
+    this.setData(
+      this.formValueMap
+        ..addAll({
+          NinValueKey: value,
+        }),
+    );
+
+    if (_FirstStepViewTextEditingControllers.containsKey(NinValueKey)) {
+      _FirstStepViewTextEditingControllers[NinValueKey]?.text = value ?? '';
+    }
+  }
+
   set mobileNumberValue(String? value) {
     this.setData(
       this.formValueMap
@@ -210,20 +223,6 @@ extension ValueProperties on FormViewModel {
     }
   }
 
-  set ninNumberValue(String? value) {
-    this.setData(
-      this.formValueMap
-        ..addAll({
-          NinNumberValueKey: value,
-        }),
-    );
-
-    if (_FirstStepViewTextEditingControllers.containsKey(NinNumberValueKey)) {
-      _FirstStepViewTextEditingControllers[NinNumberValueKey]?.text =
-          value ?? '';
-    }
-  }
-
   bool get hasFirstName =>
       this.formValueMap.containsKey(FirstNameValueKey) &&
       (firstNameValue?.isNotEmpty ?? false);
@@ -233,12 +232,12 @@ extension ValueProperties on FormViewModel {
   bool get hasEmail =>
       this.formValueMap.containsKey(EmailValueKey) &&
       (emailValue?.isNotEmpty ?? false);
+  bool get hasNin =>
+      this.formValueMap.containsKey(NinValueKey) &&
+      (ninValue?.isNotEmpty ?? false);
   bool get hasMobileNumber =>
       this.formValueMap.containsKey(MobileNumberValueKey) &&
       (mobileNumberValue?.isNotEmpty ?? false);
-  bool get hasNinNumber =>
-      this.formValueMap.containsKey(NinNumberValueKey) &&
-      (ninNumberValue?.isNotEmpty ?? false);
 
   bool get hasFirstNameValidationMessage =>
       this.fieldsValidationMessages[FirstNameValueKey]?.isNotEmpty ?? false;
@@ -246,10 +245,10 @@ extension ValueProperties on FormViewModel {
       this.fieldsValidationMessages[LastNameValueKey]?.isNotEmpty ?? false;
   bool get hasEmailValidationMessage =>
       this.fieldsValidationMessages[EmailValueKey]?.isNotEmpty ?? false;
+  bool get hasNinValidationMessage =>
+      this.fieldsValidationMessages[NinValueKey]?.isNotEmpty ?? false;
   bool get hasMobileNumberValidationMessage =>
       this.fieldsValidationMessages[MobileNumberValueKey]?.isNotEmpty ?? false;
-  bool get hasNinNumberValidationMessage =>
-      this.fieldsValidationMessages[NinNumberValueKey]?.isNotEmpty ?? false;
 
   String? get firstNameValidationMessage =>
       this.fieldsValidationMessages[FirstNameValueKey];
@@ -257,16 +256,16 @@ extension ValueProperties on FormViewModel {
       this.fieldsValidationMessages[LastNameValueKey];
   String? get emailValidationMessage =>
       this.fieldsValidationMessages[EmailValueKey];
+  String? get ninValidationMessage =>
+      this.fieldsValidationMessages[NinValueKey];
   String? get mobileNumberValidationMessage =>
       this.fieldsValidationMessages[MobileNumberValueKey];
-  String? get ninNumberValidationMessage =>
-      this.fieldsValidationMessages[NinNumberValueKey];
   void clearForm() {
     firstNameValue = '';
     lastNameValue = '';
     emailValue = '';
+    ninValue = '';
     mobileNumberValue = '';
-    ninNumberValue = '';
   }
 }
 
@@ -277,8 +276,8 @@ extension Methods on FormViewModel {
       this.fieldsValidationMessages[LastNameValueKey] = validationMessage;
   setEmailValidationMessage(String? validationMessage) =>
       this.fieldsValidationMessages[EmailValueKey] = validationMessage;
+  setNinValidationMessage(String? validationMessage) =>
+      this.fieldsValidationMessages[NinValueKey] = validationMessage;
   setMobileNumberValidationMessage(String? validationMessage) =>
       this.fieldsValidationMessages[MobileNumberValueKey] = validationMessage;
-  setNinNumberValidationMessage(String? validationMessage) =>
-      this.fieldsValidationMessages[NinNumberValueKey] = validationMessage;
 }

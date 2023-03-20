@@ -3,15 +3,12 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.logger.dart';
 import 'package:storeload/app/app.router.dart';
-import 'package:storeload/core/models/user.dart';
 import 'package:storeload/core/services/network_services/server_services.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/validation_manager.dart';
-import 'package:storeload/ui/views/authentication/forgot_password/forgot_password.dart';
 import 'package:storeload/ui/views/authentication/signin/sign_in.form.dart';
 
-
-class SignInViewModel extends FormViewModel{
+class SignInViewModel extends FormViewModel {
   final _serverService = locator<ServerService>();
   final _navigationService = locator<NavigationService>();
   final _logger = getLogger("SignUPViewModel");
@@ -22,10 +19,18 @@ class SignInViewModel extends FormViewModel{
   Future<void> signInUser() async {
     setBusy(true);
     final response = await _serverService.loginUser(
-        shopName: nameValue,
-        password: passwordValue);
+        shopName: nameValue, password: passwordValue);
 
-    if (response != null  && response.status)navigateToForgetPassword();
+    if (response != null && response.status) {
+      bool isEmailVerified = response.data.user.isEmailVerified;
+      String token = response.data.token;
+      _logger.v(isEmailVerified);
+      if (isEmailVerified) {
+        navigateToForgetPassword();
+      } else {
+        navigateToAccountSetup(token:token );
+      }
+    }
     setBusy(false);
   }
 
@@ -37,23 +42,15 @@ class SignInViewModel extends FormViewModel{
     _logger.v("De Play");
   }
 
- 
- 
-
   void nameValidationColor(String? text) {
     if (nameValidationMessage == "Correct!") {
       nameTextColor = kSuccessTextColor;
-     
     } else {
       nameTextColor = kErrorTextColor;
     }
   }
 
-
- 
-
   void passwordValidationColor(String? text) {
-  
     if (passwordValidationMessage == "Correct!") {
       passwordTextColor = kSuccessTextColor;
     } else {
@@ -64,13 +61,18 @@ class SignInViewModel extends FormViewModel{
   void navigateToForgetPassword() =>
       _navigationService.clearStackAndShow(Routes.forgotPassword);
 
+  void navigateToAccountSetup({required String token}) => _navigationService.clearStackAndShow(
+        Routes.firstStepView,
+        arguments: FirstStepViewArguments(
+          token: token
+        )
+      );
+
   void navigateToSignUp() =>
       _navigationService.clearStackAndShow(Routes.signUP);
   @override
   void setFormStatus() {
-    setNameValidationMessage(fieldValidator(value: nameValue??""));
-    setPasswordValidationMessage(passwordValidator(value:passwordValue ?? ""));
-
-
+    setNameValidationMessage(fieldValidator(value: nameValue ?? ""));
+    setPasswordValidationMessage(passwordValidator(value: passwordValue ?? ""));
   }
 }

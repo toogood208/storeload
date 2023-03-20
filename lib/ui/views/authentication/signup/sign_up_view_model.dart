@@ -25,7 +25,7 @@ class SignUpViewModel extends FormViewModel {
         shopAddress: addressValue,
         shopLGA: lgaValue,
         password: passwordValue);
-    if (response) navigateToSetUP();
+    if (response) navigateToSignIN();
     setBusy(false);
   }
 

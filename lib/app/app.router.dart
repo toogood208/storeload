@@ -88,11 +88,10 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i3.FirstStepView: (data) {
-      final args = data.getArgs<FirstStepViewArguments>(
-        orElse: () => const FirstStepViewArguments(),
-      );
+      final args = data.getArgs<FirstStepViewArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i3.FirstStepView(key: args.key),
+        builder: (context) =>
+            _i3.FirstStepView(key: args.key, token: args.token),
         settings: data,
       );
     },
@@ -144,13 +143,18 @@ class StackedRouter extends _i1.RouterBase {
 }
 
 class FirstStepViewArguments {
-  const FirstStepViewArguments({this.key});
+  const FirstStepViewArguments({
+    this.key,
+    required this.token,
+  });
 
   final _i9.Key? key;
 
+  final String token;
+
   @override
   String toString() {
-    return '{"key": "$key"}';
+    return '{"key": "$key", "token": "$token"}';
   }
 }
 
@@ -204,6 +208,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
 
   Future<dynamic> navigateToFirstStepView({
     _i9.Key? key,
+    required String token,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -211,7 +216,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.firstStepView,
-        arguments: FirstStepViewArguments(key: key),
+        arguments: FirstStepViewArguments(key: key, token: token),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -310,6 +315,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
 
   Future<dynamic> replaceWithFirstStepView({
     _i9.Key? key,
+    required String token,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -317,7 +323,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition,
   }) async {
     return replaceWith<dynamic>(Routes.firstStepView,
-        arguments: FirstStepViewArguments(key: key),
+        arguments: FirstStepViewArguments(key: key, token: token),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

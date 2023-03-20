@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
-import 'package:otp_timer_button/otp_timer_button.dart';
 import 'package:stacked/stacked.dart';
 import 'package:storeload/ui/utils/test_styles.dart';
 import 'package:storeload/ui/views/authentication/forgot_password/forgot_password_view_model.dart';
@@ -42,23 +41,11 @@ class ForgotPassword extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 otpFieldStyle: OtpFieldStyle(focusBorderColor: kTextColor50),
                 style: kAmulya18Regular.copyWith(color: kTextColor20),
-                onChanged: (value) {
-                  
-                },
+                onChanged: (value) {},
                 margin: kOTPFieldPadding,
               ),
               SizedBox(height: 8.h),
-              Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    "${model.minutes}:${model.second}",
-                    style: kAmulya14Regular.copyWith(color: kTextColor),
-                  ),),
-                  SizedBox(height: 80.h),
-
-                 model.isBusy? const AppSpinner() :CustomTextButton(title: "Resend Code?", onTap: model.getOTP)
-            
-              
+             
             ],
           ),
         ),

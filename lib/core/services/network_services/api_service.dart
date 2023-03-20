@@ -59,24 +59,39 @@ class APIService {
   Future<dynamic> post({
     required String route,
     required Map<String, dynamic> body,
+    String? bearerToken,
   }) async {
     log.v("posting $body fro $route");
-    var response = await dio.post(
-      route,
-      data: body,
-    );
+    var response = await dio.post(route,
+        data: body,
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $bearerToken',
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+          },
+        ));
+
     log.v("posting ${response.data} fro $route");
     return response.data;
   }
 
   Future<dynamic> put(
     String route,
-    Map<String, String> body,
-  ) async {
+    Map<String, String> body, {
+    required String bearerToken,
+  }) async {
     log.v("getting data fro $route");
     var response = await dio.put(
       route,
       data: body,
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $bearerToken',
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+        },
+      ),
     );
     log.v("the data fro $route is ${response.data}");
     return response.data;

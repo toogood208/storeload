@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:storeload/app/app.locator.dart';
-import 'package:storeload/core/models/create_user_model.dart';
 import 'package:storeload/core/models/user.dart';
 import 'package:storeload/core/services/network_services/api_service.dart';
 import 'package:storeload/core/services/network_services/network_constant.dart';
@@ -50,6 +47,48 @@ class ServerService {
       log.v(str);
       log.v(userResponse);
       return userResponse;
+    });
+  }
+
+  Future userAccountSetup({
+    String? firstName,
+    String? lastName,
+    String? gender,
+    String? email,
+    String? nin,
+    required String token,
+  }) async {
+    final response = await _networkFormatter.fmt(() {
+      return _apiService.put(
+          userAccountSetupEndpoint,
+          {
+            "firstName": firstName!,
+            "lastName": lastName!,
+            "gender": gender!,
+            "email": email!,
+            "NIN": nin!,
+          },
+          bearerToken: token);
+    });
+    return response.fold((l) => null, (str) {
+      // final responseStatus = jsonDecode(str);
+      log.v(str);
+      // log.v(responseStatus);
+      return str;
+    });
+  }
+
+  Future emailOtpVerification(
+      {required String otp, required String token}) async {
+    final response = await _networkFormatter.fmt(() {
+      return _apiService
+          .post(bearerToken: token, route: emailOtpVerificationEndpoint, body: {
+        "code": otp,
+      });
+    });
+    return response.fold((l) => null, (str) {
+      log.v(str);
+      return str;
     });
   }
 }

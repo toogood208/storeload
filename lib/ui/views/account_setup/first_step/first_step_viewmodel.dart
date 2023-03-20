@@ -2,14 +2,27 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.logger.dart';
+import 'package:storeload/core/services/network_services/server_services.dart';
+import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/validation_manager.dart';
 import 'package:storeload/ui/views/account_setup/first_step/first_step_view.form.dart';
+
 import 'package:storeload/ui/views/widgets/otp_dialog.dart';
 import 'package:storeload/ui/views/widgets/set_up_dialog_ui.dart';
 
 class FirstStepViewModel extends FormViewModel {
   final _log = getLogger('FirstStepViewModel');
   final _dialogService = locator<DialogService>();
+  final _serverService = locator<ServerService>();
+  final snackbar = locator<SnackbarService>();
+
+  String correct = "Correct!";
+  dynamic emailTextColor = kTextColor20;
+  dynamic firstNameTextColor = kTextColor20;
+  dynamic lastNameTextColor = kTextColor20;
+  dynamic mobileNumberTextColor = kTextColor20;
+  dynamic ninNumberTextColor = kTextColor20;
+
   int _currentStep = 1;
 
   int get currentStep => _currentStep;
@@ -45,30 +58,105 @@ class FirstStepViewModel extends FormViewModel {
     notifyListeners();
   }
 
-  void showBasicDialog() async {
+  void firstNameValidationColor(String? text) {
+    if (firstNameValidationMessage == "Correct!") {
+      firstNameTextColor = kSuccessTextColor;
+    } else {
+      firstNameTextColor = kErrorTextColor;
+    }
+  }
+
+  void lastNameValidationColor(String? text) {
+    if (lastNameValidationMessage == "Correct!") {
+      lastNameTextColor = kSuccessTextColor;
+    } else {
+      lastNameTextColor = kErrorTextColor;
+    }
+  }
+
+  void emailValidationColor(String? text) {
+    if (emailValidationMessage == "Correct!") {
+      emailTextColor = kSuccessTextColor;
+    } else {
+      emailTextColor = kErrorTextColor;
+    }
+  }
+
+  void ninNumberValidationColor(String? text) {
+    if (ninValidationMessage == "Correct!") {
+      ninNumberTextColor = kSuccessTextColor;
+    } else {
+      ninNumberTextColor = kErrorTextColor;
+    }
+  }
+
+  void mobileNumberValidationColor(String? text) {
+    if (mobileNumberValidationMessage == "Correct!") {
+      mobileNumberTextColor = kSuccessTextColor;
+    } else {
+      mobileNumberTextColor = kErrorTextColor;
+    }
+  }
+
+  void showBasicDialog({required bool status}) async {
     final response = await _dialogService.showCustomDialog(
-      data: OTPDialogStatus.success,
+      data: status ? OTPDialogStatus.success : OTPDialogStatus.failure,
       variant: DialogType.otpDialog,
       mainButtonTitle: "Exit",
     );
+    if (response == null) return;
   }
 
-  void goToHome() async {
+  void showEmailDialog({required String token}) async {
     final response = await _dialogService.showCustomDialog(
-      variant: DialogType.emailOtpDialog,
-    );
+        variant: DialogType.emailOtpDialog,
+        barrierDismissible: true,
+        data: {'email': emailValue, 'token': token});
     if (response == null) return;
-    response.confirmed ? showBasicDialog() : () {};
+    showBasicDialog(status: response.confirmed);
+  }
+
+  Future updateUserAccount({required String token}) async {
+    setBusy(true);
+    final response = await _serverService.userAccountSetup(
+      firstName: firstNameValue,
+      lastName: lastNameValue,
+      email: emailValue,
+      gender: selectedItem,
+      nin: ninValue,
+      token: token,
+    );
+    if (response == null || response['status'] == false) {
+      snackbar.showSnackbar(message: "Something went wrong");
+      setBusy(false);
+    }
+    if (response != null && response['status'] == true) {
+      showEmailDialog(token: token);
+      setBusy(false);
+    }
+  }
+
+  void goToHome({required String token}) async {
+    if (emailValidationMessage != correct ||
+        firstNameValidationMessage != correct ||
+        lastNameValidationMessage != correct ||
+        mobileNumberValidationMessage != correct ||
+        ninValidationMessage != correct ||
+        selectedItem == null) return;
+
+    // showEmailDialog(token: token);
+    updateUserAccount(token: token);
   }
 
   @override
   void setFormStatus() {
-    setFirstNameValidationMessage(fieldValidator(value: firstNameValue ?? ""));
-    setLastNameValidationMessage(fieldValidator(value: lastNameValue ?? ""));
+    setFirstNameValidationMessage(
+        fieldValidator(minimumLength: 2, value: firstNameValue ?? ""));
+    setLastNameValidationMessage(
+        fieldValidator(minimumLength: 2, value: lastNameValue ?? ""));
     setMobileNumberValidationMessage(
         phoneNumberValidator(value: mobileNumberValue ?? ""));
     setEmailValidationMessage(emailValidator(value: emailValue ?? ""));
-    setNinNumberValidationMessage(
-        ninNumberValidator(value: ninNumberValue ?? ""));
+    setNinValidationMessage(ninNumberValidator(value: ninValue ?? ""));
   }
 }

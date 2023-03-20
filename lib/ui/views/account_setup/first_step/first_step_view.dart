@@ -7,8 +7,10 @@ import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/spacing.dart';
 import 'package:storeload/ui/utils/test_styles.dart';
 import 'package:storeload/ui/views/account_setup/first_step/first_step_view.form.dart';
+
 import 'package:storeload/ui/views/account_setup/first_step/first_step_viewmodel.dart';
 import 'package:storeload/ui/views/widgets/app_button.dart';
+import 'package:storeload/ui/views/widgets/app_spinner.dart';
 import 'package:storeload/ui/views/widgets/custom_app_bar.dart';
 import 'package:storeload/ui/views/widgets/custom_text_field.dart';
 
@@ -16,12 +18,12 @@ import 'package:storeload/ui/views/widgets/custom_text_field.dart';
   FormTextField(name: 'firstName'),
   FormTextField(name: 'lastName'),
   FormTextField(name: 'email'),
+  FormTextField(name: 'nin'),
   FormTextField(name: 'mobileNumber'),
-  FormTextField(name: 'ninNumber'),
 ])
 class FirstStepView extends StatelessWidget with $FirstStepView {
-  FirstStepView({Key? key}) : super(key: key);
-
+  FirstStepView({Key? key, required this.token}) : super(key: key);
+  final String token;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<FirstStepViewModel>.reactive(
@@ -30,44 +32,50 @@ class FirstStepView extends StatelessWidget with $FirstStepView {
       builder: (context, model, child) => Scaffold(
         backgroundColor: kWhiteColor,
         appBar: const CustomAppBar(title: 'Set-up your account'),
-        body: SingleChildScrollView(
-            padding: EdgeInsets.fromLTRB(24.h, 0, 24.h, 24.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                    child: Text(
-                  'This will help us to know you better.',
-                  style: kAmulya14Regular.copyWith(color: kTextColor40),
-                )),
-                kTextFieldHieghtSpacing,
-                getStepWidget(model.currentStep),
-                kTextFieldHieghtSpacing,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: model.isBusy
+            ? const Center(
+                child: AppSpinner(),
+              )
+            : SingleChildScrollView(
+                padding: EdgeInsets.fromLTRB(24.h, 0, 24.h, 24.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                        onTap: () => model.changeStep(1),
-                        child: const StepIndicatorWidget(1)),
-                    GestureDetector(
-                        onTap: () => model.changeStep(2),
-                        child: const StepIndicatorWidget(2)),
+                    Center(
+                        child: Text(
+                      'This will help us to know you better.',
+                      style: kAmulya14Regular.copyWith(color: kTextColor40),
+                    )),
+                    kTextFieldHieghtSpacing,
+                    getStepWidget(model.currentStep),
+                    kTextFieldHieghtSpacing,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                            onTap: () => model.changeStep(1),
+                            child: const StepIndicatorWidget(1)),
+                        GestureDetector(
+                            onTap: () => model.changeStep(2),
+                            child: const StepIndicatorWidget(2)),
+                      ],
+                    ),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.2.h),
+                    AppButton(
+                      isBusy: model.isBusy,
+                      title: model.currentStep == 1 ? 'Next' : 'Go to Home',
+                      width: double.infinity,
+                      onTap: () {
+                        if (model.currentStep == 1) {
+                          model.changeStep(2);
+                        } else {
+                          model.goToHome(token: token);
+                        }
+                      },
+                    )
                   ],
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.2.h),
-                AppButton(
-                  title: model.currentStep == 1 ? 'Next' : 'Go to Home',
-                  width: double.infinity,
-                  onTap: () {
-                    if (model.currentStep == 1) {
-                      model.changeStep(2);
-                    } else {
-                      model.goToHome();
-                    }
-                  },
-                )
-              ],
-            )),
+                )),
       ),
       viewModelBuilder: () => FirstStepViewModel(),
     );
@@ -81,37 +89,54 @@ class FirstStepView extends StatelessWidget with $FirstStepView {
           lastNameController: lastNameController,
         );
       case 2:
-        return StepTwoWidget(mobileNumberController: mobileNumberController);
+        return StepTwoWidget(
+          mobileNumberController: mobileNumberController,
+          ninController: ninController,
+          emailController: emailController,
+        );
       default:
         return const SizedBox.shrink();
     }
   }
 }
 
-class StepTwoWidget extends StatelessWidget {
+class StepTwoWidget extends ViewModelWidget<FirstStepViewModel> {
   const StepTwoWidget({
     super.key,
     required this.mobileNumberController,
+    required this.ninController,
+    required this.emailController,
   });
 
   final TextEditingController mobileNumberController;
+  final TextEditingController ninController;
+  final TextEditingController emailController;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, FirstStepViewModel viewModel) {
     return Column(
       children: [
         InputField(
+            validationMessage: viewModel.mobileNumberValidationMessage,
+            keyboardType: TextInputType.number,
+            length: 13,
+            onchanged: viewModel.mobileNumberValidationColor,
             inputController: mobileNumberController,
             labelText: 'Your mobile number',
             hintText: 'e.g +2348010002000'),
         kTextFieldHieghtSpacing,
         InputField(
-            inputController: mobileNumberController,
+            validationMessage: viewModel.ninValidationMessage,
+            onchanged: viewModel.ninNumberValidationColor,
+            keyboardType: TextInputType.number,
+            length: 11,
+            inputController: ninController,
             labelText: 'Your NIN',
             hintText: 'e.g 12345678912'),
         kTextFieldHieghtSpacing,
         InputField(
-            inputController: mobileNumberController,
+            validationMessage: viewModel.emailValidationMessage,
+            inputController: emailController,
             labelText: 'Your email address',
             hintText: 'e.g Storeload@gmail.com'),
         SizedBox(height: 12.h),
@@ -183,12 +208,16 @@ class StepOneWidget extends ViewModelWidget<FirstStepViewModel> {
           labelText: "Your first name",
           hintText: "Joseph",
           inputController: firstNameController,
+          validationMessage: viewModel.firstNameValidationMessage,
+          onchanged: viewModel.firstNameValidationColor,
         ),
         kTextFieldHieghtSpacing,
         InputField(
           labelText: "Your last name",
           hintText: "Jude",
           inputController: lastNameController,
+          validationMessage: viewModel.lastNameValidationMessage,
+          onchanged: viewModel.lastNameValidationColor,
         ),
         kTextFieldHieghtSpacing,
         Text(
@@ -197,6 +226,7 @@ class StepOneWidget extends ViewModelWidget<FirstStepViewModel> {
         ),
         kTextFieldHieghtSpacing,
         DropdownButtonFormField(
+          value: viewModel.selectedItem,
           hint: Text(
             'e.g Male',
             style: kAmulya14Regular.copyWith(color: kTextColor40),
