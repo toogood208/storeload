@@ -11,7 +11,7 @@ import 'package:storeload/ui/views/authentication/signin/sign_in.form.dart';
 class SignInViewModel extends FormViewModel {
   final _serverService = locator<ServerService>();
   final _navigationService = locator<NavigationService>();
-  final _logger = getLogger("SignUPViewModel");
+  final _logger = getLogger("SignInViewModel");
   dynamic nameTextColor = kTextColor20;
   dynamic passwordTextColor = kTextColor20;
   String correct = "Correct!";

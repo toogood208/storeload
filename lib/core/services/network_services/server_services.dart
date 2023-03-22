@@ -91,4 +91,20 @@ class ServerService {
       return str;
     });
   }
+
+   Future emailOtpVerificationForgotPassord(
+      {required String otp, required String token}) async {
+    final response = await _networkFormatter.fmt(() {
+      return _apiService
+          .post(route: emailOtpVerificationForgotPasswordEndpoint, body: {
+        "code": otp,
+      });
+    });
+    return response.fold((l) => null, (str) {
+      log.v(str);
+      return str;
+    });
+  }
 }
+
+

@@ -120,6 +120,7 @@ class StepTwoWidget extends ViewModelWidget<FirstStepViewModel> {
             validationMessage: viewModel.mobileNumberValidationMessage,
             keyboardType: TextInputType.number,
             length: 13,
+             textColor: viewModel.mobileNumberTextColor,
             onchanged: viewModel.mobileNumberValidationColor,
             inputController: mobileNumberController,
             labelText: 'Your mobile number',
@@ -128,6 +129,7 @@ class StepTwoWidget extends ViewModelWidget<FirstStepViewModel> {
         InputField(
             validationMessage: viewModel.ninValidationMessage,
             onchanged: viewModel.ninNumberValidationColor,
+             textColor: viewModel.ninNumberTextColor,
             keyboardType: TextInputType.number,
             length: 11,
             inputController: ninController,
@@ -136,6 +138,7 @@ class StepTwoWidget extends ViewModelWidget<FirstStepViewModel> {
         kTextFieldHieghtSpacing,
         InputField(
             validationMessage: viewModel.emailValidationMessage,
+             textColor: viewModel.emailTextColor,
             inputController: emailController,
             labelText: 'Your email address',
             hintText: 'e.g Storeload@gmail.com'),
@@ -207,6 +210,7 @@ class StepOneWidget extends ViewModelWidget<FirstStepViewModel> {
         InputField(
           labelText: "Your first name",
           hintText: "Joseph",
+          textColor: viewModel.firstNameTextColor,
           inputController: firstNameController,
           validationMessage: viewModel.firstNameValidationMessage,
           onchanged: viewModel.firstNameValidationColor,
@@ -215,6 +219,7 @@ class StepOneWidget extends ViewModelWidget<FirstStepViewModel> {
         InputField(
           labelText: "Your last name",
           hintText: "Jude",
+           textColor: viewModel.lastNameTextColor,
           inputController: lastNameController,
           validationMessage: viewModel.lastNameValidationMessage,
           onchanged: viewModel.lastNameValidationColor,

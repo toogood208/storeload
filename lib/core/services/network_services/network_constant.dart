@@ -4,3 +4,4 @@ const signInUserEndpoint = "/auth/login";
 const forgotPassswordEndpoint = "/user/email-verify";
 const userAccountSetupEndpoint = "/user/update";
 const emailOtpVerificationEndpoint = "/user/verify-email";
+const emailOtpVerificationForgotPasswordEndpoint = "/auth/reset-password-otp";
