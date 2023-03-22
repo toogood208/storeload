@@ -5,14 +5,16 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i9;
+import 'package:flutter/material.dart' as _i10;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i10;
+import 'package:stacked_services/stacked_services.dart' as _i11;
 import 'package:storeload/ui/views/account_setup/first_step/first_step_view.dart'
     as _i3;
 import 'package:storeload/ui/views/authentication/forgot_password/forgot_password.dart'
     as _i2;
+import 'package:storeload/ui/views/authentication/reset_email_password/reset_email_password.dart'
+    as _i9;
 import 'package:storeload/ui/views/authentication/reset_password/reset_password.dart'
     as _i8;
 import 'package:storeload/ui/views/authentication/signin/sign_in.dart' as _i6;
@@ -37,6 +39,8 @@ class Routes {
 
   static const resetPaswword = '/reset-paswword';
 
+  static const resetEmailPaswword = '/reset-email-paswword';
+
   static const all = <String>{
     forgotPassword,
     firstStepView,
@@ -45,6 +49,7 @@ class Routes {
     signIN,
     signUP,
     resetPaswword,
+    resetEmailPaswword,
   };
 }
 
@@ -77,6 +82,10 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.resetPaswword,
       page: _i8.ResetPaswword,
+    ),
+    _i1.RouteDef(
+      Routes.resetEmailPaswword,
+      page: _i9.ResetEmailPaswword,
     ),
   ];
 
@@ -134,6 +143,15 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i9.ResetEmailPaswword: (data) {
+      final args = data.getArgs<ResetEmailPaswwordArguments>(
+        orElse: () => const ResetEmailPaswwordArguments(),
+      );
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => _i9.ResetEmailPaswword(key: args.key),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -148,7 +166,7 @@ class FirstStepViewArguments {
     required this.token,
   });
 
-  final _i9.Key? key;
+  final _i10.Key? key;
 
   final String token;
 
@@ -161,7 +179,7 @@ class FirstStepViewArguments {
 class SignINArguments {
   const SignINArguments({this.key});
 
-  final _i9.Key? key;
+  final _i10.Key? key;
 
   @override
   String toString() {
@@ -172,7 +190,7 @@ class SignINArguments {
 class SignUPArguments {
   const SignUPArguments({this.key});
 
-  final _i9.Key? key;
+  final _i10.Key? key;
 
   @override
   String toString() {
@@ -183,7 +201,7 @@ class SignUPArguments {
 class ResetPaswwordArguments {
   const ResetPaswwordArguments({this.key});
 
-  final _i9.Key? key;
+  final _i10.Key? key;
 
   @override
   String toString() {
@@ -191,7 +209,18 @@ class ResetPaswwordArguments {
   }
 }
 
-extension NavigatorStateExtension on _i10.NavigationService {
+class ResetEmailPaswwordArguments {
+  const ResetEmailPaswwordArguments({this.key});
+
+  final _i10.Key? key;
+
+  @override
+  String toString() {
+    return '{"key": "$key"}';
+  }
+}
+
+extension NavigatorStateExtension on _i11.NavigationService {
   Future<dynamic> navigateToForgotPassword([
     int? routerId,
     bool preventDuplicates = true,
@@ -207,7 +236,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToFirstStepView({
-    _i9.Key? key,
+    _i10.Key? key,
     required String token,
     int? routerId,
     bool preventDuplicates = true,
@@ -252,7 +281,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToSignIN({
-    _i9.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -268,7 +297,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToSignUP({
-    _i9.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -284,7 +313,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToResetPaswword({
-    _i9.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -293,6 +322,22 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }) async {
     return navigateTo<dynamic>(Routes.resetPaswword,
         arguments: ResetPaswwordArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToResetEmailPaswword({
+    _i10.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.resetEmailPaswword,
+        arguments: ResetEmailPaswwordArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -314,7 +359,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> replaceWithFirstStepView({
-    _i9.Key? key,
+    _i10.Key? key,
     required String token,
     int? routerId,
     bool preventDuplicates = true,
@@ -359,7 +404,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> replaceWithSignIN({
-    _i9.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -375,7 +420,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> replaceWithSignUP({
-    _i9.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -391,7 +436,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> replaceWithResetPaswword({
-    _i9.Key? key,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -400,6 +445,22 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.resetPaswword,
         arguments: ResetPaswwordArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithResetEmailPaswword({
+    _i10.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.resetEmailPaswword,
+        arguments: ResetEmailPaswwordArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

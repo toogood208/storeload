@@ -105,6 +105,20 @@ class ServerService {
       return str;
     });
   }
+
+  Future<bool> resetPasswordEmail(
+      String? email) async {
+    final response = await _networkFormatter.fmt(() {
+      return _apiService
+          .post(route: emailOtpVerificationForgotEmailEndpoint, body: {
+        "email": email,
+      });
+    });
+    return response.fold((l) => false, (str) {
+      log.v(str);
+      return true;
+    });
+  }
 }
 
 
