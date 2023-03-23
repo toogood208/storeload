@@ -69,6 +69,7 @@ class FirstStepViewModel extends FormViewModel {
       firstNameTextColor = kSuccessTextColor;
     } else {
       firstNameTextColor = kErrorTextColor;
+      
     }
   }
 
