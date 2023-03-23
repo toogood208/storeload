@@ -3,7 +3,6 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.router.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/validation_manager.dart';
-import 'package:storeload/ui/views/account_setup/first_step/first_step_view.form.dart';
 import 'package:storeload/ui/views/authentication/reset_email_password/reset_email_password.form.dart';
 
 import '../../../../app/app.locator.dart';
@@ -22,8 +21,14 @@ class ResetEmailPasswordViewModel extends FormViewModel {
     setBusy(false);
   }
 
+  Future<void> submit() async {
+    if (nameValidationMessage == correct) {
+      await resendPasswordEmail();
+    }
+  }
+
   void emailPasswordValidationColor(String? text) {
-    if (emailValidationMessage == "Correct!") {
+    if (nameValidationMessage == "Correct!") {
       emailTextColor = kSuccessTextColor;
     } else {
       emailTextColor = kErrorTextColor;
@@ -32,10 +37,10 @@ class ResetEmailPasswordViewModel extends FormViewModel {
 
   void navigateToForgetPassword() =>
       _navigationService.clearStackAndShow(Routes.forgotPassword,
-      arguments: ForgotPasswordArguments(email: nameValue));
+          arguments: ForgotPasswordArguments(email: nameValue));
 
   @override
   void setFormStatus() {
-    setEmailValidationMessage(emailValidator(value: nameValue ?? ""));
+    setNameValidationMessage(emailValidator(value: nameValue ?? ""));
   }
 }

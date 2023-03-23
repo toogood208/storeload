@@ -48,7 +48,7 @@ class ResetEmailPaswword extends StatelessWidget with $ResetEmailPaswword {
                 hintText: "e.g jude@gmail.com",
               ),
               SizedBox(height: 64.h),
-               AppButton(title: "Reset Password", onTap: model.resendPasswordEmail,)
+               AppButton(title: "Reset Password", onTap: model.submit,)
             ],
           ),
         ),

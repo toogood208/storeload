@@ -40,9 +40,12 @@ class ForgotPassword extends StatelessWidget {
               SizedBox(height: 80.h),
               OTPTextField(
                 width: MediaQuery.of(context).size.width,
+                fieldWidth: 17,
+                length: 6,
                 otpFieldStyle: OtpFieldStyle(focusBorderColor: kTextColor50),
                 style: kAmulya18Regular.copyWith(color: kTextColor20),
                 onChanged: (value) {},
+                onCompleted: (value) => model.submit(value),
                 margin: kOTPFieldPadding,
               ),
               SizedBox(height: 8.h),
@@ -56,7 +59,7 @@ class ForgotPassword extends StatelessWidget {
               SizedBox(height: 80.h),
               model.isBusy
                   ? const AppSpinner()
-                  : CustomTextButton(title: "Resend Code?", onTap: model.getOTP)
+                  : CustomTextButton(title: "Resend Code?", onTap :() => model.getOTP(email!),)
             ],
           ),
         ),

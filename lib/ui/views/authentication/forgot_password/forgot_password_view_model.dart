@@ -13,12 +13,10 @@ class ForgotPasswordViewModel extends BaseViewModel {
   final _log = getLogger("ForgotPasswordViewModel");
   final _serverService = locator<ServerService>();
   final _navigationService = locator<NavigationService>();
- 
+
   String minutes = "";
   String second = "";
   String strDigits(int n) => n.toString().padLeft(2, '0');
-
-
 
   Timer? countdownTimer;
   Duration myDuration = const Duration(minutes: 3);
@@ -27,6 +25,13 @@ class ForgotPasswordViewModel extends BaseViewModel {
     _log.v("working");
     countdownTimer =
         Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
+  }
+
+  Future<void> resendPasswordEmail(String email) async {
+    setBusy(true);
+    final response = await _serverService.resetPasswordEmail(email);
+    _log.v(response);
+    setBusy(false);
   }
 
   void setCountDown() {
@@ -61,9 +66,21 @@ class ForgotPasswordViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future getOTP() async {
+  Future getOTP(String email) async {
     setBusy(true);
-    await Future.delayed(const Duration(seconds: 5), () => resetTimer());
+    await Future.delayed(const Duration(seconds: 1), () {
+      resetTimer();
+      resendPasswordEmail(email);
+    });
+    setBusy(false);
+  }
+
+  Future<void> submit(String otp) async {
+    setBusy(true);
+    final response =
+        await _serverService.emailOtpVerificationForgotPassord(otp: otp);
+    final userId = response!.data.id;
+    _log.v(userId);
     setBusy(false);
   }
 

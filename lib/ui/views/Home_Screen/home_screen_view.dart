@@ -22,8 +22,8 @@ class HomeScreenView extends StatelessWidget {
               leading: const CircleAvatar(
                 radius: 30,
               ),
-              title: Text('${model.user.firstName!} ${model.user.lastName!}'),
-              subtitle: Text(model.user.email!),
+              title: Text('${model.user.firstName} ${model.user.lastName}'),
+              subtitle: Text(model.user.email),
               trailing: CustomTextButton(
                 title: 'Logout',
                 onTap: model.logout,

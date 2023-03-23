@@ -32,7 +32,7 @@ class FirstStepView extends StatelessWidget with $FirstStepView {
       onDispose: (model) => disposeForm(),
       onModelReady: (model) {
         syncFormWithViewModel(model);
-        model.init();
+       // model.init();
       },
       builder: (context, model, child) => Scaffold(
         backgroundColor: kWhiteColor,
@@ -75,7 +75,7 @@ class FirstStepView extends StatelessWidget with $FirstStepView {
                         if (model.currentStep == 1) {
                           model.changeStep(2);
                         } else {
-                          model.goToHome();
+                         // model.goToHome();
                         }
                       },
                     )

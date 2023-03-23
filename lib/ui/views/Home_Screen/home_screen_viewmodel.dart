@@ -12,7 +12,7 @@ class HomeScreenViewModel extends BaseViewModel {
   final _persistentStorageService = locator<PersistentStorageService>();
   final _navigationService = locator<NavigationService>();
   final _snackbarService = locator<SnackbarService>();
-  late UserClass user;
+  late Data user;
 
   
   void init() {

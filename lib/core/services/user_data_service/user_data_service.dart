@@ -1,11 +1,11 @@
 import 'package:storeload/core/models/user.dart';
 
 class UserDataService {
-  late UserClass _user;
+  late Data _user;
 
-  UserClass get user => _user;
+  Data get user => _user;
 
-  void setUser({required UserClass user}) {
+  void setUser({required Data user}) {
     _user = user;
   }
 

@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
                 primary: kBackgroundColor,
               ),
         ),
-        initialRoute: Routes.signUP,
+        initialRoute: Routes.resetEmailPaswword,
         onGenerateRoute: StackedRouter().onGenerateRoute,
         navigatorKey: StackedService.navigatorKey,
       ),
