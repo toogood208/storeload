@@ -3,6 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.logger.dart';
 import 'package:storeload/app/app.router.dart';
+import 'package:storeload/core/services/network_services/localstorage/persistent_storage_service.dart';
 import 'package:storeload/core/services/network_services/server_services.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/validation_manager.dart';
@@ -11,6 +12,7 @@ import 'package:storeload/ui/views/authentication/signin/sign_in.form.dart';
 class SignInViewModel extends FormViewModel {
   final _serverService = locator<ServerService>();
   final _navigationService = locator<NavigationService>();
+  final _persistentStorageService = locator<PersistentStorageService>();
   final _logger = getLogger("SignUPViewModel");
   dynamic nameTextColor = kTextColor20;
   dynamic passwordTextColor = kTextColor20;
@@ -28,6 +30,7 @@ class SignInViewModel extends FormViewModel {
       if (isEmailVerified) {
         navigateToForgetPassword();
       } else {
+        _persistentStorageService.userToken = token;
         navigateToAccountSetup(token:token );
       }
     }
@@ -63,9 +66,7 @@ class SignInViewModel extends FormViewModel {
 
   void navigateToAccountSetup({required String token}) => _navigationService.clearStackAndShow(
         Routes.firstStepView,
-        arguments: FirstStepViewArguments(
-          token: token
-        )
+        
       );
 
   void navigateToSignUp() =>

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.router.dart';
+import 'package:storeload/core/services/network_services/localstorage/local_storage_service.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/views/widgets/set_up_dialog_ui.dart';
 
@@ -10,6 +11,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
   setUpDialogUI();
+  await openHiveBoxes();
+
   runApp(const MyApp());
 }
 

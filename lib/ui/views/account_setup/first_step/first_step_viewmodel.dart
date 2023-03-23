@@ -2,6 +2,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.logger.dart';
+import 'package:storeload/core/services/network_services/localstorage/persistent_storage_service.dart';
 import 'package:storeload/core/services/network_services/server_services.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/validation_manager.dart';
@@ -15,14 +16,14 @@ class FirstStepViewModel extends FormViewModel {
   final _dialogService = locator<DialogService>();
   final _serverService = locator<ServerService>();
   final snackbar = locator<SnackbarService>();
-
+  final _persistentStorageService = locator<PersistentStorageService>();
   String correct = "Correct!";
   dynamic emailTextColor = kTextColor20;
   dynamic firstNameTextColor = kTextColor20;
   dynamic lastNameTextColor = kTextColor20;
   dynamic mobileNumberTextColor = kTextColor20;
   dynamic ninNumberTextColor = kTextColor20;
-
+  String? token;
   int _currentStep = 1;
 
   int get currentStep => _currentStep;
@@ -40,6 +41,11 @@ class FirstStepViewModel extends FormViewModel {
   String? _selectedItem;
 
   String? get selectedItem => _selectedItem;
+
+  void init() {
+    token = _persistentStorageService.userToken;
+    notifyListeners();
+  }
 
   void setSelectedItem(String? value) {
     _selectedItem = value;
@@ -107,7 +113,7 @@ class FirstStepViewModel extends FormViewModel {
     if (response == null) return;
   }
 
-  void showEmailDialog({required String token}) async {
+  void showEmailDialog() async {
     final response = await _dialogService.showCustomDialog(
         variant: DialogType.emailOtpDialog,
         barrierDismissible: true,
@@ -116,7 +122,7 @@ class FirstStepViewModel extends FormViewModel {
     showBasicDialog(status: response.confirmed);
   }
 
-  Future updateUserAccount({required String token}) async {
+  Future updateUserAccount() async {
     setBusy(true);
     final response = await _serverService.userAccountSetup(
       firstName: firstNameValue,
@@ -124,19 +130,19 @@ class FirstStepViewModel extends FormViewModel {
       email: emailValue,
       gender: selectedItem,
       nin: ninValue,
-      token: token,
+      token: token!,
     );
     if (response == null || response['status'] == false) {
       snackbar.showSnackbar(message: "Something went wrong");
       setBusy(false);
     }
     if (response != null && response['status'] == true) {
-      showEmailDialog(token: token);
+      showEmailDialog();
       setBusy(false);
     }
   }
 
-  void goToHome({required String token}) async {
+  void goToHome() async {
     if (emailValidationMessage != correct ||
         firstNameValidationMessage != correct ||
         lastNameValidationMessage != correct ||
@@ -145,7 +151,7 @@ class FirstStepViewModel extends FormViewModel {
         selectedItem == null) return;
 
     // showEmailDialog(token: token);
-    updateUserAccount(token: token);
+    updateUserAccount();
   }
 
   @override

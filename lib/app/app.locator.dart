@@ -12,6 +12,7 @@ import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_services/src/snackbar/snackbar_service.dart';
 
 import '../core/services/network_services/api_service.dart';
+import '../core/services/network_services/localstorage/persistent_storage_service.dart';
 import '../core/services/network_services/network_service.dart';
 import '../core/services/network_services/server_services.dart';
 
@@ -30,4 +31,5 @@ Future<void> setupLocator(
   locator.registerLazySingleton(() => APIService());
   locator.registerLazySingleton(() => NetworkService());
   locator.registerLazySingleton(() => ServerService());
+  locator.registerLazySingleton(() => PersistentStorageService());
 }

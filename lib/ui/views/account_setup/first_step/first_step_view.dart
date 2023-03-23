@@ -22,8 +22,8 @@ import 'package:storeload/ui/views/widgets/custom_text_field.dart';
   FormTextField(name: 'mobileNumber'),
 ])
 class FirstStepView extends StatelessWidget with $FirstStepView {
-  FirstStepView({Key? key, required this.token}) : super(key: key);
-  final String token;
+  FirstStepView({Key? key, }) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<FirstStepViewModel>.reactive(
@@ -70,7 +70,7 @@ class FirstStepView extends StatelessWidget with $FirstStepView {
                         if (model.currentStep == 1) {
                           model.changeStep(2);
                         } else {
-                          model.goToHome(token: token);
+                          model.goToHome();
                         }
                       },
                     )

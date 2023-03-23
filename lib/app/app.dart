@@ -1,6 +1,7 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/core/services/network_services/api_service.dart';
+import 'package:storeload/core/services/network_services/localstorage/persistent_storage_service.dart';
 import 'package:storeload/core/services/network_services/network_service.dart';
 import 'package:storeload/core/services/network_services/server_services.dart';
 import 'package:storeload/ui/views/account_setup/first_step/first_step_view.dart';
@@ -30,6 +31,8 @@ import 'package:storeload/ui/views/intro_screens/splash_screen/splash_screen.dar
     LazySingleton(classType: APIService),
     LazySingleton(classType: NetworkService),
     LazySingleton(classType: ServerService),
+    LazySingleton(classType: PersistentStorageService), 
+
   ],
   logger: StackedLogger(),
 )

@@ -85,6 +85,7 @@ class _InputFieldState extends State<InputField> {
                   inputFormatters: widget.keyboardType == TextInputType.number
                       ? [
                           LengthLimitingTextInputFormatter(widget.length),
+                          
                         ]
                       : null,
                   textAlignVertical: TextAlignVertical.center,
