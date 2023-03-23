@@ -99,8 +99,12 @@ class StackedRouter extends _i1.RouterBase {
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.ForgotPassword: (data) {
+      final args = data.getArgs<ForgotPasswordArguments>(
+        orElse: () => const ForgotPasswordArguments(),
+      );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i2.ForgotPassword(),
+        builder: (context) =>
+            _i2.ForgotPassword(key: args.key, email: args.email),
         settings: data,
       );
     },
@@ -175,6 +179,22 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
+class ForgotPasswordArguments {
+  const ForgotPasswordArguments({
+    this.key,
+    this.email,
+  });
+
+  final _i11.Key? key;
+
+  final String? email;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "email": "$email"}';
+  }
+}
+
 class FirstStepViewArguments {
   const FirstStepViewArguments({this.key});
 
@@ -231,14 +251,17 @@ class ResetEmailPaswwordArguments {
 }
 
 extension NavigatorStateExtension on _i12.NavigationService {
-  Future<dynamic> navigateToForgotPassword([
+  Future<dynamic> navigateToForgotPassword({
+    _i11.Key? key,
+    String? email,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.forgotPassword,
+        arguments: ForgotPasswordArguments(key: key, email: email),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -367,14 +390,17 @@ extension NavigatorStateExtension on _i12.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithForgotPassword([
+  Future<dynamic> replaceWithForgotPassword({
+    _i11.Key? key,
+    String? email,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.forgotPassword,
+        arguments: ForgotPasswordArguments(key: key, email: email),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

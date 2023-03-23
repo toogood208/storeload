@@ -5,13 +5,16 @@ import 'package:otp_text_field/otp_field_style.dart';
 import 'package:stacked/stacked.dart';
 import 'package:storeload/ui/utils/test_styles.dart';
 import 'package:storeload/ui/views/authentication/forgot_password/forgot_password_view_model.dart';
+import 'package:storeload/ui/views/widgets/app_spinner.dart';
+import 'package:storeload/ui/views/widgets/custom_text_button.dart';
 
 import '../../../utils/colors.dart';
 import '../../../utils/edge_insects.dart';
 import '../../widgets/custom_app_bar.dart';
 
 class ForgotPassword extends StatelessWidget {
-  const ForgotPassword({Key? key}) : super(key: key);
+  const ForgotPassword({Key? key, this.email}) : super(key: key);
+  final String? email;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class ForgotPassword extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Enter the four digit code sent to your ***********load@gmail",
+                "Enter the four digit code sent to $email",
                 textAlign: TextAlign.left,
                 style: kAmulya14Regular.copyWith(color: kTextColor40),
               ),
@@ -43,7 +46,17 @@ class ForgotPassword extends StatelessWidget {
                 margin: kOTPFieldPadding,
               ),
               SizedBox(height: 8.h),
-             
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "${model.minutes}:${model.second}",
+                  style: kAmulya14Regular.copyWith(color: kTextColor),
+                ),
+              ),
+              SizedBox(height: 80.h),
+              model.isBusy
+                  ? const AppSpinner()
+                  : CustomTextButton(title: "Resend Code?", onTap: model.getOTP)
             ],
           ),
         ),

@@ -31,7 +31,8 @@ class ResetEmailPasswordViewModel extends FormViewModel {
   }
 
   void navigateToForgetPassword() =>
-      _navigationService.clearStackAndShow(Routes.forgotPassword);
+      _navigationService.clearStackAndShow(Routes.forgotPassword,
+      arguments: ForgotPasswordArguments(email: nameValue));
 
   @override
   void setFormStatus() {

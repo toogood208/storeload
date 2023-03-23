@@ -92,8 +92,7 @@ class ServerService {
     });
   }
 
-   Future emailOtpVerificationForgotPassord(
-      {required String otp, required String token}) async {
+  Future<User?> emailOtpVerificationForgotPassord({required String otp}) async {
     final response = await _networkFormatter.fmt(() {
       return _apiService
           .post(route: emailOtpVerificationForgotPasswordEndpoint, body: {
@@ -101,13 +100,13 @@ class ServerService {
       });
     });
     return response.fold((l) => null, (str) {
-      log.v(str);
-      return str;
+      final dataResponse = User.fromJson(str);
+      log.v(dataResponse);
+      return dataResponse;
     });
   }
 
-  Future<bool> resetPasswordEmail(
-      String? email) async {
+  Future<bool> resetPasswordEmail(String? email) async {
     final response = await _networkFormatter.fmt(() {
       return _apiService
           .post(route: emailOtpVerificationForgotEmailEndpoint, body: {
@@ -120,5 +119,3 @@ class ServerService {
     });
   }
 }
-
-
