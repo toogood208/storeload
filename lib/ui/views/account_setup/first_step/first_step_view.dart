@@ -22,13 +22,18 @@ import 'package:storeload/ui/views/widgets/custom_text_field.dart';
   FormTextField(name: 'mobileNumber'),
 ])
 class FirstStepView extends StatelessWidget with $FirstStepView {
-  FirstStepView({Key? key, }) : super(key: key);
-  
+  FirstStepView({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<FirstStepViewModel>.reactive(
       onDispose: (model) => disposeForm(),
-      onModelReady: (model) => syncFormWithViewModel(model),
+      onModelReady: (model) {
+        syncFormWithViewModel(model);
+        model.init();
+      },
       builder: (context, model, child) => Scaffold(
         backgroundColor: kWhiteColor,
         appBar: const CustomAppBar(title: 'Set-up your account'),
@@ -120,7 +125,7 @@ class StepTwoWidget extends ViewModelWidget<FirstStepViewModel> {
             validationMessage: viewModel.mobileNumberValidationMessage,
             keyboardType: TextInputType.number,
             length: 13,
-             textColor: viewModel.mobileNumberTextColor,
+            textColor: viewModel.mobileNumberTextColor,
             onchanged: viewModel.mobileNumberValidationColor,
             inputController: mobileNumberController,
             labelText: 'Your mobile number',
@@ -129,7 +134,7 @@ class StepTwoWidget extends ViewModelWidget<FirstStepViewModel> {
         InputField(
             validationMessage: viewModel.ninValidationMessage,
             onchanged: viewModel.ninNumberValidationColor,
-             textColor: viewModel.ninNumberTextColor,
+            textColor: viewModel.ninNumberTextColor,
             keyboardType: TextInputType.number,
             length: 11,
             inputController: ninController,
@@ -138,7 +143,7 @@ class StepTwoWidget extends ViewModelWidget<FirstStepViewModel> {
         kTextFieldHieghtSpacing,
         InputField(
             validationMessage: viewModel.emailValidationMessage,
-             textColor: viewModel.emailTextColor,
+            textColor: viewModel.emailTextColor,
             inputController: emailController,
             labelText: 'Your email address',
             hintText: 'e.g Storeload@gmail.com'),
@@ -219,7 +224,7 @@ class StepOneWidget extends ViewModelWidget<FirstStepViewModel> {
         InputField(
           labelText: "Your last name",
           hintText: "Jude",
-           textColor: viewModel.lastNameTextColor,
+          textColor: viewModel.lastNameTextColor,
           inputController: lastNameController,
           validationMessage: viewModel.lastNameValidationMessage,
           onchanged: viewModel.lastNameValidationColor,

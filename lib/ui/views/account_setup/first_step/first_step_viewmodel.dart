@@ -2,8 +2,11 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.logger.dart';
-import 'package:storeload/core/services/network_services/localstorage/persistent_storage_service.dart';
+import 'package:storeload/app/app.router.dart';
+import 'package:storeload/core/models/user.dart';
+import 'package:storeload/core/services/localstorage/persistent_storage_service.dart';
 import 'package:storeload/core/services/network_services/server_services.dart';
+import 'package:storeload/core/services/user_data_service/user_data_service.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/validation_manager.dart';
 import 'package:storeload/ui/views/account_setup/first_step/first_step_view.form.dart';
@@ -15,8 +18,12 @@ class FirstStepViewModel extends FormViewModel {
   final _log = getLogger('FirstStepViewModel');
   final _dialogService = locator<DialogService>();
   final _serverService = locator<ServerService>();
+  final _navigationService = locator<NavigationService>();
   final snackbar = locator<SnackbarService>();
+  final _userDataService = locator<UserDataService>();
+
   final _persistentStorageService = locator<PersistentStorageService>();
+
   String correct = "Correct!";
   dynamic emailTextColor = kTextColor20;
   dynamic firstNameTextColor = kTextColor20;
@@ -24,6 +31,7 @@ class FirstStepViewModel extends FormViewModel {
   dynamic mobileNumberTextColor = kTextColor20;
   dynamic ninNumberTextColor = kTextColor20;
   String? token;
+
   int _currentStep = 1;
 
   int get currentStep => _currentStep;
@@ -44,6 +52,7 @@ class FirstStepViewModel extends FormViewModel {
 
   void init() {
     token = _persistentStorageService.userToken;
+    _log.v(token);
     notifyListeners();
   }
 
@@ -69,7 +78,6 @@ class FirstStepViewModel extends FormViewModel {
       firstNameTextColor = kSuccessTextColor;
     } else {
       firstNameTextColor = kErrorTextColor;
-      
     }
   }
 
@@ -112,13 +120,31 @@ class FirstStepViewModel extends FormViewModel {
       mainButtonTitle: "Exit",
     );
     if (response == null) return;
+    if (response.confirmed && status) {
+      UserClass user = _userDataService.user;
+      user.firstName = firstNameValue;
+      user.lastName = lastNameValue;
+      user.email = emailValue;
+      user.gender = selectedItem;
+      user.nin = ninValue;
+      _userDataService.setUser(user: user);
+      notifyListeners();
+      _log.v("Exit");
+      navigateToHomeScreenView();
+    }
+  }
+
+  void navigateToHomeScreenView() {
+    _navigationService.navigateTo(Routes.homeScreenView);
   }
 
   void showEmailDialog() async {
     final response = await _dialogService.showCustomDialog(
         variant: DialogType.emailOtpDialog,
         barrierDismissible: true,
-        data: {'email': emailValue, 'token': token});
+        data: {
+          'email': emailValue,
+        });
     if (response == null) return;
     showBasicDialog(status: response.confirmed);
   }

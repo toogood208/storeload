@@ -5,10 +5,10 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i10;
+import 'package:flutter/material.dart' as _i11;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i11;
+import 'package:stacked_services/stacked_services.dart' as _i12;
 import 'package:storeload/ui/views/account_setup/first_step/first_step_view.dart'
     as _i3;
 import 'package:storeload/ui/views/authentication/forgot_password/forgot_password.dart'
@@ -19,6 +19,7 @@ import 'package:storeload/ui/views/authentication/reset_password/reset_password.
     as _i8;
 import 'package:storeload/ui/views/authentication/signin/sign_in.dart' as _i6;
 import 'package:storeload/ui/views/authentication/signup/sign_up.dart' as _i7;
+import 'package:storeload/ui/views/Home_Screen/home_screen_view.dart' as _i10;
 import 'package:storeload/ui/views/intro_screens/onboarding/onboarding.dart'
     as _i5;
 import 'package:storeload/ui/views/intro_screens/splash_screen/splash_screen.dart'
@@ -41,6 +42,8 @@ class Routes {
 
   static const resetEmailPaswword = '/reset-email-paswword';
 
+  static const homeScreenView = '/home-screen-view';
+
   static const all = <String>{
     forgotPassword,
     firstStepView,
@@ -50,6 +53,7 @@ class Routes {
     signUP,
     resetPaswword,
     resetEmailPaswword,
+    homeScreenView,
   };
 }
 
@@ -86,6 +90,10 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.resetEmailPaswword,
       page: _i9.ResetEmailPaswword,
+    ),
+    _i1.RouteDef(
+      Routes.homeScreenView,
+      page: _i10.HomeScreenView,
     ),
   ];
 
@@ -153,6 +161,12 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i10.HomeScreenView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i10.HomeScreenView(),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -164,7 +178,7 @@ class StackedRouter extends _i1.RouterBase {
 class FirstStepViewArguments {
   const FirstStepViewArguments({this.key});
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   @override
   String toString() {
@@ -175,7 +189,7 @@ class FirstStepViewArguments {
 class SignINArguments {
   const SignINArguments({this.key});
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   @override
   String toString() {
@@ -186,7 +200,7 @@ class SignINArguments {
 class SignUPArguments {
   const SignUPArguments({this.key});
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   @override
   String toString() {
@@ -197,7 +211,7 @@ class SignUPArguments {
 class ResetPaswwordArguments {
   const ResetPaswwordArguments({this.key});
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   @override
   String toString() {
@@ -208,7 +222,7 @@ class ResetPaswwordArguments {
 class ResetEmailPaswwordArguments {
   const ResetEmailPaswwordArguments({this.key});
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   @override
   String toString() {
@@ -216,7 +230,7 @@ class ResetEmailPaswwordArguments {
   }
 }
 
-extension NavigatorStateExtension on _i11.NavigationService {
+extension NavigatorStateExtension on _i12.NavigationService {
   Future<dynamic> navigateToForgotPassword([
     int? routerId,
     bool preventDuplicates = true,
@@ -232,7 +246,7 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }
 
   Future<dynamic> navigateToFirstStepView({
-    _i10.Key? key,
+    _i11.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -276,7 +290,7 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }
 
   Future<dynamic> navigateToSignIN({
-    _i10.Key? key,
+    _i11.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -292,7 +306,7 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }
 
   Future<dynamic> navigateToSignUP({
-    _i10.Key? key,
+    _i11.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -308,7 +322,7 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }
 
   Future<dynamic> navigateToResetPaswword({
-    _i10.Key? key,
+    _i11.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -324,7 +338,7 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }
 
   Future<dynamic> navigateToResetEmailPaswword({
-    _i10.Key? key,
+    _i11.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -333,6 +347,20 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }) async {
     return navigateTo<dynamic>(Routes.resetEmailPaswword,
         arguments: ResetEmailPaswwordArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToHomeScreenView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.homeScreenView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -354,7 +382,7 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }
 
   Future<dynamic> replaceWithFirstStepView({
-    _i10.Key? key,
+    _i11.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -398,7 +426,7 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }
 
   Future<dynamic> replaceWithSignIN({
-    _i10.Key? key,
+    _i11.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -414,7 +442,7 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }
 
   Future<dynamic> replaceWithSignUP({
-    _i10.Key? key,
+    _i11.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -430,7 +458,7 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }
 
   Future<dynamic> replaceWithResetPaswword({
-    _i10.Key? key,
+    _i11.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -446,7 +474,7 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }
 
   Future<dynamic> replaceWithResetEmailPaswword({
-    _i10.Key? key,
+    _i11.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -455,6 +483,20 @@ extension NavigatorStateExtension on _i11.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.resetEmailPaswword,
         arguments: ResetEmailPaswwordArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithHomeScreenView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.homeScreenView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

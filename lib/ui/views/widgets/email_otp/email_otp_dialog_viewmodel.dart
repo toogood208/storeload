@@ -3,14 +3,17 @@ import 'dart:async';
 import 'package:stacked/stacked.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.logger.dart';
+import 'package:storeload/core/services/localstorage/persistent_storage_service.dart';
 
 import '../../../../core/services/network_services/server_services.dart';
 
 class EmailOtpDialogViewModel extends BaseViewModel {
   final _log = getLogger("EmailOtpDialogViewModel");
   final _serverService = locator<ServerService>();
+  final _persistentStorageService = locator<PersistentStorageService>();
 
   String? otpValue;
+  String? token;
 
   String minutes = "";
   String second = "";
@@ -23,6 +26,11 @@ class EmailOtpDialogViewModel extends BaseViewModel {
     _log.v("working");
     countdownTimer =
         Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
+  }
+
+  void init() {
+    token = _persistentStorageService.userToken;
+    notifyListeners();
   }
 
   void setCountDown() {
@@ -69,16 +77,17 @@ class EmailOtpDialogViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<bool> verifyOtp(String value, {required String token}) async {
+  Future<bool> verifyOtp(String value) async {
     _log.v(value);
-   return await emailOtpVerification(otp: value, token: token);
+    return await emailOtpVerification(otp: value);
   }
 
-  Future emailOtpVerification(
-      {required String otp, required String token}) async {
+  Future emailOtpVerification({
+    required String otp,
+  }) async {
     setBusy(true);
     final response =
-        await _serverService.emailOtpVerification(otp: otp, token: token);
+        await _serverService.emailOtpVerification(otp: otp, token: token!);
     _log.v(response['status']);
     if (response == null) {
       setBusy(false);

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.router.dart';
-import 'package:storeload/core/services/network_services/localstorage/local_storage_service.dart';
+import 'package:storeload/core/services/localstorage/local_storage_service.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/views/widgets/set_up_dialog_ui.dart';
 
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
                 primary: kBackgroundColor,
               ),
         ),
-        initialRoute: Routes.resetEmailPaswword,
+        initialRoute: Routes.signUP,
         onGenerateRoute: StackedRouter().onGenerateRoute,
         navigatorKey: StackedService.navigatorKey,
       ),

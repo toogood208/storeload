@@ -11,10 +11,11 @@ import 'package:stacked_services/src/dialog/dialog_service.dart';
 import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_services/src/snackbar/snackbar_service.dart';
 
+import '../core/services/localstorage/persistent_storage_service.dart';
 import '../core/services/network_services/api_service.dart';
-import '../core/services/network_services/localstorage/persistent_storage_service.dart';
 import '../core/services/network_services/network_service.dart';
 import '../core/services/network_services/server_services.dart';
+import '../core/services/user_data_service/user_data_service.dart';
 
 final locator = StackedLocator.instance;
 
@@ -32,4 +33,5 @@ Future<void> setupLocator(
   locator.registerLazySingleton(() => NetworkService());
   locator.registerLazySingleton(() => ServerService());
   locator.registerLazySingleton(() => PersistentStorageService());
+  locator.registerLazySingleton(() => UserDataService());
 }

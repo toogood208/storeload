@@ -5,8 +5,6 @@ import 'package:otp_text_field/otp_field_style.dart';
 import 'package:stacked/stacked.dart';
 import 'package:storeload/ui/utils/test_styles.dart';
 import 'package:storeload/ui/views/authentication/forgot_password/forgot_password_view_model.dart';
-import 'package:storeload/ui/views/widgets/app_spinner.dart';
-import 'package:storeload/ui/views/widgets/custom_text_button.dart';
 
 import '../../../utils/colors.dart';
 import '../../../utils/edge_insects.dart';

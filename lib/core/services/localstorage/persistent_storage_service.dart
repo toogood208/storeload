@@ -1,5 +1,5 @@
 import 'package:storeload/core/constants/hive_boxes.dart';
-import 'package:storeload/core/services/network_services/localstorage/local_storage_service.dart';
+import 'package:storeload/core/services/localstorage/local_storage_service.dart';
 
 const String _saveUserTokenKey = 'SaveUserTokenKey';
 

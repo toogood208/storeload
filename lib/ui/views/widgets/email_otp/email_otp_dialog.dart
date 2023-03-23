@@ -24,7 +24,10 @@ class EmailDialog extends StatelessWidget {
     var maskedEmail =
         '${'*' * (email!.indexOf('@'))}${email!.substring(email!.indexOf('@'))}';
     return ViewModelBuilder<EmailOtpDialogViewModel>.reactive(
-      onModelReady: (model) => model.startTimer(),
+      onModelReady: (model) {
+        model.init();
+        model.startTimer();
+      },
       builder: (context, model, child) => AlertDialog(
         title: Text(
           'Verify your email address',
@@ -53,8 +56,9 @@ class EmailDialog extends StatelessWidget {
                 otpFieldStyle: OtpFieldStyle(focusBorderColor: kTextColor50),
                 style: kAmulya18Regular.copyWith(color: kTextColor20),
                 onCompleted: (value) async {
-                  var status = await model.verifyOtp(value,
-                      token: request.data['token']);
+                  var status = await model.verifyOtp(
+                    value,
+                  );
                   model.stopTimer();
 
                   completer(DialogResponse(confirmed: status, data: value));
