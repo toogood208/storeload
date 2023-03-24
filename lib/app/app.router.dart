@@ -152,7 +152,8 @@ class StackedRouter extends _i1.RouterBase {
         orElse: () => const ResetPaswwordArguments(),
       );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i8.ResetPaswword(key: args.key),
+        builder: (context) =>
+            _i8.ResetPaswword(key: args.key, userId: args.userId),
         settings: data,
       );
     },
@@ -229,13 +230,18 @@ class SignUPArguments {
 }
 
 class ResetPaswwordArguments {
-  const ResetPaswwordArguments({this.key});
+  const ResetPaswwordArguments({
+    this.key,
+    this.userId,
+  });
 
   final _i11.Key? key;
 
+  final String? userId;
+
   @override
   String toString() {
-    return '{"key": "$key"}';
+    return '{"key": "$key", "userId": "$userId"}';
   }
 }
 
@@ -346,6 +352,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
 
   Future<dynamic> navigateToResetPaswword({
     _i11.Key? key,
+    String? userId,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -353,7 +360,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.resetPaswword,
-        arguments: ResetPaswwordArguments(key: key),
+        arguments: ResetPaswwordArguments(key: key, userId: userId),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -485,6 +492,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
 
   Future<dynamic> replaceWithResetPaswword({
     _i11.Key? key,
+    String? userId,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -492,7 +500,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
         transition,
   }) async {
     return replaceWith<dynamic>(Routes.resetPaswword,
-        arguments: ResetPaswwordArguments(key: key),
+        arguments: ResetPaswwordArguments(key: key, userId: userId),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

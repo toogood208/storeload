@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.logger.dart';
+import 'package:storeload/app/app.router.dart';
 import 'package:storeload/core/services/network_services/server_services.dart';
 
 import 'package:storeload/ui/views/widgets/otp_dialog.dart';
@@ -79,7 +80,8 @@ class ForgotPasswordViewModel extends BaseViewModel {
     setBusy(true);
     final response =
         await _serverService.emailOtpVerificationForgotPassord(otp: otp);
-    final userId = response!.data.id;
+    String? userId = response?.data.id;
+    if (response!.status && userId != null) navigateToResetPassword(userId);
     _log.v(userId);
     setBusy(false);
   }
@@ -91,5 +93,10 @@ class ForgotPasswordViewModel extends BaseViewModel {
         secondaryButtonTitle: "Exit",
         mainButtonTitle: "Retry");
     _log.v(response?.confirmed);
+  }
+
+  void navigateToResetPassword(String userId) {
+    _navigationService.navigateTo(Routes.resetPaswword,
+    arguments: ResetPaswwordArguments(userId: userId));
   }
 }

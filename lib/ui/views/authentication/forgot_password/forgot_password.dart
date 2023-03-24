@@ -21,49 +21,58 @@ class ForgotPassword extends StatelessWidget {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => ForgotPasswordViewModel(),
       onModelReady: (model) => model.startTimer(),
-      builder: (context, model, child) => Scaffold(
-        backgroundColor: kWhiteColor,
-        appBar: const CustomAppBar(
-          title: "Forgot Password?",
-        ),
-        body: SingleChildScrollView(
-          padding: kAppPadding,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "Enter the four digit code sent to $email",
-                textAlign: TextAlign.left,
-                style: kAmulya14Regular.copyWith(color: kTextColor40),
+      builder: (context, model, child) => model.isBusy
+          ? const Scaffold(
+              body: Center(
+                child: AppSpinner(),
               ),
-              SizedBox(height: 80.h),
-              OTPTextField(
-                width: MediaQuery.of(context).size.width,
-                fieldWidth: 17,
-                length: 6,
-                otpFieldStyle: OtpFieldStyle(focusBorderColor: kTextColor50),
-                style: kAmulya18Regular.copyWith(color: kTextColor20),
-                onChanged: (value) {},
-                onCompleted: (value) => model.submit(value),
-                margin: kOTPFieldPadding,
+            )
+          : Scaffold(
+              backgroundColor: kWhiteColor,
+              appBar: const CustomAppBar(
+                title: "Forgot Password?",
               ),
-              SizedBox(height: 8.h),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  "${model.minutes}:${model.second}",
-                  style: kAmulya14Regular.copyWith(color: kTextColor),
+              body: SingleChildScrollView(
+                padding: kAppPadding,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Enter the four digit code sent to $email",
+                      textAlign: TextAlign.left,
+                      style: kAmulya14Regular.copyWith(color: kTextColor40),
+                    ),
+                    SizedBox(height: 80.h),
+                    OTPTextField(
+                      width: MediaQuery.of(context).size.width,
+                      length: 4,
+                      otpFieldStyle:
+                          OtpFieldStyle(focusBorderColor: kTextColor50),
+                      style: kAmulya18Regular.copyWith(color: kTextColor20),
+                      onChanged: (value) {},
+                      onCompleted: (value) => model.submit(value),
+                      margin: kOTPFieldPadding,
+                    ),
+                    SizedBox(height: 8.h),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        "${model.minutes}:${model.second}",
+                        style: kAmulya14Regular.copyWith(color: kTextColor),
+                      ),
+                    ),
+                    SizedBox(height: 80.h),
+                    model.isBusy
+                        ? const AppSpinner()
+                        : CustomTextButton(
+                            title: "Resend Code?",
+                            onTap: () => model.getOTP(email!),
+                          )
+                  ],
                 ),
               ),
-              SizedBox(height: 80.h),
-              model.isBusy
-                  ? const AppSpinner()
-                  : CustomTextButton(title: "Resend Code?", onTap :() => model.getOTP(email!),)
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }

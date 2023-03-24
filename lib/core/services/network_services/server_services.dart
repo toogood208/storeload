@@ -118,4 +118,23 @@ class ServerService {
       return true;
     });
   }
+
+  Future<bool> newResetPassword({
+    String? userId,
+    String? password,
+  }) async {
+    final response = await _networkFormatter.fmt(() {
+      return _apiService.post(route: signInUserEndpoint, body: {
+        "userId": userId,
+        "password": password,
+      });
+    });
+
+    return response.fold((l) => false, (str) {
+      final userResponse = User.fromJson(str);
+      log.v(str);
+      log.v(userResponse);
+      return true;
+    });
+  }
 }

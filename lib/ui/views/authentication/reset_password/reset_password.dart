@@ -14,16 +14,16 @@ import '../../widgets/custom_app_bar.dart';
 @FormView(fields: [
   FormTextField(name: "password"),
 ])
-
 class ResetPaswword extends StatelessWidget with $ResetPaswword {
-  ResetPaswword({Key? key}) : super(key: key);
+  ResetPaswword({Key? key, this.userId}) : super(key: key);
+  String? userId;
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => ResetPasswordViewModel(),
-       onDispose: (model) => disposeForm(),
-      onModelReady: (model) => syncFormWithViewModel(model),  
+      onDispose: (model) => disposeForm(),
+      onModelReady: (model) => syncFormWithViewModel(model),
       builder: (context, model, child) => Scaffold(
         backgroundColor: kWhiteColor,
         appBar: const CustomAppBar(
@@ -35,7 +35,7 @@ class ResetPaswword extends StatelessWidget with $ResetPaswword {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-               InputField(
+              InputField(
                 onchanged: model.passwordValidationColor,
                 textColor: model.passwordTextColor,
                 inputController: passwordController,
@@ -46,12 +46,11 @@ class ResetPaswword extends StatelessWidget with $ResetPaswword {
                 suffixIcon: true,
                 hintText: "e.g storeload!",
               ),
-             
               SizedBox(height: 64.h),
-              
-             const AppButton(title: "Reset Password")
-            
-              
+              AppButton(
+                title: "Reset Password",
+                onTap: () => model.submit(userId!),
+              )
             ],
           ),
         ),
