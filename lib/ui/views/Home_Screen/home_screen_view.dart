@@ -23,7 +23,7 @@ class HomeScreenView extends StatelessWidget {
                 radius: 30,
               ),
               title: Text('${model.user.firstName} ${model.user.lastName}'),
-              subtitle: Text(model.user.email),
+              subtitle: Text(model.user.email!),
               trailing: CustomTextButton(
                 title: 'Logout',
                 onTap: model.logout,
