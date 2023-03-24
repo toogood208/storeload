@@ -41,7 +41,7 @@ class EmailDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Enter the 6 digit code sent to $maskedEmail",
+              "Enter the 4 digit code sent to $maskedEmail",
               textAlign: TextAlign.center,
               style: kAmulya14Regular.copyWith(color: kTextColor40),
             ),
@@ -49,7 +49,7 @@ class EmailDialog extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.0.h),
               child: OTPTextField(
-                length: 6,
+                length: 4,
                 controller: fieldcontroller,
                 width: double.infinity,
                 onChanged: (value) => model.setOtpValue(value),
@@ -60,7 +60,6 @@ class EmailDialog extends StatelessWidget {
                     value,
                   );
                   model.stopTimer();
-
                   completer(DialogResponse(confirmed: status, data: value));
                 },
               ),

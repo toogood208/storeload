@@ -29,7 +29,7 @@ class SignInViewModel extends FormViewModel {
 
     if (response != null && response.status) {
       bool isEmailVerified = response.data.isEmailVerified;
-      String token = response.data.tokens[0].token;
+      String token = response.data.token;
       //set user data
       _userDataService.setUser(user: response.data);
       // notifyListeners();
