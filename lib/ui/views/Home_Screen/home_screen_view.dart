@@ -11,7 +11,7 @@ class HomeScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeScreenViewModel>.reactive(
-      onModelReady: (model) => model.init(),
+      onViewModelReady: (model) => model.init(),
       builder: (context, model, child) => Scaffold(
           body: Center(
         child: Column(

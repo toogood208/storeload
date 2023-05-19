@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// StackedRouterGenerator
+// StackedNavigatorGenerator
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
@@ -194,6 +194,17 @@ class ForgotPasswordArguments {
   String toString() {
     return '{"key": "$key", "email": "$email"}';
   }
+
+  @override
+  bool operator ==(covariant ForgotPasswordArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.email == email;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ email.hashCode;
+  }
 }
 
 class FirstStepViewArguments {
@@ -204,6 +215,17 @@ class FirstStepViewArguments {
   @override
   String toString() {
     return '{"key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant FirstStepViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
   }
 }
 
@@ -216,6 +238,17 @@ class SignINArguments {
   String toString() {
     return '{"key": "$key"}';
   }
+
+  @override
+  bool operator ==(covariant SignINArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
+  }
 }
 
 class SignUPArguments {
@@ -226,6 +259,17 @@ class SignUPArguments {
   @override
   String toString() {
     return '{"key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant SignUPArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
   }
 }
 
@@ -243,6 +287,17 @@ class ResetPaswwordArguments {
   String toString() {
     return '{"key": "$key", "userId": "$userId"}';
   }
+
+  @override
+  bool operator ==(covariant ResetPaswwordArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.userId == userId;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ userId.hashCode;
+  }
 }
 
 class ResetEmailPaswwordArguments {
@@ -253,6 +308,17 @@ class ResetEmailPaswwordArguments {
   @override
   String toString() {
     return '{"key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant ResetEmailPaswwordArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
   }
 }
 

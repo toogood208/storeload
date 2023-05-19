@@ -28,7 +28,7 @@ final Map<String, String? Function(String?)?> _FirstStepViewTextValidations = {
   MobileNumberValueKey: null,
 };
 
-mixin $FirstStepView on StatelessWidget {
+mixin $FirstStepView {
   TextEditingController get firstNameController =>
       _getFormTextEditingController(FirstNameValueKey);
   TextEditingController get lastNameController =>
@@ -46,11 +46,14 @@ mixin $FirstStepView on StatelessWidget {
   FocusNode get mobileNumberFocusNode =>
       _getFormFocusNode(MobileNumberValueKey);
 
-  TextEditingController _getFormTextEditingController(String key,
-      {String? initialValue}) {
+  TextEditingController _getFormTextEditingController(
+    String key, {
+    String? initialValue,
+  }) {
     if (_FirstStepViewTextEditingControllers.containsKey(key)) {
       return _FirstStepViewTextEditingControllers[key]!;
     }
+
     _FirstStepViewTextEditingControllers[key] =
         TextEditingController(text: initialValue);
     return _FirstStepViewTextEditingControllers[key]!;
@@ -76,8 +79,10 @@ mixin $FirstStepView on StatelessWidget {
 
   /// Registers a listener on every generated controller that calls [model.setData()]
   /// with the latest textController values
-  @Deprecated('Use syncFormWithViewModel instead.'
-      'This feature was deprecated after 3.1.0.')
+  @Deprecated(
+    'Use syncFormWithViewModel instead.'
+    'This feature was deprecated after 3.1.0.',
+  )
   void listenToFormUpdated(FormViewModel model) {
     firstNameController.addListener(() => _updateFormData(model));
     lastNameController.addListener(() => _updateFormData(model));
@@ -86,7 +91,7 @@ mixin $FirstStepView on StatelessWidget {
     mobileNumberController.addListener(() => _updateFormData(model));
   }
 
-  final bool _autoTextFieldValidation = true;
+  static const bool _autoTextFieldValidation = true;
   bool validateFormFields(FormViewModel model) {
     _updateFormData(model, forceValidate: true);
     return model.isFormValid;
@@ -104,28 +109,10 @@ mixin $FirstStepView on StatelessWidget {
           MobileNumberValueKey: mobileNumberController.text,
         }),
     );
+
     if (_autoTextFieldValidation || forceValidate) {
-      _updateValidationData(model);
+      updateValidationData(model);
     }
-  }
-
-  /// Updates the fieldsValidationMessages on the FormViewModel
-  void _updateValidationData(FormViewModel model) =>
-      model.setValidationMessages({
-        FirstNameValueKey: _getValidationMessage(FirstNameValueKey),
-        LastNameValueKey: _getValidationMessage(LastNameValueKey),
-        EmailValueKey: _getValidationMessage(EmailValueKey),
-        NinValueKey: _getValidationMessage(NinValueKey),
-        MobileNumberValueKey: _getValidationMessage(MobileNumberValueKey),
-      });
-
-  /// Returns the validation message for the given key
-  String? _getValidationMessage(String key) {
-    final validatorForKey = _FirstStepViewTextValidations[key];
-    if (validatorForKey == null) return null;
-    String? validationMessageForKey =
-        validatorForKey(_FirstStepViewTextEditingControllers[key]!.text);
-    return validationMessageForKey;
   }
 
   /// Calls dispose on all the generated controllers and focus nodes
@@ -260,13 +247,6 @@ extension ValueProperties on FormViewModel {
       this.fieldsValidationMessages[NinValueKey];
   String? get mobileNumberValidationMessage =>
       this.fieldsValidationMessages[MobileNumberValueKey];
-  void clearForm() {
-    firstNameValue = '';
-    lastNameValue = '';
-    emailValue = '';
-    ninValue = '';
-    mobileNumberValue = '';
-  }
 }
 
 extension Methods on FormViewModel {
@@ -280,4 +260,45 @@ extension Methods on FormViewModel {
       this.fieldsValidationMessages[NinValueKey] = validationMessage;
   setMobileNumberValidationMessage(String? validationMessage) =>
       this.fieldsValidationMessages[MobileNumberValueKey] = validationMessage;
+
+  /// Clears text input fields on the Form
+  void clearForm() {
+    firstNameValue = '';
+    lastNameValue = '';
+    emailValue = '';
+    ninValue = '';
+    mobileNumberValue = '';
+  }
+
+  /// Validates text input fields on the Form
+  void validateForm() {
+    this.setValidationMessages({
+      FirstNameValueKey: getValidationMessage(FirstNameValueKey),
+      LastNameValueKey: getValidationMessage(LastNameValueKey),
+      EmailValueKey: getValidationMessage(EmailValueKey),
+      NinValueKey: getValidationMessage(NinValueKey),
+      MobileNumberValueKey: getValidationMessage(MobileNumberValueKey),
+    });
+  }
 }
+
+/// Returns the validation message for the given key
+String? getValidationMessage(String key) {
+  final validatorForKey = _FirstStepViewTextValidations[key];
+  if (validatorForKey == null) return null;
+
+  String? validationMessageForKey = validatorForKey(
+    _FirstStepViewTextEditingControllers[key]!.text,
+  );
+
+  return validationMessageForKey;
+}
+
+/// Updates the fieldsValidationMessages on the FormViewModel
+void updateValidationData(FormViewModel model) => model.setValidationMessages({
+      FirstNameValueKey: getValidationMessage(FirstNameValueKey),
+      LastNameValueKey: getValidationMessage(LastNameValueKey),
+      EmailValueKey: getValidationMessage(EmailValueKey),
+      NinValueKey: getValidationMessage(NinValueKey),
+      MobileNumberValueKey: getValidationMessage(MobileNumberValueKey),
+    });

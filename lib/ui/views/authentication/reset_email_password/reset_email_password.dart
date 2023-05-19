@@ -22,7 +22,7 @@ class ResetEmailPaswword extends StatelessWidget with $ResetEmailPaswword {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => ResetEmailPasswordViewModel(),
       onDispose: (model) => disposeForm(),
-      onModelReady: (model) => syncFormWithViewModel(model),
+      onViewModelReady: (model) => syncFormWithViewModel(model),
       builder: (context, model, child) =>
       model.isBusy? const Scaffold(
         body: Center(

@@ -21,16 +21,19 @@ final Map<String, String? Function(String?)?>
   NameValueKey: null,
 };
 
-mixin $ResetEmailPaswword on StatelessWidget {
+mixin $ResetEmailPaswword {
   TextEditingController get nameController =>
       _getFormTextEditingController(NameValueKey);
   FocusNode get nameFocusNode => _getFormFocusNode(NameValueKey);
 
-  TextEditingController _getFormTextEditingController(String key,
-      {String? initialValue}) {
+  TextEditingController _getFormTextEditingController(
+    String key, {
+    String? initialValue,
+  }) {
     if (_ResetEmailPaswwordTextEditingControllers.containsKey(key)) {
       return _ResetEmailPaswwordTextEditingControllers[key]!;
     }
+
     _ResetEmailPaswwordTextEditingControllers[key] =
         TextEditingController(text: initialValue);
     return _ResetEmailPaswwordTextEditingControllers[key]!;
@@ -52,13 +55,15 @@ mixin $ResetEmailPaswword on StatelessWidget {
 
   /// Registers a listener on every generated controller that calls [model.setData()]
   /// with the latest textController values
-  @Deprecated('Use syncFormWithViewModel instead.'
-      'This feature was deprecated after 3.1.0.')
+  @Deprecated(
+    'Use syncFormWithViewModel instead.'
+    'This feature was deprecated after 3.1.0.',
+  )
   void listenToFormUpdated(FormViewModel model) {
     nameController.addListener(() => _updateFormData(model));
   }
 
-  final bool _autoTextFieldValidation = true;
+  static const bool _autoTextFieldValidation = true;
   bool validateFormFields(FormViewModel model) {
     _updateFormData(model, forceValidate: true);
     return model.isFormValid;
@@ -72,24 +77,10 @@ mixin $ResetEmailPaswword on StatelessWidget {
           NameValueKey: nameController.text,
         }),
     );
+
     if (_autoTextFieldValidation || forceValidate) {
-      _updateValidationData(model);
+      updateValidationData(model);
     }
-  }
-
-  /// Updates the fieldsValidationMessages on the FormViewModel
-  void _updateValidationData(FormViewModel model) =>
-      model.setValidationMessages({
-        NameValueKey: _getValidationMessage(NameValueKey),
-      });
-
-  /// Returns the validation message for the given key
-  String? _getValidationMessage(String key) {
-    final validatorForKey = _ResetEmailPaswwordTextValidations[key];
-    if (validatorForKey == null) return null;
-    String? validationMessageForKey =
-        validatorForKey(_ResetEmailPaswwordTextEditingControllers[key]!.text);
-    return validationMessageForKey;
   }
 
   /// Calls dispose on all the generated controllers and focus nodes
@@ -136,12 +127,38 @@ extension ValueProperties on FormViewModel {
 
   String? get nameValidationMessage =>
       this.fieldsValidationMessages[NameValueKey];
-  void clearForm() {
-    nameValue = '';
-  }
 }
 
 extension Methods on FormViewModel {
   setNameValidationMessage(String? validationMessage) =>
       this.fieldsValidationMessages[NameValueKey] = validationMessage;
+
+  /// Clears text input fields on the Form
+  void clearForm() {
+    nameValue = '';
+  }
+
+  /// Validates text input fields on the Form
+  void validateForm() {
+    this.setValidationMessages({
+      NameValueKey: getValidationMessage(NameValueKey),
+    });
+  }
 }
+
+/// Returns the validation message for the given key
+String? getValidationMessage(String key) {
+  final validatorForKey = _ResetEmailPaswwordTextValidations[key];
+  if (validatorForKey == null) return null;
+
+  String? validationMessageForKey = validatorForKey(
+    _ResetEmailPaswwordTextEditingControllers[key]!.text,
+  );
+
+  return validationMessageForKey;
+}
+
+/// Updates the fieldsValidationMessages on the FormViewModel
+void updateValidationData(FormViewModel model) => model.setValidationMessages({
+      NameValueKey: getValidationMessage(NameValueKey),
+    });

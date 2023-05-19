@@ -31,7 +31,7 @@ class SignIN extends StatelessWidget with $SignIN {
         passwordController.clear();
         disposeForm();
       },
-      onModelReady: (model) => syncFormWithViewModel(model),
+      onViewModelReady: (model) => syncFormWithViewModel(model),
       builder: (context, model, child) => Scaffold(
         backgroundColor: kWhiteColor,
         appBar: const CustomAppBar(

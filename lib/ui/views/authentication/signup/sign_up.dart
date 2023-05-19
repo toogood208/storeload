@@ -30,7 +30,7 @@ class SignUP extends StatelessWidget with $SignUP {
     final formKey = GlobalKey<FormState>();
     return ViewModelBuilder.reactive(
       onDispose: (model) => disposeForm(),
-      onModelReady: (model) => syncFormWithViewModel(model),
+      onViewModelReady: (model) => syncFormWithViewModel(model),
       viewModelBuilder: () => SignUpViewModel(),
       builder: (context, model, child) => Scaffold(
         backgroundColor: kWhiteColor,

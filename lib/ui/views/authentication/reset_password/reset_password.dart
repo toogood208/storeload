@@ -25,7 +25,7 @@ class ResetPaswword extends StatelessWidget with $ResetPaswword {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => ResetPasswordViewModel(),
       onDispose: (model) => disposeForm(),
-      onModelReady: (model) => syncFormWithViewModel(model),
+      onViewModelReady: (model) => syncFormWithViewModel(model),
       builder: (context, model, child) => Scaffold(
         backgroundColor: kWhiteColor,
         appBar: const CustomAppBar(

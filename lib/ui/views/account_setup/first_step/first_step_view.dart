@@ -30,7 +30,7 @@ class FirstStepView extends StatelessWidget with $FirstStepView {
   Widget build(BuildContext context) {
     return ViewModelBuilder<FirstStepViewModel>.reactive(
       onDispose: (model) => disposeForm(),
-      onModelReady: (model) {
+      onViewModelReady: (model) {
         syncFormWithViewModel(model);
        model.init();
       },

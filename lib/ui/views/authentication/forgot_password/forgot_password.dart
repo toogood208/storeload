@@ -20,7 +20,7 @@ class ForgotPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => ForgotPasswordViewModel(),
-      onModelReady: (model) => model.startTimer(),
+      onViewModelReady: (model) => model.startTimer(),
       builder: (context, model, child) => model.isBusy
           ? const Scaffold(
               body: Center(

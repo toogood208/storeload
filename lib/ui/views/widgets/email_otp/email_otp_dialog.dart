@@ -24,7 +24,7 @@ class EmailDialog extends StatelessWidget {
     var maskedEmail =
         '${'*' * (email!.indexOf('@'))}${email!.substring(email!.indexOf('@'))}';
     return ViewModelBuilder<EmailOtpDialogViewModel>.reactive(
-      onModelReady: (model) {
+      onViewModelReady: (model) {
         model.init();
         model.startTimer();
       },
