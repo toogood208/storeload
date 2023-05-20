@@ -1,23 +1,20 @@
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.router.dart';
 import 'package:storeload/core/models/user.dart';
 import 'package:storeload/core/services/localstorage/persistent_storage_service.dart';
 
-import '../../../core/services/user_data_service/user_data_service.dart';
 
-class HomeScreenViewModel extends BaseViewModel {
-  final _userDataService = locator<UserDataService>();
+class HomeScreenViewModel extends IndexTrackingViewModel {
   final _persistentStorageService = locator<PersistentStorageService>();
   final _navigationService = locator<NavigationService>();
   final _snackbarService = locator<SnackbarService>();
   late Data user;
 
-  
   void init() {
-    user = _userDataService.user;
-    notifyListeners();
+    setBusy(false);
   }
 
   void logout() {

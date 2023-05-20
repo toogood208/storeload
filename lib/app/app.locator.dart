@@ -16,6 +16,7 @@ import '../core/services/network_services/api_service.dart';
 import '../core/services/network_services/network_service.dart';
 import '../core/services/network_services/server_services.dart';
 import '../core/services/user_data_service/user_data_service.dart';
+import '../ui/views/Home_Screen/home_screen_viewmodel.dart';
 
 final locator = StackedLocator.instance;
 
@@ -36,4 +37,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => ServerService());
   locator.registerLazySingleton(() => PersistentStorageService());
   locator.registerLazySingleton(() => UserDataService());
+  locator.registerLazySingleton(() => HomeScreenViewModel());
 }
