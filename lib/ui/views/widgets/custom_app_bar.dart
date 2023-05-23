@@ -26,6 +26,9 @@ class CustomAppBarState extends State<CustomAppBar> {
       backgroundColor: kWhiteColor,
       automaticallyImplyLeading: true,
       centerTitle: true,
+      iconTheme: IconThemeData(
+        color: kBackgroundColor,
+      ),
       actions: widget.actions,
       title: Text(
         widget.title,

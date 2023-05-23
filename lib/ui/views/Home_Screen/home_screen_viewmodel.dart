@@ -1,10 +1,10 @@
 import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.router.dart';
 import 'package:storeload/core/models/user.dart';
 import 'package:storeload/core/services/localstorage/persistent_storage_service.dart';
+
 
 
 class HomeScreenViewModel extends IndexTrackingViewModel {
@@ -13,9 +13,13 @@ class HomeScreenViewModel extends IndexTrackingViewModel {
   final _snackbarService = locator<SnackbarService>();
   late Data user;
 
+
+
+
   void init() {
     setBusy(false);
   }
+
 
   void logout() {
     _persistentStorageService.userToken = '';

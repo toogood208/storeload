@@ -1,0 +1,21 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "category": "All"
+    },
+    {
+      "id": 2,
+      "category": "Milk"
+    },
+    {
+      "id": 3,
+      "category": "Recently Added"
+    },
+    {
+      "id": 4,
+      "category": "Drinks"
+    }
+  ]
+
+}

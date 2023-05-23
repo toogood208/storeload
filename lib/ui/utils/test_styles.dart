@@ -95,6 +95,13 @@ TextStyle kAmulya14Regular = TextStyle(
     height: 2
 );
 
+TextStyle kAmulya14Medium = TextStyle(
+    fontFamily: "Amulya",
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+    height: 2
+);
+
 TextStyle kAmulya18Regular = TextStyle(
     fontFamily: "Amulya",
     fontWeight: FontWeight.w400,

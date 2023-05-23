@@ -14,3 +14,5 @@ const kSecondOrangeColor = Color(0XFFFF9447);
 const kErrorTextColor = Color(0XFFD41F1F);
 const kSuccessTextColor = Colors.green;
 const kTextFieldFocusedColor = Color.fromRGBO(0, 27, 46, 0.08);
+const kProductDetailActiveColor=Color(0XFFFF7F11);
+const kProductDetailInActiveColor=Color(0XFFE6E6E6);

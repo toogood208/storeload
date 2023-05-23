@@ -5,10 +5,11 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/cupertino.dart' as _i11;
+import 'package:flutter/cupertino.dart' as _i12;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i12;
+import 'package:stacked_services/stacked_services.dart' as _i14;
+import 'package:storeload/core/constants/dummy_data/products.dart' as _i13;
 import 'package:storeload/ui/views/account_setup/first_step/first_step_view.dart'
     as _i3;
 import 'package:storeload/ui/views/authentication/forgot_password/forgot_password.dart'
@@ -24,6 +25,8 @@ import 'package:storeload/ui/views/intro_screens/onboarding/onboarding.dart'
     as _i5;
 import 'package:storeload/ui/views/intro_screens/splash_screen/splash_screen.dart'
     as _i4;
+import 'package:storeload/ui/views/product_detail/product_detail_screen_view.dart'
+    as _i11;
 
 class Routes {
   static const forgotPassword = '/forgot-password';
@@ -44,6 +47,8 @@ class Routes {
 
   static const homeScreenView = '/home-screen-view';
 
+  static const productDetailScreenView = '/product-detail-screen-view';
+
   static const all = <String>{
     forgotPassword,
     firstStepView,
@@ -54,6 +59,7 @@ class Routes {
     resetPaswword,
     resetEmailPaswword,
     homeScreenView,
+    productDetailScreenView,
   };
 }
 
@@ -94,6 +100,10 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.homeScreenView,
       page: _i10.HomeScreenView,
+    ),
+    _i1.RouteDef(
+      Routes.productDetailScreenView,
+      page: _i11.ProductDetailScreenView,
     ),
   ];
 
@@ -172,6 +182,15 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i11.ProductDetailScreenView: (data) {
+      final args =
+          data.getArgs<ProductDetailScreenViewArguments>(nullOk: false);
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            _i11.ProductDetailScreenView(key: args.key, product: args.product),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -186,7 +205,7 @@ class ForgotPasswordArguments {
     this.email,
   });
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 
   final String? email;
 
@@ -210,7 +229,7 @@ class ForgotPasswordArguments {
 class FirstStepViewArguments {
   const FirstStepViewArguments({this.key});
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 
   @override
   String toString() {
@@ -232,7 +251,7 @@ class FirstStepViewArguments {
 class SignINArguments {
   const SignINArguments({this.key});
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 
   @override
   String toString() {
@@ -254,7 +273,7 @@ class SignINArguments {
 class SignUPArguments {
   const SignUPArguments({this.key});
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 
   @override
   String toString() {
@@ -279,7 +298,7 @@ class ResetPaswwordArguments {
     this.userId,
   });
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 
   final String? userId;
 
@@ -303,7 +322,7 @@ class ResetPaswwordArguments {
 class ResetEmailPaswwordArguments {
   const ResetEmailPaswwordArguments({this.key});
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 
   @override
   String toString() {
@@ -322,9 +341,36 @@ class ResetEmailPaswwordArguments {
   }
 }
 
-extension NavigatorStateExtension on _i12.NavigationService {
+class ProductDetailScreenViewArguments {
+  const ProductDetailScreenViewArguments({
+    this.key,
+    required this.product,
+  });
+
+  final _i12.Key? key;
+
+  final _i13.Products product;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "product": "$product"}';
+  }
+
+  @override
+  bool operator ==(covariant ProductDetailScreenViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.product == product;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ product.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i14.NavigationService {
   Future<dynamic> navigateToForgotPassword({
-    _i11.Key? key,
+    _i12.Key? key,
     String? email,
     int? routerId,
     bool preventDuplicates = true,
@@ -341,7 +387,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> navigateToFirstStepView({
-    _i11.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -385,7 +431,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> navigateToSignIN({
-    _i11.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -401,7 +447,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> navigateToSignUP({
-    _i11.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -417,7 +463,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> navigateToResetPaswword({
-    _i11.Key? key,
+    _i12.Key? key,
     String? userId,
     int? routerId,
     bool preventDuplicates = true,
@@ -434,7 +480,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> navigateToResetEmailPaswword({
-    _i11.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -463,8 +509,25 @@ extension NavigatorStateExtension on _i12.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToProductDetailScreenView({
+    _i12.Key? key,
+    required _i13.Products product,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.productDetailScreenView,
+        arguments: ProductDetailScreenViewArguments(key: key, product: product),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithForgotPassword({
-    _i11.Key? key,
+    _i12.Key? key,
     String? email,
     int? routerId,
     bool preventDuplicates = true,
@@ -481,7 +544,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> replaceWithFirstStepView({
-    _i11.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -525,7 +588,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> replaceWithSignIN({
-    _i11.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -541,7 +604,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> replaceWithSignUP({
-    _i11.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -557,7 +620,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> replaceWithResetPaswword({
-    _i11.Key? key,
+    _i12.Key? key,
     String? userId,
     int? routerId,
     bool preventDuplicates = true,
@@ -574,7 +637,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> replaceWithResetEmailPaswword({
-    _i11.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -597,6 +660,23 @@ extension NavigatorStateExtension on _i12.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.homeScreenView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithProductDetailScreenView({
+    _i12.Key? key,
+    required _i13.Products product,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.productDetailScreenView,
+        arguments: ProductDetailScreenViewArguments(key: key, product: product),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
