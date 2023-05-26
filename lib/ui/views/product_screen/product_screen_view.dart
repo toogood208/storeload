@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:storeload/core/constants/dummy_data/products.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/currency_symbol.dart';
 import 'package:storeload/ui/utils/edge_insects.dart';
@@ -20,7 +19,6 @@ class ProductScreenView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProductScreenViewModel>.reactive(
         viewModelBuilder: () => ProductScreenViewModel(),
-        onViewModelReady:(model)=> model.init(),
         builder: (context, model, child) {
           return Scaffold(
             backgroundColor: kWhiteColor,
@@ -57,16 +55,16 @@ class ProductScreenView extends StatelessWidget {
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
-                                itemCount: products.length,
+                                itemCount: model.products.length,
                                   physics: const ClampingScrollPhysics(),
                                   itemBuilder: (context, innerIndex){
-                                  final productDetails = products[innerIndex];
+                                  final productDetails = model.products[innerIndex].products[innerIndex].data[innerIndex];
                                   return GestureDetector(
                                     onTap: ()=>model.navigateToProductDetailsScreen(productDetails),
                                     child: ProductCard(
-                                      productImage: productDetails.image,
-                                      productName: productDetails.name,
-                                      productPrice: productDetails.price,
+                                      productImage: productDetails.image!,
+                                      productName: productDetails.name!,
+                                      productPrice: productDetails.price!,
                                     ),
                                   );
                                   }),

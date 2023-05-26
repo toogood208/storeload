@@ -5,7 +5,6 @@ import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.router.dart';
 import 'package:storeload/core/services/localstorage/local_storage_service.dart';
 import 'package:storeload/ui/utils/colors.dart';
-import 'package:storeload/ui/views/Home_Screen/home_screen_view.dart';
 import 'package:storeload/ui/views/widgets/set_up_dialog_ui.dart';
 
 void main() async {
@@ -33,10 +32,9 @@ class MyApp extends StatelessWidget {
                 primary: kBackgroundColor,
               ),
         ),
-       // initialRoute: Routes.signUP,
+       initialRoute: Routes.splashScreenView,
         onGenerateRoute: StackedRouter().onGenerateRoute,
         navigatorKey: StackedService.navigatorKey,
-        home:  const HomeScreenView(),
       ),
     );
   }

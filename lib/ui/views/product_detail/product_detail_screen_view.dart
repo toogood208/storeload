@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:storeload/core/constants/dummy_data/products.dart';
+import 'package:storeload/core/models/products.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/edge_insects.dart';
 import 'package:storeload/ui/utils/test_styles.dart';
@@ -17,7 +17,7 @@ class ProductDetailScreenView extends StatelessWidget {
   const ProductDetailScreenView({Key? key, required this.product})
       : super(key: key);
 
-  final Products product;
+  final Datum product;
 
   @override
   Widget build(BuildContext context) {
@@ -44,16 +44,16 @@ class ProductDetailScreenView extends StatelessWidget {
                       controller: controller,
                       children: <Widget>[
                         PageViewImage(
-                          image: product.image,
+                          image: product.image!,
                         ),
                         PageViewImage(
-                          image: product.image,
+                          image: product.image!,
                         ),
                         PageViewImage(
-                          image: product.image,
+                          image: product.image!,
                         ),
                         PageViewImage(
-                          image: product.image,
+                          image: product.image!,
                         ),
                       ],
                     ),
@@ -93,7 +93,7 @@ class ProductDetailScreenView extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            product.price,
+                            product.price!,
                             style: kAmulya18Regular.copyWith(
                                 color: kTextColor, fontWeight: FontWeight.w500),
                           ),

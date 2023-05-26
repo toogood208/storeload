@@ -79,7 +79,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/images/product_thumbnail/
-    - assets/json/
+    - assets/json/product.json
   
 
   
