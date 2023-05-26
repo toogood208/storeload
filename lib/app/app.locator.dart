@@ -12,6 +12,7 @@ import 'package:stacked_services/src/snackbar/snackbar_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 
 import '../core/services/localstorage/persistent_storage_service.dart';
+import '../core/services/localstorage/shared_preference_service.dart';
 import '../core/services/network_services/api_service.dart';
 import '../core/services/network_services/network_service.dart';
 import '../core/services/network_services/server_services.dart';
@@ -38,4 +39,6 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => PersistentStorageService());
   locator.registerLazySingleton(() => UserDataService());
   locator.registerLazySingleton(() => HomeScreenViewModel());
+  final sharedPreferencesService = await SharedPreferencesService.getInstance();
+  locator.registerSingleton(sharedPreferencesService);
 }

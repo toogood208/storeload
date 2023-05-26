@@ -1,5 +1,6 @@
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:storeload/core/services/localstorage/shared_preference_service.dart';
 import 'package:storeload/core/services/network_services/api_service.dart';
 import 'package:storeload/core/services/localstorage/persistent_storage_service.dart';
 import 'package:storeload/core/services/network_services/network_service.dart';
@@ -42,6 +43,10 @@ import 'package:storeload/ui/views/product_detail/product_detail_screen_view.dar
     LazySingleton(classType: PersistentStorageService),
     LazySingleton(classType: UserDataService),
     LazySingleton(classType: HomeScreenViewModel),
+    Presolve(
+      classType: SharedPreferencesService,
+      presolveUsing: SharedPreferencesService.getInstance,
+    )
 
   ],
   logger: StackedLogger(),
