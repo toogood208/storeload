@@ -1,10 +1,14 @@
+
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.logger.dart';
 import 'package:storeload/app/app.router.dart';
+import 'package:storeload/core/constants/app_constant.dart';
+import 'package:storeload/core/models/user.dart';
 
 import 'package:storeload/core/services/localstorage/persistent_storage_service.dart';
+import 'package:storeload/core/services/localstorage/shared_preference_service.dart';
 import 'package:storeload/core/services/network_services/server_services.dart';
 import 'package:storeload/core/services/user_data_service/user_data_service.dart';
 import 'package:storeload/ui/utils/colors.dart';
@@ -16,6 +20,7 @@ class SignInViewModel extends FormViewModel {
   final _navigationService = locator<NavigationService>();
   final _persistentStorageService = locator<PersistentStorageService>();
   final _userDataService = locator<UserDataService>();
+  final _sharedPreferenceService = locator<SharedPreferencesService>();
   final _logger = getLogger("SignUPViewModel");
   dynamic nameTextColor = kTextColor20;
   dynamic passwordTextColor = kTextColor20;
@@ -28,16 +33,18 @@ class SignInViewModel extends FormViewModel {
         shopName: nameValue, password: passwordValue);
 
     if (response != null && response.status) {
-      bool isEmailVerified = response.data.isEmailVerified;
+      bool isEmailVerified = response.data.isEmailVerified ?? false;
       String token = response.data.token;
       //set user data
       _userDataService.setUser(user: response.data);
+      _sharedPreferenceService.saveData(AppConstant.user, userToJson(response));
       // notifyListeners();
       _logger.v(isEmailVerified);
       if (isEmailVerified) {
         navigateToHomeScreenView();
       } else {
         _persistentStorageService.userToken = token;
+        _sharedPreferenceService.saveData(AppConstant.token, token);
         navigateToAccountSetup();
       }
     }
@@ -48,7 +55,9 @@ class SignInViewModel extends FormViewModel {
   Future<void> submit() async {
     if (nameValidationMessage == correct &&
         passwordValidationMessage == correct) {
+
       await signInUser();
+
     }
     _logger.v("De Play");
   }
@@ -75,8 +84,13 @@ class SignInViewModel extends FormViewModel {
   void navigateToHomeScreenView() =>
       _navigationService.navigateTo(Routes.homeScreenView);
 
-  void navigateToAccountSetup() =>
-      _navigationService.clearStackAndShow(Routes.firstStepView);
+  void navigateToAccountSetup() {
+    _navigationService.clearStackAndShow(Routes.firstStepView);
+    _sharedPreferenceService.saveData(AppConstant.userLoggedIN, true);
+
+
+  }
+
 
   void navigateToSignUp() =>
       _navigationService.clearStackAndShow(Routes.signUP);

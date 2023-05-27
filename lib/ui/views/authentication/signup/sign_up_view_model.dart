@@ -3,6 +3,8 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.logger.dart';
 import 'package:storeload/app/app.router.dart';
+import 'package:storeload/core/constants/app_constant.dart';
+import 'package:storeload/core/services/localstorage/shared_preference_service.dart';
 import 'package:storeload/core/services/network_services/server_services.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/validation_manager.dart';
@@ -11,6 +13,8 @@ import 'package:storeload/ui/views/authentication/signup/sign_up.form.dart';
 class SignUpViewModel extends FormViewModel {
   final _serverService = locator<ServerService>();
   final _navigationService = locator<NavigationService>();
+  final _sharedPreferenceService = locator<SharedPreferencesService>();
+
   final _logger = getLogger("SignUPViewModel");
   dynamic nameTextColor = kTextColor20;
   dynamic addressTextColor = kTextColor20;
@@ -25,6 +29,7 @@ class SignUpViewModel extends FormViewModel {
         shopAddress: addressValue,
         shopLGA: lgaValue,
         password: passwordValue);
+    _sharedPreferenceService.saveData(AppConstant.userSignedUp, true);
     if (response) navigateToSignIN();
     setBusy(false);
   }

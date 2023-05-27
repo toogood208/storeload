@@ -38,8 +38,8 @@ class Data {
     required this.shopName,
     required this.password,
     required this.isEmailVerified,
-    required this.createdAt,
-    required this.updatedAt,
+    this.createdAt,
+     this.updatedAt,
     required this.v,
     required this.nin,
     required this.email,
@@ -53,10 +53,10 @@ class Data {
   String id;
   String shopName;
   String password;
-  bool isEmailVerified;
-  DateTime createdAt;
-  DateTime updatedAt;
-  int v;
+  bool? isEmailVerified;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? v;
   String? nin;
   String? email;
   String? emailVerificationCode;
@@ -70,8 +70,8 @@ class Data {
         shopName: json['user']["shopName"],
         password: json['user']["password"],
         isEmailVerified: json['user']["isEmailVerified"],
-        createdAt: DateTime.parse(json['user']["createdAt"]),
-        updatedAt: DateTime.parse(json['user']["updatedAt"]),
+        createdAt:  json['user']["createdAt"],
+        updatedAt: json['user']["updatedAt"],
         v: json['user']["__v"],
         nin: json['user']["NIN"],
         email: json['user']["email"],
@@ -87,8 +87,8 @@ class Data {
         "shopName": shopName,
         "password": password,
         "isEmailVerified": isEmailVerified,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
         "__v": v,
         "NIN": nin,
         "email": email,

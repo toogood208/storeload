@@ -10,7 +10,7 @@ class OnBoardingScreenViewModel extends BaseViewModel{
   final _navigationService = locator<NavigationService>();
 
   void navigateToSignUpScreen(){
-    _sharedPreferenceService.saveData(NavigationConstant.isOnboarded, true);
+    _sharedPreferenceService.saveData(AppConstant.isOnboarded, true);
     _navigationService.clearStackAndShow(Routes.signUP);
   }
 }
