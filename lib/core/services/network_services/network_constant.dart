@@ -8,3 +8,4 @@ const emailOtpVerificationForgotPasswordEndpoint = "/auth/reset-password-otp";
 const emailOtpVerificationForgotEmailEndpoint = "/auth/reset-password-email";
 const newResetPassword = "/auth/reset-password";
 const getAllProductsEndpoint = '/product/getMany';
+const getProductByCategoryEndpoint  = '/product/getByCategory';

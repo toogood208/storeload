@@ -16,6 +16,7 @@ import 'package:storeload/ui/views/authentication/signin/sign_in.dart';
 import 'package:storeload/ui/views/authentication/signup/sign_up.dart';
 import 'package:storeload/ui/views/intro_screens/onboarding/onboarding.dart';
 import 'package:storeload/ui/views/intro_screens/splash_screen/splash_screen.dart';
+import 'package:storeload/ui/views/product_category/product_category_view.dart';
 import 'package:storeload/ui/views/product_detail/product_detail_screen_view.dart';
 
 @StackedApp(
@@ -30,6 +31,7 @@ import 'package:storeload/ui/views/product_detail/product_detail_screen_view.dar
     AdaptiveRoute(page: ResetEmailPaswword),
     AdaptiveRoute(page: HomeScreenView),
     AdaptiveRoute(page: ProductDetailScreenView),
+    AdaptiveRoute(page: ProductCategoryView),
      
   
   ],

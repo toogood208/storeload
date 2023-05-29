@@ -152,4 +152,15 @@ class ServerService {
 
 
   }
+
+  Future<List<CategoryDataModel>> getProductsByCategory({required String token, required String category})async{
+    final response = await _networkFormatter.fmt((){
+      return _apiService.get(route: getProductByCategoryEndpoint,queryParameters: {
+        "category":category,
+      },
+      bearerToken:token );
+    });
+
+    return response.fold((l) => [], (r) => ProductDataModel.fromJson(r).data);
+  }
 }

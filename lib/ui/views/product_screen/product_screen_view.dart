@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:storeload/ui/utils/colors.dart';
-import 'package:storeload/ui/utils/currency_symbol.dart';
 import 'package:storeload/ui/utils/edge_insects.dart';
 import 'package:storeload/ui/views/product_screen/product_screen_view_model.dart';
+import 'package:storeload/ui/views/widgets/product_card.dart';
 import 'package:storeload/ui/views/widgets/product_category_label_widget.dart';
 
 import '../../utils/test_styles.dart';
@@ -19,7 +19,7 @@ class ProductScreenView extends StatelessWidget {
     return ViewModelBuilder<ProductScreenViewModel>.reactive(
         viewModelBuilder: () => ProductScreenViewModel(),
         builder: (context, model, child) {
-          return Scaffold(
+          return  Scaffold(
             backgroundColor: kWhiteColor,
             body: Container(
               padding: kAppPadding,
@@ -32,13 +32,15 @@ class ProductScreenView extends StatelessWidget {
                   SizedBox(height: 24.h),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: model.product2.length,
+                      padding: EdgeInsets.zero,
+                      itemCount: model.products.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        final label = model.product2[index].category;
-                        final innerdata = model.product2[index].data;
+                        final label = model.pres[index];
+                        final innerData = model.products[index].data;
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
 
                           children: [
@@ -53,19 +55,18 @@ class ProductScreenView extends StatelessWidget {
                               ),
 
                               child: ListView.builder(
+                                  padding: EdgeInsets.zero,
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
-                                itemCount:innerdata.length,
+                                itemCount:innerData.length,
                                   physics: const ClampingScrollPhysics(),
                                   itemBuilder: (context, innerIndex){
-                                  final productDetails = innerdata[innerIndex];
-                                  return GestureDetector(
+                                  final productDetails = innerData[innerIndex];
+                                  return ProductCard(
                                     onTap: () =>model.navigateToProductDetailsScreen(productDetails),
-                                    child: ProductCard(
-                                      productImage: productDetails.image!,
-                                      productName: productDetails.name!,
-                                      productPrice: productDetails.price!.toString(),
-                                    ),
+                                    productImage: productDetails.image!,
+                                    productName: productDetails.name!,
+                                    productPrice: productDetails.price!.toString(),
                                   );
                                   }),
                             ),
@@ -86,33 +87,4 @@ class ProductScreenView extends StatelessWidget {
   }
 }
 
-class ProductCard extends StatelessWidget {
-  const ProductCard({
-    super.key,
-    required this.productImage,
-    required this.productName,
-    required this.productPrice
-  });
-  final String productImage;
-  final String productName;
-  final String productPrice;
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.network(productImage,
-        width: 96.w,
-        height: 86.h,),
-        Text(
-          productName,
-          style: kAmulya14Regular.copyWith(color: kTextColor),
-        ),
-        Text(
-          productPrice.currency(),
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ],
-    );
-  }
-}
