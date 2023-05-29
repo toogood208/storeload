@@ -23,7 +23,7 @@ class SplashScreenViewModel extends BaseViewModel{
         _navigationService.replaceWith(Routes.onBoarding);
       } else if(userOnboarded != null && userSignedUp == null ){
         _navigationService.clearStackAndShow(Routes.signUP);
-      } else if(userOnboarded != null && userSignedUp != null && userLoggedIn == null ){
+      } else if(userOnboarded != null && userSignedUp != null && userLoggedIn != null ){
         _navigationService.clearStackAndShow(Routes.signIN);
       }
     });

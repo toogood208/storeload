@@ -9,7 +9,7 @@ import 'package:flutter/cupertino.dart' as _i12;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i14;
-import 'package:storeload/core/models/products.dart' as _i13;
+import 'package:storeload/core/models/product_model/product_model.dart' as _i13;
 import 'package:storeload/ui/views/account_setup/first_step/first_step_view.dart'
     as _i3;
 import 'package:storeload/ui/views/authentication/forgot_password/forgot_password.dart'
@@ -349,7 +349,7 @@ class ProductDetailScreenViewArguments {
 
   final _i12.Key? key;
 
-  final _i13.Datum product;
+  final _i13.CategoryDataModel product;
 
   @override
   String toString() {
@@ -511,7 +511,7 @@ extension NavigatorStateExtension on _i14.NavigationService {
 
   Future<dynamic> navigateToProductDetailScreenView({
     _i12.Key? key,
-    required _i13.Datum product,
+    required _i13.CategoryDataModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -668,7 +668,7 @@ extension NavigatorStateExtension on _i14.NavigationService {
 
   Future<dynamic> replaceWithProductDetailScreenView({
     _i12.Key? key,
-    required _i13.Datum product,
+    required _i13.CategoryDataModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,

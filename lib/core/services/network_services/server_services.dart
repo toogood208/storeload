@@ -1,4 +1,5 @@
 import 'package:storeload/app/app.locator.dart';
+import 'package:storeload/core/models/product_model/product_model.dart';
 import 'package:storeload/core/models/user.dart';
 import 'package:storeload/core/services/network_services/api_service.dart';
 import 'package:storeload/core/services/network_services/network_constant.dart';
@@ -136,5 +137,19 @@ class ServerService {
       log.v(userResponse);
       return true;
     });
+  }
+
+  Future<List<ProductDataModel>> getAllProducts(String token) async{
+    final response = await _networkFormatter.fmt((){
+      return _apiService.get(route: getAllProductsEndpoint,bearerToken: token);
+    });
+
+    return response.fold((l) => [], (res){
+     // log.v(response);
+     return ProductModel.fromJson(res).data;
+
+    });
+
+
   }
 }

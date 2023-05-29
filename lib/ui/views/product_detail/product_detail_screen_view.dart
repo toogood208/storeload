@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-import 'package:storeload/core/models/products.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/edge_insects.dart';
 import 'package:storeload/ui/utils/test_styles.dart';
@@ -11,13 +10,14 @@ import 'package:storeload/ui/views/product_detail/widget/product_detail_circle.d
 import 'package:storeload/ui/views/widgets/app_button.dart';
 import 'package:storeload/ui/views/widgets/custom_app_bar.dart';
 
+import '../../../core/models/product_model/product_model.dart';
 import '../widgets/custom_drop_down.dart';
 
 class ProductDetailScreenView extends StatelessWidget {
   const ProductDetailScreenView({Key? key, required this.product})
       : super(key: key);
 
-  final Datum product;
+  final CategoryDataModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +93,7 @@ class ProductDetailScreenView extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            product.price!,
+                            product.category!,
                             style: kAmulya18Regular.copyWith(
                                 color: kTextColor, fontWeight: FontWeight.w500),
                           ),

@@ -36,9 +36,20 @@ class APIService {
   Future<dynamic> get({
     required String route,
     Map<String, String>? queryParameters,
+    String? bearerToken,
   }) async {
     log.v("getting data fro $route");
-    var response = await dio.get(route, queryParameters: queryParameters);
+    var response = await dio.get(
+      route,
+      queryParameters: queryParameters,
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $bearerToken',
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+        },
+      ),
+    );
     log.v("the data fro $route is ${response.data}");
     return response.data;
   }

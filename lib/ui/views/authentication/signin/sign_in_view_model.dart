@@ -45,7 +45,7 @@ class SignInViewModel extends FormViewModel {
       } else {
         _persistentStorageService.userToken = token;
         _sharedPreferenceService.saveData(AppConstant.token, token);
-        navigateToAccountSetup();
+        navigateToHomeScreenView();
       }
     }
     setBusy(false);

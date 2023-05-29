@@ -7,7 +7,6 @@ import 'package:storeload/ui/utils/edge_insects.dart';
 import 'package:storeload/ui/views/product_screen/product_screen_view_model.dart';
 import 'package:storeload/ui/views/widgets/product_category_label_widget.dart';
 
-import '../../../core/constants/dummy_data/product_categories.dart';
 import '../../utils/test_styles.dart';
 
 part 'widget/product_categories.dart';
@@ -33,10 +32,11 @@ class ProductScreenView extends StatelessWidget {
                   SizedBox(height: 24.h),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: categories.length,
+                      itemCount: model.product2.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        final label = categories[index];
+                        final label = model.product2[index].category;
+                        final innerdata = model.product2[index].data;
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
@@ -55,16 +55,16 @@ class ProductScreenView extends StatelessWidget {
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
-                                itemCount: model.products.length,
+                                itemCount:innerdata.length,
                                   physics: const ClampingScrollPhysics(),
                                   itemBuilder: (context, innerIndex){
-                                  final productDetails = model.products[innerIndex].products[innerIndex].data[innerIndex];
+                                  final productDetails = innerdata[innerIndex];
                                   return GestureDetector(
-                                    onTap: ()=>model.navigateToProductDetailsScreen(productDetails),
+                                    onTap: () =>model.navigateToProductDetailsScreen(productDetails),
                                     child: ProductCard(
                                       productImage: productDetails.image!,
                                       productName: productDetails.name!,
-                                      productPrice: productDetails.price!,
+                                      productPrice: productDetails.price!.toString(),
                                     ),
                                   );
                                   }),
@@ -101,7 +101,9 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset(productImage),
+        Image.network(productImage,
+        width: 96.w,
+        height: 86.h,),
         Text(
           productName,
           style: kAmulya14Regular.copyWith(color: kTextColor),

@@ -15,9 +15,9 @@ class ProductCategoryWidget extends ViewModelWidget<ProductScreenViewModel> {
           height: 30,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: categories.length,
+              itemCount: viewModel.product2.length,
               itemBuilder: (context, index) {
-                final choice = categories[index];
+                final choice = viewModel.product2[index].category;
                 return ChoiceChip(
                   padding: EdgeInsets.zero,
                   labelPadding: EdgeInsets.only(right: 24.w),
