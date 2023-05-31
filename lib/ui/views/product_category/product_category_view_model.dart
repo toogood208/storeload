@@ -16,10 +16,11 @@ class ProductCategoryViewModel extends BaseViewModel {
   List<CategoryDataModel> get productList => _productList;
 
   Future<void> getProductByCategory(String category) async {
+    setBusy(true);
     final token = await _sharePreferenceService.getData(AppConstant.token);
     _productList = await _serverService.getProductsByCategory(
         token: token, category: category);
-    notifyListeners();
+   setBusy(false);
   }
 
   navigateToProductDetailsScreen(CategoryDataModel productDetails) {

@@ -26,12 +26,12 @@ class ProductScreenViewModel extends BaseViewModel {
   }
 
   Future<void> getAllProducts() async {
+    setBusy(true);
     final token = await _sharedPreferenceService.getData(AppConstant.token);
      products = await _server.getAllProducts(token);
     pres = products.map<String>((e) => e.category).toList();
     choice = pres[0];
-
-    notifyListeners();
+    setBusy(false);
 
   }
 

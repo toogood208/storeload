@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
@@ -8,6 +9,7 @@ import 'package:storeload/ui/views/widgets/product_card.dart';
 import 'package:storeload/ui/views/widgets/product_category_label_widget.dart';
 
 import '../../utils/test_styles.dart';
+import '../widgets/empty_shimmer_widget.dart';
 
 part 'widget/product_categories.dart';
 
@@ -19,7 +21,10 @@ class ProductScreenView extends StatelessWidget {
     return ViewModelBuilder<ProductScreenViewModel>.reactive(
         viewModelBuilder: () => ProductScreenViewModel(),
         builder: (context, model, child) {
-          return  Scaffold(
+          return model.isBusy?
+              const EmptyShimmerWidget()
+              :
+            Scaffold(
             backgroundColor: kWhiteColor,
             body: Container(
               padding: kAppPadding,
@@ -42,32 +47,36 @@ class ProductScreenView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
-
                           children: [
                             ProductCategoryLabelWidget(
-                                label: label, onTap: () {}),
+                                label: label, onTap: () {
+                                   model.navigateToProductCategoryScreen(label);
+                            }),
                             Container(
-                              height:141.h,
-                              margin:EdgeInsets.only(
+                              height: 141.h,
+                              margin: EdgeInsets.only(
                                 right: 16.w,
                                 top: 10.h,
                                 bottom: 10.h,
                               ),
-
                               child: ListView.builder(
                                   padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                itemCount:innerData.length,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: innerData.length,
                                   physics: const ClampingScrollPhysics(),
-                                  itemBuilder: (context, innerIndex){
-                                  final productDetails = innerData[innerIndex];
-                                  return ProductCard(
-                                    onTap: () =>model.navigateToProductDetailsScreen(productDetails),
-                                    productImage: productDetails.image!,
-                                    productName: productDetails.name!,
-                                    productPrice: productDetails.price!.toString(),
-                                  );
+                                  itemBuilder: (context, innerIndex) {
+                                    final productDetails =
+                                        innerData[innerIndex];
+                                    return ProductCard(
+                                      onTap: () =>
+                                          model.navigateToProductDetailsScreen(
+                                              productDetails),
+                                      productImage: productDetails.image!,
+                                      productName: productDetails.name!,
+                                      productPrice:
+                                          productDetails.price!.toString(),
+                                    );
                                   }),
                             ),
                           ],
@@ -75,10 +84,6 @@ class ProductScreenView extends StatelessWidget {
                       },
                     ),
                   ),
-
-
-
-
                 ],
               ),
             ),

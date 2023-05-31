@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/core/models/product_model/product_model.dart';
+import 'package:storeload/core/models/search_product_model/search_product_model.dart';
 import 'package:storeload/core/models/user.dart';
 import 'package:storeload/core/services/network_services/api_service.dart';
 import 'package:storeload/core/services/network_services/network_constant.dart';
@@ -162,5 +165,16 @@ class ServerService {
     });
 
     return response.fold((l) => [], (r) => ProductDataModel.fromJson(r).data);
+  }
+
+  Future<List<SearchCategoryDataModel>> getProductsBySearchText({required String token, required String query})async{
+    final response = await _networkFormatter.fmt((){
+      return _apiService.get(route: getProductBySearchTextEndpoint,queryParameters: {
+        "category":json.decode(query),
+      },
+          bearerToken:token );
+    });
+
+    return response.fold((l) => [], (r) => SearchProductModel.fromJson(r).data);
   }
 }

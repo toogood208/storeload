@@ -5,6 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/test_styles.dart';
 import 'package:storeload/ui/views/Home_Screen/home_screen_viewmodel.dart';
+import 'package:storeload/ui/views/product_search/search_view.dart';
 import 'package:storeload/ui/views/widgets/app_spinner.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:storeload/ui/views/widgets/custom_bottom_navbar.dart';
@@ -45,7 +46,8 @@ class HomeScreenView extends StatelessWidget {
             ),
             actions: [
               CustomHomePageIcon(
-                onTap: () {},
+                onTap: () => showSearch(context: context,
+                    delegate: ProductSearch(),),
                 iconData: CupertinoIcons.search,
               ),
               CustomHomePageIcon(
