@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:stacked/stacked.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.logger.dart';
+import 'package:storeload/core/constants/app_constant.dart';
 import 'package:storeload/core/services/localstorage/persistent_storage_service.dart';
+import 'package:storeload/core/services/localstorage/shared_preference_service.dart';
 
 import '../../../../core/services/network_services/server_services.dart';
 
@@ -11,6 +13,7 @@ class EmailOtpDialogViewModel extends BaseViewModel {
   final _log = getLogger("EmailOtpDialogViewModel");
   final _serverService = locator<ServerService>();
   final _persistentStorageService = locator<PersistentStorageService>();
+  final _local = locator<SharedPreferencesService>();
 
   String? otpValue;
   String? token;
@@ -86,8 +89,9 @@ class EmailOtpDialogViewModel extends BaseViewModel {
     required String otp,
   }) async {
     setBusy(true);
+    final token = await _local.getData(AppConstant.token);
     final response =
-        await _serverService.emailOtpVerification(otp: otp, token: token!);
+        await _serverService.emailOtpVerification(otp: otp, token: token);
     _log.v(response['status']);
     if (response == null) {
       setBusy(false);

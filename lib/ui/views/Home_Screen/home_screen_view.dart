@@ -92,7 +92,7 @@ class HomeScreenView extends StatelessWidget {
       case 1:
         return const Text("My Wallet");
       case 2:
-        return const Text("Medicals");
+        return const ProductScreenView();
       case 3:
         return const ProfileScreenView();
 
