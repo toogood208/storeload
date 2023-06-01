@@ -27,7 +27,9 @@ class ProfileScreenViewModel extends BaseViewModel {
     }
   }
 
-  void navigateToShopInformation() {}
+  void navigateToShopInformation() {
+    _navigationService.navigateTo(Routes.shopInformationView);
+  }
 
   void navigateToPrivacyPolicy() => _navigationService.navigateTo(
         Routes.privacyPolicyView,
