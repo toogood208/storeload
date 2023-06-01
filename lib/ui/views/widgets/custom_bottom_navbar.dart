@@ -13,7 +13,6 @@ class CustomBottomNavbar extends StatelessWidget {
   final int currentIndex;
   final void Function(int) onTap;
 
-
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -52,7 +51,7 @@ class CustomBottomNavbar extends StatelessWidget {
             CupertinoIcons.person,
             size: 16.5.r,
           ),
-          label: "my Profile",
+          label: "My Profile",
         ),
       ],
     );

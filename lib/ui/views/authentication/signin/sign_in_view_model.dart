@@ -1,4 +1,3 @@
-
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
@@ -7,7 +6,6 @@ import 'package:storeload/app/app.router.dart';
 import 'package:storeload/core/constants/app_constant.dart';
 import 'package:storeload/core/models/user.dart';
 
-import 'package:storeload/core/services/localstorage/persistent_storage_service.dart';
 import 'package:storeload/core/services/localstorage/shared_preference_service.dart';
 import 'package:storeload/core/services/network_services/server_services.dart';
 import 'package:storeload/core/services/user_data_service/user_data_service.dart';
@@ -18,7 +16,7 @@ import 'package:storeload/ui/views/authentication/signin/sign_in.form.dart';
 class SignInViewModel extends FormViewModel {
   final _serverService = locator<ServerService>();
   final _navigationService = locator<NavigationService>();
-  final _persistentStorageService = locator<PersistentStorageService>();
+
   final _userDataService = locator<UserDataService>();
   final _sharedPreferenceService = locator<SharedPreferencesService>();
   final _logger = getLogger("SignUPViewModel");
@@ -40,12 +38,12 @@ class SignInViewModel extends FormViewModel {
       _sharedPreferenceService.saveData(AppConstant.user, userToJson(response));
       // notifyListeners();
       _logger.v(isEmailVerified);
+      _logger.v(token);
       if (isEmailVerified) {
         navigateToHomeScreenView();
       } else {
-        _persistentStorageService.userToken = token;
         _sharedPreferenceService.saveData(AppConstant.token, token);
-        navigateToHomeScreenView();
+        navigateToAccountSetup();
       }
     }
     setBusy(false);
@@ -55,9 +53,7 @@ class SignInViewModel extends FormViewModel {
   Future<void> submit() async {
     if (nameValidationMessage == correct &&
         passwordValidationMessage == correct) {
-
       await signInUser();
-
     }
     _logger.v("De Play");
   }
@@ -82,15 +78,12 @@ class SignInViewModel extends FormViewModel {
       _navigationService.clearStackAndShow(Routes.forgotPassword);
 
   void navigateToHomeScreenView() =>
-      _navigationService.navigateTo(Routes.homeScreenView);
+      _navigationService.replaceWith(Routes.homeScreenView);
 
   void navigateToAccountSetup() {
     _navigationService.clearStackAndShow(Routes.firstStepView);
     _sharedPreferenceService.saveData(AppConstant.userLoggedIN, true);
-
-
   }
-
 
   void navigateToSignUp() =>
       _navigationService.clearStackAndShow(Routes.signUP);

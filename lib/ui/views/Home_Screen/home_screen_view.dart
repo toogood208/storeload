@@ -5,6 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'package:storeload/ui/utils/colors.dart';
 import 'package:storeload/ui/utils/test_styles.dart';
 import 'package:storeload/ui/views/Home_Screen/home_screen_viewmodel.dart';
+import 'package:storeload/ui/views/profile_screen/profile_screen_view.dart';
 import 'package:storeload/ui/views/widgets/app_spinner.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:storeload/ui/views/widgets/custom_bottom_navbar.dart';
@@ -12,7 +13,6 @@ import 'package:storeload/ui/views/widgets/custom_bottom_navbar.dart';
 import '../../../app/app.locator.dart';
 import '../product_screen/product_screen_view.dart';
 import '../widgets/custome_home_page_icons.dart';
-
 
 class HomeScreenView extends StatelessWidget {
   const HomeScreenView({
@@ -23,7 +23,6 @@ class HomeScreenView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeScreenViewModel>.reactive(
       onViewModelReady: (model) => model.init(),
-
       builder: (context, model, child) {
         if (model.isBusy) {
           Loader.show(
@@ -34,30 +33,32 @@ class HomeScreenView extends StatelessWidget {
 
         return Scaffold(
           backgroundColor: kWhiteColor,
-          appBar: AppBar(
-            backgroundColor: kWhiteColor,
-            elevation: 0,
-            title: Text(
-              "Hello, Shopper",
-              style: kClashGrotesk18Medium.copyWith(
-                color: kTextColor,
-              ),
-            ),
-            actions: [
-              CustomHomePageIcon(
-                onTap: () {},
-                iconData: CupertinoIcons.search,
-              ),
-              CustomHomePageIcon(
-                onTap: () {},
-                iconData: CupertinoIcons.shopping_cart,
-              ),
-              CustomHomePageIcon(
-                onTap: () {},
-                iconData: CupertinoIcons.bell,
-              ),
-            ],
-          ),
+          appBar: model.currentIndex != 3
+              ? AppBar(
+                  backgroundColor: kWhiteColor,
+                  elevation: 0,
+                  title: Text(
+                    "Hello, Shopper",
+                    style: kClashGrotesk18Medium.copyWith(
+                      color: kTextColor,
+                    ),
+                  ),
+                  actions: [
+                    CustomHomePageIcon(
+                      onTap: () {},
+                      iconData: CupertinoIcons.search,
+                    ),
+                    CustomHomePageIcon(
+                      onTap: () {},
+                      iconData: CupertinoIcons.shopping_cart,
+                    ),
+                    CustomHomePageIcon(
+                      onTap: () {},
+                      iconData: CupertinoIcons.bell,
+                    ),
+                  ],
+                )
+              : null,
           body: PageTransitionSwitcher(
               duration: const Duration(milliseconds: 300),
               reverse: model.reverse,
@@ -93,12 +94,10 @@ class HomeScreenView extends StatelessWidget {
       case 2:
         return const Text("Medicals");
       case 3:
-        return const Text("Profile");
+        return const ProfileScreenView();
 
       default:
         return const ProductScreenView();
     }
   }
 }
-
-

@@ -17,12 +17,13 @@ import 'package:storeload/ui/views/authentication/signup/sign_up.dart';
 import 'package:storeload/ui/views/intro_screens/onboarding/onboarding.dart';
 import 'package:storeload/ui/views/intro_screens/splash_screen/splash_screen.dart';
 import 'package:storeload/ui/views/product_detail/product_detail_screen_view.dart';
+import 'package:storeload/ui/views/profile_screen/profile_screen_view.dart';
 
 @StackedApp(
   routes: [
     AdaptiveRoute(page: ForgotPassword),
     AdaptiveRoute(page: FirstStepView),
-    AdaptiveRoute(page: SplashScreenView,initial: true),
+    AdaptiveRoute(page: SplashScreenView, initial: true),
     AdaptiveRoute(page: OnBoarding),
     AdaptiveRoute(page: SignIN),
     AdaptiveRoute(page: SignUP),
@@ -30,8 +31,7 @@ import 'package:storeload/ui/views/product_detail/product_detail_screen_view.dar
     AdaptiveRoute(page: ResetEmailPaswword),
     AdaptiveRoute(page: HomeScreenView),
     AdaptiveRoute(page: ProductDetailScreenView),
-     
-  
+    AdaptiveRoute(page: ProfileScreenView),
   ],
   dependencies: [
     LazySingleton(classType: DialogService),
@@ -47,7 +47,6 @@ import 'package:storeload/ui/views/product_detail/product_detail_screen_view.dar
       classType: SharedPreferencesService,
       presolveUsing: SharedPreferencesService.getInstance,
     )
-
   ],
   logger: StackedLogger(),
 )
