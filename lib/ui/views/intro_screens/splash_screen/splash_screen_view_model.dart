@@ -17,15 +17,20 @@ class SplashScreenViewModel extends BaseViewModel{
     final userOnboarded = await _sharedPreferenceService.getData(AppConstant.isOnboarded);
     final userSignedUp = await _sharedPreferenceService.getData(AppConstant.userSignedUp);
     final userLoggedIn = await _sharedPreferenceService.getData(AppConstant.userLoggedIN);
+    final token = await _sharedPreferenceService.getData(AppConstant.token);
 
     await Future.delayed(const Duration(seconds: 2),(){
-      if (userOnboarded == null){
+      if(token != null){
+     _navigationService.clearStackAndShow(Routes.homeScreenView);
+
+      } else if (userOnboarded == null){
         _navigationService.replaceWith(Routes.onBoarding);
       } else if(userOnboarded != null && userSignedUp == null ){
         _navigationService.clearStackAndShow(Routes.signUP);
       } else if(userOnboarded != null && userSignedUp != null && userLoggedIn != null ){
         _navigationService.clearStackAndShow(Routes.signIN);
       }
+
     });
 
 

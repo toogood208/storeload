@@ -17,7 +17,7 @@ class PageViewImage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
-          child: Image.asset(
+          child: Image.network(
             image,
             width: 327.w,
             height: 261.h,
