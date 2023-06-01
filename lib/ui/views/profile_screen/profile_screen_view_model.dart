@@ -26,4 +26,18 @@ class ProfileScreenViewModel extends BaseViewModel {
       return;
     }
   }
+
+  void navigateToShopInformation() {}
+
+  void navigateToPrivacyPolicy() => _navigationService.navigateTo(
+        Routes.privacyPolicyView,
+      );
+
+  void navigateToTermsOfService() =>
+      _navigationService.navigateTo(Routes.termsOfServiceView);
+
+  void navigateToContactUs() =>
+      _navigationService.navigateTo(Routes.contactUsView);
+
+  void navigateToFAQ() => _navigationService.navigateTo(Routes.faqView);
 }

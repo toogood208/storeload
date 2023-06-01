@@ -23,7 +23,7 @@ class ProfileScreenView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 64.h),
+                SizedBox(height: 32.h),
                 Row(
                   children: [
                     Text(
@@ -41,31 +41,31 @@ class ProfileScreenView extends StatelessWidget {
                 ),
                 SizedBox(height: 32.h),
                 SettingsTile(
-                  onTap: () {},
+                  onTap: model.navigateToShopInformation,
                   text: 'Shopping Information',
                   icon: CupertinoIcons.cart,
                 ),
                 SizedBox(height: 32.h),
                 SettingsTile(
-                  onTap: () {},
+                  onTap: model.navigateToContactUs,
                   text: 'Contact Us',
                   icon: CupertinoIcons.phone,
                 ),
                 SizedBox(height: 32.h),
                 SettingsTile(
-                  onTap: () {},
+                  onTap: model.navigateToFAQ,
                   text: 'Frequently Asked Questions',
                   icon: CupertinoIcons.bolt,
                 ),
                 SizedBox(height: 32.h),
                 SettingsTile(
-                  onTap: () {},
+                  onTap: model.navigateToPrivacyPolicy,
                   text: 'Privacy Policy',
                   icon: CupertinoIcons.doc_text,
                 ),
                 SizedBox(height: 32.h),
                 SettingsTile(
-                  onTap: () {},
+                  onTap: model.navigateToTermsOfService,
                   text: 'Terms of Service',
                   icon: CupertinoIcons.doc_checkmark,
                 ),

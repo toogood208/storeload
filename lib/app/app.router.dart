@@ -5,11 +5,11 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/cupertino.dart' as _i14;
+import 'package:flutter/cupertino.dart' as _i19;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i16;
-import 'package:storeload/core/models/product_model/product_model.dart' as _i15;
+import 'package:stacked_services/stacked_services.dart' as _i21;
+import 'package:storeload/core/models/product_model/product_model.dart' as _i20;
 import 'package:storeload/ui/views/account_setup/first_step/first_step_view.dart'
     as _i3;
 import 'package:storeload/ui/views/authentication/forgot_password/forgot_password.dart'
@@ -20,17 +20,25 @@ import 'package:storeload/ui/views/authentication/reset_password/reset_password.
     as _i8;
 import 'package:storeload/ui/views/authentication/signin/sign_in.dart' as _i6;
 import 'package:storeload/ui/views/authentication/signup/sign_up.dart' as _i7;
+import 'package:storeload/ui/views/contact_us/contact_us_view.dart' as _i15;
+import 'package:storeload/ui/views/faq/faq_view.dart' as _i17;
 import 'package:storeload/ui/views/Home_Screen/home_screen_view.dart' as _i10;
 import 'package:storeload/ui/views/intro_screens/onboarding/onboarding.dart'
     as _i5;
 import 'package:storeload/ui/views/intro_screens/splash_screen/splash_screen.dart'
     as _i4;
+import 'package:storeload/ui/views/privacy_policy/privacy_policy_view.dart'
+    as _i16;
 import 'package:storeload/ui/views/product_category/product_category_view.dart'
     as _i13;
 import 'package:storeload/ui/views/product_detail/product_detail_screen_view.dart'
     as _i11;
 import 'package:storeload/ui/views/profile_screen/profile_screen_view.dart'
     as _i12;
+import 'package:storeload/ui/views/shop_information/shop_information_view.dart'
+    as _i14;
+import 'package:storeload/ui/views/terms_of_service/terms_of_service_view.dart'
+    as _i18;
 
 class Routes {
   static const forgotPassword = '/forgot-password';
@@ -57,6 +65,16 @@ class Routes {
 
   static const productCategoryView = '/product-category-view';
 
+  static const shopInformationView = '/shop-information-view';
+
+  static const contactUsView = '/contact-us-view';
+
+  static const privacyPolicyView = '/privacy-policy-view';
+
+  static const faqView = '/faq-view';
+
+  static const termsOfServiceView = '/terms-of-service-view';
+
   static const all = <String>{
     forgotPassword,
     firstStepView,
@@ -70,6 +88,11 @@ class Routes {
     productDetailScreenView,
     profileScreenView,
     productCategoryView,
+    shopInformationView,
+    contactUsView,
+    privacyPolicyView,
+    faqView,
+    termsOfServiceView,
   };
 }
 
@@ -122,6 +145,26 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.productCategoryView,
       page: _i13.ProductCategoryView,
+    ),
+    _i1.RouteDef(
+      Routes.shopInformationView,
+      page: _i14.ShopInformationView,
+    ),
+    _i1.RouteDef(
+      Routes.contactUsView,
+      page: _i15.ContactUsView,
+    ),
+    _i1.RouteDef(
+      Routes.privacyPolicyView,
+      page: _i16.PrivacyPolicyView,
+    ),
+    _i1.RouteDef(
+      Routes.faqView,
+      page: _i17.FaqView,
+    ),
+    _i1.RouteDef(
+      Routes.termsOfServiceView,
+      page: _i18.TermsOfServiceView,
     ),
   ];
 
@@ -223,6 +266,36 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i14.ShopInformationView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i14.ShopInformationView(),
+        settings: data,
+      );
+    },
+    _i15.ContactUsView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i15.ContactUsView(),
+        settings: data,
+      );
+    },
+    _i16.PrivacyPolicyView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i16.PrivacyPolicyView(),
+        settings: data,
+      );
+    },
+    _i17.FaqView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i17.FaqView(),
+        settings: data,
+      );
+    },
+    _i18.TermsOfServiceView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i18.TermsOfServiceView(),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -237,7 +310,7 @@ class ForgotPasswordArguments {
     this.email,
   });
 
-  final _i14.Key? key;
+  final _i19.Key? key;
 
   final String? email;
 
@@ -261,7 +334,7 @@ class ForgotPasswordArguments {
 class FirstStepViewArguments {
   const FirstStepViewArguments({this.key});
 
-  final _i14.Key? key;
+  final _i19.Key? key;
 
   @override
   String toString() {
@@ -283,7 +356,7 @@ class FirstStepViewArguments {
 class SignINArguments {
   const SignINArguments({this.key});
 
-  final _i14.Key? key;
+  final _i19.Key? key;
 
   @override
   String toString() {
@@ -305,7 +378,7 @@ class SignINArguments {
 class SignUPArguments {
   const SignUPArguments({this.key});
 
-  final _i14.Key? key;
+  final _i19.Key? key;
 
   @override
   String toString() {
@@ -330,7 +403,7 @@ class ResetPaswwordArguments {
     this.userId,
   });
 
-  final _i14.Key? key;
+  final _i19.Key? key;
 
   final String? userId;
 
@@ -354,7 +427,7 @@ class ResetPaswwordArguments {
 class ResetEmailPaswwordArguments {
   const ResetEmailPaswwordArguments({this.key});
 
-  final _i14.Key? key;
+  final _i19.Key? key;
 
   @override
   String toString() {
@@ -379,9 +452,9 @@ class ProductDetailScreenViewArguments {
     required this.product,
   });
 
-  final _i14.Key? key;
+  final _i19.Key? key;
 
-  final _i15.CategoryDataModel product;
+  final _i20.CategoryDataModel product;
 
   @override
   String toString() {
@@ -406,7 +479,7 @@ class ProductCategoryViewArguments {
     required this.category,
   });
 
-  final _i14.Key? key;
+  final _i19.Key? key;
 
   final String category;
 
@@ -427,9 +500,9 @@ class ProductCategoryViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i16.NavigationService {
+extension NavigatorStateExtension on _i21.NavigationService {
   Future<dynamic> navigateToForgotPassword({
-    _i14.Key? key,
+    _i19.Key? key,
     String? email,
     int? routerId,
     bool preventDuplicates = true,
@@ -446,7 +519,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> navigateToFirstStepView({
-    _i14.Key? key,
+    _i19.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -490,7 +563,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> navigateToSignIN({
-    _i14.Key? key,
+    _i19.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -506,7 +579,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> navigateToSignUP({
-    _i14.Key? key,
+    _i19.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -522,7 +595,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> navigateToResetPaswword({
-    _i14.Key? key,
+    _i19.Key? key,
     String? userId,
     int? routerId,
     bool preventDuplicates = true,
@@ -539,7 +612,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> navigateToResetEmailPaswword({
-    _i14.Key? key,
+    _i19.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -569,8 +642,8 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> navigateToProductDetailScreenView({
-    _i14.Key? key,
-    required _i15.CategoryDataModel product,
+    _i19.Key? key,
+    required _i20.CategoryDataModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -600,7 +673,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> navigateToProductCategoryView({
-    _i14.Key? key,
+    _i19.Key? key,
     required String category,
     int? routerId,
     bool preventDuplicates = true,
@@ -616,8 +689,78 @@ extension NavigatorStateExtension on _i16.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToShopInformationView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.shopInformationView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToContactUsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.contactUsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToPrivacyPolicyView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.privacyPolicyView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToFaqView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.faqView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToTermsOfServiceView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.termsOfServiceView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithForgotPassword({
-    _i14.Key? key,
+    _i19.Key? key,
     String? email,
     int? routerId,
     bool preventDuplicates = true,
@@ -634,7 +777,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> replaceWithFirstStepView({
-    _i14.Key? key,
+    _i19.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -678,7 +821,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> replaceWithSignIN({
-    _i14.Key? key,
+    _i19.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -694,7 +837,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> replaceWithSignUP({
-    _i14.Key? key,
+    _i19.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -710,7 +853,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> replaceWithResetPaswword({
-    _i14.Key? key,
+    _i19.Key? key,
     String? userId,
     int? routerId,
     bool preventDuplicates = true,
@@ -727,7 +870,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> replaceWithResetEmailPaswword({
-    _i14.Key? key,
+    _i19.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -757,8 +900,8 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> replaceWithProductDetailScreenView({
-    _i14.Key? key,
-    required _i15.CategoryDataModel product,
+    _i19.Key? key,
+    required _i20.CategoryDataModel product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -788,7 +931,7 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }
 
   Future<dynamic> replaceWithProductCategoryView({
-    _i14.Key? key,
+    _i19.Key? key,
     required String category,
     int? routerId,
     bool preventDuplicates = true,
@@ -798,6 +941,76 @@ extension NavigatorStateExtension on _i16.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.productCategoryView,
         arguments: ProductCategoryViewArguments(key: key, category: category),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithShopInformationView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.shopInformationView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithContactUsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.contactUsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithPrivacyPolicyView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.privacyPolicyView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithFaqView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.faqView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithTermsOfServiceView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.termsOfServiceView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
