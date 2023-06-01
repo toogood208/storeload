@@ -5,7 +5,7 @@ import 'package:storeload/app/app.logger.dart';
 import 'package:storeload/core/models/user.dart';
 import 'package:storeload/core/services/user_data_service/user_data_service.dart';
 
-class ShopInformationViewModel extends BaseViewModel {
+class ShopInformationViewModel extends FormViewModel {
   final _navigationService = locator<NavigationService>();
   final _userDataService = locator<UserDataService>();
   final logger = getLogger("ShopInformationViewModel");
@@ -17,7 +17,7 @@ class ShopInformationViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void pop(){
+  void pop() {
     _navigationService.back();
   }
 }
