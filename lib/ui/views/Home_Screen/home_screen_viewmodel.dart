@@ -16,9 +16,6 @@ class HomeScreenViewModel extends IndexTrackingViewModel {
 
 
 
-  void init() {
-    setBusy(false);
-  }
 
 
   void logout() {

@@ -21,7 +21,7 @@ class SplashScreenViewModel extends BaseViewModel{
 
     await Future.delayed(const Duration(seconds: 2),(){
       if(token != null){
-     _navigationService.clearStackAndShow(Routes.signIN);
+     _navigationService.clearStackAndShow(Routes.homeScreenView);
 
       } else if (userOnboarded == null){
         _navigationService.replaceWith(Routes.onBoarding);

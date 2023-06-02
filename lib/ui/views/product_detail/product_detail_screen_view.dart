@@ -17,7 +17,7 @@ class ProductDetailScreenView extends StatelessWidget {
   const ProductDetailScreenView({Key? key, required this.product})
       : super(key: key);
 
-  final CategoryDataModel product;
+  final dynamic product;
 
   @override
   Widget build(BuildContext context) {

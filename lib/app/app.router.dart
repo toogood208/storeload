@@ -8,8 +8,7 @@
 import 'package:flutter/cupertino.dart' as _i19;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i21;
-import 'package:storeload/core/models/product_model/product_model.dart' as _i20;
+import 'package:stacked_services/stacked_services.dart' as _i20;
 import 'package:storeload/ui/views/account_setup/first_step/first_step_view.dart'
     as _i3;
 import 'package:storeload/ui/views/authentication/forgot_password/forgot_password.dart'
@@ -454,7 +453,7 @@ class ProductDetailScreenViewArguments {
 
   final _i19.Key? key;
 
-  final _i20.CategoryDataModel product;
+  final dynamic product;
 
   @override
   String toString() {
@@ -500,7 +499,7 @@ class ProductCategoryViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i21.NavigationService {
+extension NavigatorStateExtension on _i20.NavigationService {
   Future<dynamic> navigateToForgotPassword({
     _i19.Key? key,
     String? email,
@@ -643,7 +642,7 @@ extension NavigatorStateExtension on _i21.NavigationService {
 
   Future<dynamic> navigateToProductDetailScreenView({
     _i19.Key? key,
-    required _i20.CategoryDataModel product,
+    required dynamic product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -901,7 +900,7 @@ extension NavigatorStateExtension on _i21.NavigationService {
 
   Future<dynamic> replaceWithProductDetailScreenView({
     _i19.Key? key,
-    required _i20.CategoryDataModel product,
+    required dynamic product,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,

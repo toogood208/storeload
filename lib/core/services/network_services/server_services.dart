@@ -173,7 +173,7 @@ class ServerService {
       return _apiService.get(
           route: getProductBySearchTextEndpoint,
           queryParameters: {
-            "category": json.decode(query),
+            "searchText": query,
           },
           bearerToken: token);
     });

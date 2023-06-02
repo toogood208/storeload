@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
+import 'package:storeload/ui/utils/edge_insects.dart';
 import 'package:storeload/ui/views/product_search/search_view_model.dart';
 import 'package:storeload/ui/views/widgets/product_card.dart';
 
@@ -36,7 +37,7 @@ class ProductSearch extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: (() => SearchViewModel()),
-      onViewModelReady: (model) => model.getProductList(query),
+      onViewModelReady: (model) => model.getProductSearch(query),
       builder: ((context, model, child) {
         return model.isBusy
             ? const Center(child: AppSpinner())
@@ -70,7 +71,6 @@ class ProductSearch extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: (() => SearchViewModel()),
-      //onViewModelReady: (model) => model.getProductList(query),
       builder: ((context, model, child) {
         final suggestions1 = model.productList;
         final suggestions = query.isEmpty
@@ -107,16 +107,26 @@ class ServerListNotEmpty extends ViewModelWidget<SearchViewModel> {
   @override
   Widget build(BuildContext context, SearchViewModel viewModel) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: kAppPadding,
       child: ListView.builder(
         itemCount: viewModel.productList.length,
         itemBuilder: (context, index) {
           final product = viewModel.productList[index];
-          return ProductCard(
-            productImage: product.image,
-            productName: product.name,
-            productPrice:product.price.toString(),
-            onTap: () {  },);
+          return Container(
+            height: 141.h,
+            margin: EdgeInsets.only(
+              right: 16.w,
+              top: 10.h,
+              bottom: 10.h,
+            ),
+            child: ProductCard(
+              productImage: product.image,
+              productName: product.name,
+              productPrice:product.price.toString(),
+              onTap: () {
+                viewModel.goToProductDetailView(product);
+              },),
+          );
         },
       ),
     );
@@ -134,7 +144,7 @@ class EmptyServerWidget extends StatelessWidget {
       children: [
         Center(
           child: Text(
-            'You do not have any servers with this name yet',
+            'You do not have any product with this name yet',
           //  style: kBodyRegularTextStyle,
           ),
         ),

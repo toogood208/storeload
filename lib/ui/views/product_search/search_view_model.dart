@@ -17,24 +17,16 @@ class SearchViewModel extends BaseViewModel {
 List<SearchCategoryDataModel> _productList = [];
 List<SearchCategoryDataModel> get productList => _productList;
 
-Future<void> onSearch(String query) async {
-  if (_productList.isNotEmpty) {
-    _productList = _productList
-        .where((element) => element.name.toLowerCase().contains(query))
-        .toList();
-  } else {
-    await getProductList(query);
-  }
-}
 
-Future<void> getProductList(String query) async {
+Future<void> getProductSearch(String query) async {
+  setBusy(true);
   final token = _sharePreferenceService.getData(AppConstant.token);
   _productList = await _serverStorageService.getProductsBySearchText(token: token, query: query);
-  onSearch(query);
+  setBusy(false);
 
 }
 
-  Future<void> goToProductDetailView(CategoryDataModel productDetail) async {
+  Future<void> goToProductDetailView(SearchCategoryDataModel productDetail) async {
 
       _navigationService.navigateTo(Routes.productDetailScreenView,
           arguments: ProductDetailScreenViewArguments(product: productDetail));
