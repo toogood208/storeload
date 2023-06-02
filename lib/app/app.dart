@@ -14,6 +14,7 @@ import 'package:storeload/ui/views/authentication/reset_email_password/reset_ema
 import 'package:storeload/ui/views/authentication/reset_password/reset_password.dart';
 import 'package:storeload/ui/views/authentication/signin/sign_in.dart';
 import 'package:storeload/ui/views/authentication/signup/sign_up.dart';
+import 'package:storeload/ui/views/cart/cart_view.dart';
 import 'package:storeload/ui/views/contact_us/contact_us_view.dart';
 import 'package:storeload/ui/views/faq/faq_view.dart';
 import 'package:storeload/ui/views/intro_screens/onboarding/onboarding.dart';
@@ -44,6 +45,7 @@ import 'package:storeload/ui/views/terms_of_service/terms_of_service_view.dart';
     AdaptiveRoute(page: PrivacyPolicyView),
     AdaptiveRoute(page: FaqView),
     AdaptiveRoute(page: TermsOfServiceView),
+    AdaptiveRoute(page: CartView),
 
 
 

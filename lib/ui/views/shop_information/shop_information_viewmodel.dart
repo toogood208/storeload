@@ -3,7 +3,6 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/app/app.logger.dart';
 import 'package:storeload/core/models/user.dart';
-import 'package:storeload/core/services/localstorage/shared_preference_service.dart';
 import 'package:storeload/core/services/network_services/server_services.dart';
 import 'package:storeload/core/services/user_data_service/user_data_service.dart';
 import 'package:storeload/ui/views/shop_information/shop_information_view.form.dart';
@@ -12,7 +11,6 @@ class ShopInformationViewModel extends FormViewModel {
   final _navigationService = locator<NavigationService>();
   final _userDataService = locator<UserDataService>();
   final _serverService = locator<ServerService>();
-  final _sharedPreferenceService = locator<SharedPreferencesService>();
   final _snackBarService = locator<SnackbarService>();
 
   final logger = getLogger("ShopInformationViewModel");

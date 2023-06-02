@@ -5,18 +5,15 @@ import 'package:storeload/app/app.router.dart';
 import 'package:storeload/core/models/user.dart';
 import 'package:storeload/core/services/localstorage/persistent_storage_service.dart';
 
-
-
 class HomeScreenViewModel extends IndexTrackingViewModel {
   final _persistentStorageService = locator<PersistentStorageService>();
   final _navigationService = locator<NavigationService>();
   final _snackbarService = locator<SnackbarService>();
   late Data user;
 
-
-
-
-
+  void navigateToCartView() {
+    _navigationService.navigateTo(Routes.cartView);
+  }
 
   void logout() {
     _persistentStorageService.userToken = '';

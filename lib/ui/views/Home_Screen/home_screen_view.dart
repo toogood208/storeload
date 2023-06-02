@@ -43,7 +43,7 @@ class HomeScreenView extends StatelessWidget {
                       iconData: CupertinoIcons.search,
                     ),
                     CustomHomePageIcon(
-                      onTap: () {},
+                      onTap: model.navigateToCartView,
                       iconData: CupertinoIcons.shopping_cart,
                     ),
                     CustomHomePageIcon(

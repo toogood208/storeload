@@ -405,11 +405,13 @@ CategoryDataModel _$CategoryDataModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CategoryDataModel {
+  @JsonKey(name: "_id")
   dynamic get id => throw _privateConstructorUsedError;
   dynamic get name => throw _privateConstructorUsedError;
   dynamic get description => throw _privateConstructorUsedError;
   dynamic get category => throw _privateConstructorUsedError;
   dynamic get image => throw _privateConstructorUsedError;
+  @JsonKey(name: "__v")
   dynamic get v => throw _privateConstructorUsedError;
   dynamic get price => throw _privateConstructorUsedError;
 
@@ -426,12 +428,12 @@ abstract class $CategoryDataModelCopyWith<$Res> {
       _$CategoryDataModelCopyWithImpl<$Res, CategoryDataModel>;
   @useResult
   $Res call(
-      {dynamic id,
+      {@JsonKey(name: "_id") dynamic id,
       dynamic name,
       dynamic description,
       dynamic category,
       dynamic image,
-      dynamic v,
+      @JsonKey(name: "__v") dynamic v,
       dynamic price});
 }
 
@@ -498,12 +500,12 @@ abstract class _$$_CategoryDataModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {dynamic id,
+      {@JsonKey(name: "_id") dynamic id,
       dynamic name,
       dynamic description,
       dynamic category,
       dynamic image,
-      dynamic v,
+      @JsonKey(name: "__v") dynamic v,
       dynamic price});
 }
 
@@ -544,19 +546,19 @@ class _$_CategoryDataModel
     with DiagnosticableTreeMixin
     implements _CategoryDataModel {
   const _$_CategoryDataModel(
-      {this.id = "",
+      {@JsonKey(name: "_id") this.id = "",
       this.name = "",
       this.description = "",
       this.category = "",
       this.image = "",
-      this.v = 0,
+      @JsonKey(name: "__v") this.v = 0,
       this.price = 0});
 
   factory _$_CategoryDataModel.fromJson(Map<String, dynamic> json) =>
       _$$_CategoryDataModelFromJson(json);
 
   @override
-  @JsonKey()
+  @JsonKey(name: "_id")
   final dynamic id;
   @override
   @JsonKey()
@@ -571,7 +573,7 @@ class _$_CategoryDataModel
   @JsonKey()
   final dynamic image;
   @override
-  @JsonKey()
+  @JsonKey(name: "__v")
   final dynamic v;
   @override
   @JsonKey()
@@ -640,18 +642,19 @@ class _$_CategoryDataModel
 
 abstract class _CategoryDataModel implements CategoryDataModel {
   const factory _CategoryDataModel(
-      {final dynamic id,
+      {@JsonKey(name: "_id") final dynamic id,
       final dynamic name,
       final dynamic description,
       final dynamic category,
       final dynamic image,
-      final dynamic v,
+      @JsonKey(name: "__v") final dynamic v,
       final dynamic price}) = _$_CategoryDataModel;
 
   factory _CategoryDataModel.fromJson(Map<String, dynamic> json) =
       _$_CategoryDataModel.fromJson;
 
   @override
+  @JsonKey(name: "_id")
   dynamic get id;
   @override
   dynamic get name;
@@ -662,6 +665,7 @@ abstract class _CategoryDataModel implements CategoryDataModel {
   @override
   dynamic get image;
   @override
+  @JsonKey(name: "__v")
   dynamic get v;
   @override
   dynamic get price;

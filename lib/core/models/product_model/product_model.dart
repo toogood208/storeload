@@ -27,12 +27,12 @@ class ProductDataModel with _$ProductDataModel{
 @freezed
 class CategoryDataModel with _$CategoryDataModel{
   const factory CategoryDataModel({
-    @Default("") id,
+   @JsonKey(name: "_id")@Default("") id,
     @Default("") name,
     @Default("") description,
     @Default("") category,
     @Default("") image,
-    @Default(0) v,
+    @JsonKey(name: "__v")@Default(0) v,
     @Default(0) price,
 
   }) = _CategoryDataModel;

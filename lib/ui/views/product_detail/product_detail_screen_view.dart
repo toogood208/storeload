@@ -10,7 +10,6 @@ import 'package:storeload/ui/views/product_detail/widget/product_detail_circle.d
 import 'package:storeload/ui/views/widgets/app_button.dart';
 import 'package:storeload/ui/views/widgets/custom_app_bar.dart';
 
-import '../../../core/models/product_model/product_model.dart';
 import '../widgets/custom_drop_down.dart';
 
 class ProductDetailScreenView extends StatelessWidget {
@@ -125,12 +124,22 @@ class ProductDetailScreenView extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 31.h),
-                  Text("This is 40kg product with great nutritional values.",
-                  style: kAmulya14Regular.copyWith(color: kTextColor40,
-                  fontWeight: FontWeight.w400),),
+                  Text(
+                    "This is 40kg product with great nutritional values.",
+                    style: kAmulya14Regular.copyWith(
+                        color: kTextColor40, fontWeight: FontWeight.w400),
+                  ),
                   SizedBox(height: 124.h),
-                  AppButton(title: "Add to Cart", onTap: (){},
-                    width: double.infinity,)
+                  AppButton(
+                    title: "Add to Cart",
+                    onTap: () {
+                      model.createOrder(
+                          productId: product.id,
+                          quantity: model.selectQuantity,
+                          address: "majito");
+                    },
+                    width: double.infinity,
+                  )
                 ],
               ),
             ),

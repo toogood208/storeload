@@ -11,3 +11,4 @@ const getAllProductsEndpoint = '/product/getMany';
 const getProductByCategoryEndpoint = '/product/getByCategory';
 const getProductBySearchTextEndpoint = '/product/getBySearchText';
 const getUserProfileEndpoint = '/user/my-profile';
+const createOrderEndpoint = '/order/create';

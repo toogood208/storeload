@@ -2,7 +2,6 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/core/constants/app_constant.dart';
-import 'package:storeload/core/models/product_model/product_model.dart';
 import 'package:storeload/core/models/search_product_model/search_product_model.dart';
 
 import '../../../app/app.router.dart';

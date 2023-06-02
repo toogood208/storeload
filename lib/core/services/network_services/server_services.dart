@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/core/models/product_model/product_model.dart';
 import 'package:storeload/core/models/search_product_model/search_product_model.dart';
@@ -192,5 +190,25 @@ class ServerService {
       // log.v(userResponse);
       return str;
     });
+  }
+
+  Future<bool> createOrder({
+    required String token,
+    required String productId,
+    required int quantity,
+    required String address,
+  }) async {
+    final response = await _networkFormatter.fmt(() {
+      return _apiService.post(
+          route: createOrderEndpoint,
+          body: {
+            "productId": productId,
+            "quantity": quantity,
+            "shippingAddress": address,
+          },
+          bearerToken: token);
+    });
+
+    return response.fold((l) => false, (r)=> true);
   }
 }

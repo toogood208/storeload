@@ -5,10 +5,10 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/cupertino.dart' as _i19;
+import 'package:flutter/cupertino.dart' as _i20;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i20;
+import 'package:stacked_services/stacked_services.dart' as _i21;
 import 'package:storeload/ui/views/account_setup/first_step/first_step_view.dart'
     as _i3;
 import 'package:storeload/ui/views/authentication/forgot_password/forgot_password.dart'
@@ -19,6 +19,7 @@ import 'package:storeload/ui/views/authentication/reset_password/reset_password.
     as _i8;
 import 'package:storeload/ui/views/authentication/signin/sign_in.dart' as _i6;
 import 'package:storeload/ui/views/authentication/signup/sign_up.dart' as _i7;
+import 'package:storeload/ui/views/cart/cart_view.dart' as _i19;
 import 'package:storeload/ui/views/contact_us/contact_us_view.dart' as _i15;
 import 'package:storeload/ui/views/faq/faq_view.dart' as _i17;
 import 'package:storeload/ui/views/Home_Screen/home_screen_view.dart' as _i10;
@@ -74,6 +75,8 @@ class Routes {
 
   static const termsOfServiceView = '/terms-of-service-view';
 
+  static const cartView = '/cart-view';
+
   static const all = <String>{
     forgotPassword,
     firstStepView,
@@ -92,6 +95,7 @@ class Routes {
     privacyPolicyView,
     faqView,
     termsOfServiceView,
+    cartView,
   };
 }
 
@@ -164,6 +168,10 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.termsOfServiceView,
       page: _i18.TermsOfServiceView,
+    ),
+    _i1.RouteDef(
+      Routes.cartView,
+      page: _i19.CartView,
     ),
   ];
 
@@ -295,6 +303,12 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i19.CartView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i19.CartView(),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -309,7 +323,7 @@ class ForgotPasswordArguments {
     this.email,
   });
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
   final String? email;
 
@@ -333,7 +347,7 @@ class ForgotPasswordArguments {
 class FirstStepViewArguments {
   const FirstStepViewArguments({this.key});
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
   @override
   String toString() {
@@ -355,7 +369,7 @@ class FirstStepViewArguments {
 class SignINArguments {
   const SignINArguments({this.key});
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
   @override
   String toString() {
@@ -377,7 +391,7 @@ class SignINArguments {
 class SignUPArguments {
   const SignUPArguments({this.key});
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
   @override
   String toString() {
@@ -402,7 +416,7 @@ class ResetPaswwordArguments {
     this.userId,
   });
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
   final String? userId;
 
@@ -426,7 +440,7 @@ class ResetPaswwordArguments {
 class ResetEmailPaswwordArguments {
   const ResetEmailPaswwordArguments({this.key});
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
   @override
   String toString() {
@@ -451,7 +465,7 @@ class ProductDetailScreenViewArguments {
     required this.product,
   });
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
   final dynamic product;
 
@@ -478,7 +492,7 @@ class ProductCategoryViewArguments {
     required this.category,
   });
 
-  final _i19.Key? key;
+  final _i20.Key? key;
 
   final String category;
 
@@ -499,9 +513,9 @@ class ProductCategoryViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i20.NavigationService {
+extension NavigatorStateExtension on _i21.NavigationService {
   Future<dynamic> navigateToForgotPassword({
-    _i19.Key? key,
+    _i20.Key? key,
     String? email,
     int? routerId,
     bool preventDuplicates = true,
@@ -518,7 +532,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> navigateToFirstStepView({
-    _i19.Key? key,
+    _i20.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -562,7 +576,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> navigateToSignIN({
-    _i19.Key? key,
+    _i20.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -578,7 +592,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> navigateToSignUP({
-    _i19.Key? key,
+    _i20.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -594,7 +608,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> navigateToResetPaswword({
-    _i19.Key? key,
+    _i20.Key? key,
     String? userId,
     int? routerId,
     bool preventDuplicates = true,
@@ -611,7 +625,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> navigateToResetEmailPaswword({
-    _i19.Key? key,
+    _i20.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -641,7 +655,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> navigateToProductDetailScreenView({
-    _i19.Key? key,
+    _i20.Key? key,
     required dynamic product,
     int? routerId,
     bool preventDuplicates = true,
@@ -672,7 +686,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> navigateToProductCategoryView({
-    _i19.Key? key,
+    _i20.Key? key,
     required String category,
     int? routerId,
     bool preventDuplicates = true,
@@ -758,8 +772,22 @@ extension NavigatorStateExtension on _i20.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToCartView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.cartView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithForgotPassword({
-    _i19.Key? key,
+    _i20.Key? key,
     String? email,
     int? routerId,
     bool preventDuplicates = true,
@@ -776,7 +804,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> replaceWithFirstStepView({
-    _i19.Key? key,
+    _i20.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -820,7 +848,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> replaceWithSignIN({
-    _i19.Key? key,
+    _i20.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -836,7 +864,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> replaceWithSignUP({
-    _i19.Key? key,
+    _i20.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -852,7 +880,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> replaceWithResetPaswword({
-    _i19.Key? key,
+    _i20.Key? key,
     String? userId,
     int? routerId,
     bool preventDuplicates = true,
@@ -869,7 +897,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> replaceWithResetEmailPaswword({
-    _i19.Key? key,
+    _i20.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -899,7 +927,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> replaceWithProductDetailScreenView({
-    _i19.Key? key,
+    _i20.Key? key,
     required dynamic product,
     int? routerId,
     bool preventDuplicates = true,
@@ -930,7 +958,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
   }
 
   Future<dynamic> replaceWithProductCategoryView({
-    _i19.Key? key,
+    _i20.Key? key,
     required String category,
     int? routerId,
     bool preventDuplicates = true,
@@ -1010,6 +1038,20 @@ extension NavigatorStateExtension on _i20.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.termsOfServiceView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithCartView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.cartView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

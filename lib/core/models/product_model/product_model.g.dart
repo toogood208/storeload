@@ -43,23 +43,23 @@ Map<String, dynamic> _$$_ProductDataModelToJson(_$_ProductDataModel instance) =>
 
 _$_CategoryDataModel _$$_CategoryDataModelFromJson(Map<String, dynamic> json) =>
     _$_CategoryDataModel(
-      id: json['id'] ?? "",
+      id: json['_id'] ?? "",
       name: json['name'] ?? "",
       description: json['description'] ?? "",
       category: json['category'] ?? "",
       image: json['image'] ?? "",
-      v: json['v'] ?? 0,
+      v: json['__v'] ?? 0,
       price: json['price'] ?? 0,
     );
 
 Map<String, dynamic> _$$_CategoryDataModelToJson(
         _$_CategoryDataModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'name': instance.name,
       'description': instance.description,
       'category': instance.category,
       'image': instance.image,
-      'v': instance.v,
+      '__v': instance.v,
       'price': instance.price,
     };
