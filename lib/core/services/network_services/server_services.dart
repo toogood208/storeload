@@ -1,4 +1,5 @@
 import 'package:storeload/app/app.locator.dart';
+import 'package:storeload/core/models/cart_model/cart_model.dart';
 import 'package:storeload/core/models/product_model/product_model.dart';
 import 'package:storeload/core/models/search_product_model/search_product_model.dart';
 import 'package:storeload/core/models/user.dart';
@@ -179,6 +180,18 @@ class ServerService {
     return response.fold((l) => [], (r) => SearchProductModel.fromJson(r).data);
   }
 
+  Future<CartModel?> getAllOrderPlacedByUser(String token) async {
+    final response = await _networkFormatter.fmt(() {
+      return _apiService.get(
+          route: getOrdersByUserEndpoint, bearerToken: token);
+    });
+
+    return response.fold((l) => null, (r) {
+      final b = CartModel.fromJson(r);
+      return b;
+    });
+  }
+
   Future<Map<String, dynamic>?> getUserProfile({required String token}) async {
     final response = await _networkFormatter.fmt(() {
       return _apiService.get(route: getUserProfileEndpoint, bearerToken: token);
@@ -209,6 +222,6 @@ class ServerService {
           bearerToken: token);
     });
 
-    return response.fold((l) => false, (r)=> true);
+    return response.fold((l) => false, (r) => true);
   }
 }
