@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/core/models/cart_model/cart_model.dart';
 import 'package:storeload/core/models/product_model/product_model.dart';
@@ -188,6 +189,7 @@ class ServerService {
 
     return response.fold((l) => null, (r) {
       final b = CartModel.fromJson(r);
+      log.v(b);
       return b;
     });
   }
