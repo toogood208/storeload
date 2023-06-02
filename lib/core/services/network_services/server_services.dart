@@ -142,39 +142,55 @@ class ServerService {
     });
   }
 
-  Future<List<ProductDataModel>> getAllProducts(String token) async{
-    final response = await _networkFormatter.fmt((){
-      return _apiService.get(route: getAllProductsEndpoint,bearerToken: token);
+  Future<List<ProductDataModel>> getAllProducts(String token) async {
+    final response = await _networkFormatter.fmt(() {
+      return _apiService.get(route: getAllProductsEndpoint, bearerToken: token);
     });
 
-    return response.fold((l) => [], (res){
-     // log.v(response);
-     return ProductModel.fromJson(res).data;
-
+    return response.fold((l) => [], (res) {
+      // log.v(response);
+      return ProductModel.fromJson(res).data;
     });
-
-
   }
 
-  Future<List<CategoryDataModel>> getProductsByCategory({required String token, required String category})async{
-    final response = await _networkFormatter.fmt((){
-      return _apiService.get(route: getProductByCategoryEndpoint,queryParameters: {
-        "category":category,
-      },
-      bearerToken:token );
+  Future<List<CategoryDataModel>> getProductsByCategory(
+      {required String token, required String category}) async {
+    final response = await _networkFormatter.fmt(() {
+      return _apiService.get(
+          route: getProductByCategoryEndpoint,
+          queryParameters: {
+            "category": category,
+          },
+          bearerToken: token);
     });
 
     return response.fold((l) => [], (r) => ProductDataModel.fromJson(r).data);
   }
 
-  Future<List<SearchCategoryDataModel>> getProductsBySearchText({required String token, required String query})async{
-    final response = await _networkFormatter.fmt((){
-      return _apiService.get(route: getProductBySearchTextEndpoint,queryParameters: {
-        "category":json.decode(query),
-      },
-          bearerToken:token );
+  Future<List<SearchCategoryDataModel>> getProductsBySearchText(
+      {required String token, required String query}) async {
+    final response = await _networkFormatter.fmt(() {
+      return _apiService.get(
+          route: getProductBySearchTextEndpoint,
+          queryParameters: {
+            "category": json.decode(query),
+          },
+          bearerToken: token);
     });
 
     return response.fold((l) => [], (r) => SearchProductModel.fromJson(r).data);
+  }
+
+  Future<Map<String, dynamic>?> getUserProfile({required String token}) async {
+    final response = await _networkFormatter.fmt(() {
+      return _apiService.get(route: getUserProfileEndpoint, bearerToken: token);
+    });
+
+    return response.fold((l) => null, (str) {
+      // final userResponse = User.fromJson(str);
+      log.v(str);
+      // log.v(userResponse);
+      return str;
+    });
   }
 }
