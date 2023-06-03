@@ -1,4 +1,3 @@
-import 'package:logger/logger.dart';
 import 'package:storeload/app/app.locator.dart';
 import 'package:storeload/core/models/cart_model/cart_model.dart';
 import 'package:storeload/core/models/product_model/product_model.dart';
@@ -14,6 +13,7 @@ class ServerService {
   final log = getLogger("ServerService");
   final _apiService = locator<APIService>();
   final _networkFormatter = locator<NetworkService>();
+
 
   Future<bool> createUser({
     String? shopName,
@@ -181,16 +181,20 @@ class ServerService {
     return response.fold((l) => [], (r) => SearchProductModel.fromJson(r).data);
   }
 
-  Future<CartModel?> getAllOrderPlacedByUser(String token) async {
+  Future<List<CartOrderedItemsModel>> getAllOrderPlacedByUser(
+      String token) async {
     final response = await _networkFormatter.fmt(() {
       return _apiService.get(
           route: getOrdersByUserEndpoint, bearerToken: token);
     });
 
-    return response.fold((l) => null, (r) {
-      final b = CartModel.fromJson(r);
-      log.v(b);
-      return b;
+    return response.fold((l) => [], (r) {
+      final cart = CartModel.fromJson(r);
+      final data = CartDataModel.fromJson(cart.data);
+      final orderedItems = data.orderedItems;
+
+      log.v(orderedItems);
+      return orderedItems;
     });
   }
 

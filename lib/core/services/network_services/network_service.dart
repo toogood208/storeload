@@ -6,27 +6,33 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:storeload/app/app.locator.dart';
 
 class NetworkService {
-  final snackbar = locator<SnackbarService>();
+  final snackBar = locator<SnackbarService>();
   Future<Either<void, dynamic>> fmt(Function function) async {
     try {
       return Right(await function.call());
     } on DioError catch (e) {
       if (e.type == DioErrorType.receiveTimeout ||
           e.type == DioErrorType.connectionTimeout) {
-        snackbar.showSnackbar(message: "Connection timed out");
+        snackBar.showSnackbar(message: "Connection timed out");
       }
       if (e.response == null) {
-        snackbar.showSnackbar(message: "Couldn'\t reach the server, please check your internet");
-      } else {
-        snackbar.showSnackbar(message: e.response!.data['message']);
+        snackBar.showSnackbar(message: "Couldn'\t reach the server, please check your internet");
+      }
+      if(e.response?.statusCode == 503){
+        snackBar.showSnackbar(message: "unable to show cart now, please try again later");
+
+      }
+
+      else {
+        snackBar.showSnackbar(message: e.response!.data['message']);
       }
 
       return const Left(null);
     } on SocketException {
-      snackbar.showSnackbar(message: "No Internet Connection");
+      snackBar.showSnackbar(message: "No Internet Connection");
       return const Left(null);
     } catch (e) {
-      snackbar.showSnackbar(message: e.toString());
+      snackBar.showSnackbar(message: e.toString());
       return const Left(null);
     }
   }

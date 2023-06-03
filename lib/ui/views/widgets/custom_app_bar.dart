@@ -30,7 +30,7 @@ class CustomAppBarState extends State<CustomAppBar> {
         color: kBackgroundColor,
       ),
       actions: widget.actions,
-      title: Text(
+      title:  Text(
         widget.title,
         style: kClashGrotesk20Medium.copyWith(
           color: kTextColor,
