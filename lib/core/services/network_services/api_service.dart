@@ -20,14 +20,21 @@ class APIService {
     );
   }
 
-  Future<dynamic> delete(
-    String route,
+  Future<dynamic> delete({
+    required String route,
     Map<String, List>? body,
-  ) async {
+    String? bearerToken,
+  }) async {
     log.v("getting data fro $route");
-    var response = await dio.patch(
+    var response = await dio.delete(
       route,
-      data: jsonEncode(body),
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $bearerToken',
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+        },
+      ),
     );
     log.v("the data fro $route is ${response.data}");
     return response.data;

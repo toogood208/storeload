@@ -14,7 +14,6 @@ class ServerService {
   final _apiService = locator<APIService>();
   final _networkFormatter = locator<NetworkService>();
 
-
   Future<bool> createUser({
     String? shopName,
     String? shopAddress,
@@ -108,6 +107,20 @@ class ServerService {
       log.v(dataResponse);
       return dataResponse;
     });
+  }
+
+  Future<bool> clearCart(String token) async {
+    final response = await _networkFormatter.fmt(() {
+      return _apiService.delete(route: clearCartEndpoint, bearerToken: token);
+    });
+    return response.fold((l) => false, (r) => true);
+  }
+
+  Future<bool> deleteOrder(String token) async {
+    final response = await _networkFormatter.fmt(() {
+      return _apiService.delete(route: deleteOrderEndpoint, bearerToken: token);
+    });
+    return response.fold((l) => false, (r) => true);
   }
 
   Future<bool> resetPasswordEmail(String? email) async {

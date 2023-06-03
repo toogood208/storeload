@@ -14,9 +14,9 @@ class CartViewModel extends BaseViewModel {
   final debouncer = NetWorkDebouncer();
   final log = getLogger("CartViewModel");
   CartViewModel() {
-    // debouncer.run((){
-    //   getAllOrdersPlacedByUser();
-    // });
+    debouncer.run((){
+      getAllOrdersPlacedByUser();
+    });
 
   }
   List<CartOrderedItemsModel> cart = [];
@@ -26,6 +26,16 @@ class CartViewModel extends BaseViewModel {
     final token = await _local.getData(AppConstant.token);
     setBusy(true);
     cart = await _server.getAllOrderPlacedByUser(token);
+    setBusy(false);
+  }
+
+  Future<void> clearCart() async {
+    final token = await _local.getData(AppConstant.token);
+    setBusy(true);
+    final response = await _server.clearCart(token);
+    if(response == true){
+      getAllOrdersPlacedByUser();
+    }
     setBusy(false);
   }
 }

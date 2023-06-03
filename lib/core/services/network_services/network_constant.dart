@@ -13,3 +13,5 @@ const getProductBySearchTextEndpoint = '/product/getBySearchText';
 const getUserProfileEndpoint = '/user/my-profile';
 const createOrderEndpoint = '/order/create';
 const getOrdersByUserEndpoint = '/order/getOrdersByUser';
+const clearCartEndpoint = '/order/delete-all';
+const deleteOrderEndpoint = '/order/delete';
